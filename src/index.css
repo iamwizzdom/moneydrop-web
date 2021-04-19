@@ -1,13 +1,423 @@
+::-webkit-scrollbar {
+    width: 6px;
+    /* for vertical scrollbars */
+    height: 6px;
+    /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(35, 31, 32, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(35, 31, 32, 0.5);
+}
+
+.mobile-bottom-sheet .sheet-holder::-webkit-scrollbar-track {
+    background: none;
+}
+
+.mobile-bottom-sheet .sheet-holder::-webkit-scrollbar-thumb {
+    background: none;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: none;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: none;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: 'CamptonLight', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f3f3f3;
+}
+
+b {
+    font-family: 'CamptonBold', sans-serif;
+}
+
+div, select {
+    font-family: 'CamptonLight', sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.my-rounded {
+    border-radius: 8px !important;
+}
+
+.my-rounded-top {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.color-accent {
+    color: #e04805 !important;
+}
+
+.color-accent-hover:hover {
+    color: #e04805 !important;
+}
+
+.background-accent {
+    background-color: #f9beaa !important;
+}
+
+.background-accent-hover:hover {
+    background-color: #e04805 !important;
+}
+
+.border-accent {
+    border-color: #f9beaa !important;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.my-nav-item {
+    margin-bottom: 30px;
+}
+
+.my-nav-item a {
+    color: #5b5a5a !important;
+}
+
+.my-nav-item a:hover {
+    color: #e04805 !important;
+}
+
+.my-nav-item a.active {
+    color: #e04805 !important;
+    background-color: #ffffff !important;
+}
+
+.my-tab-nav-item a {
+    padding: 6px 15px 6px 15px;
+    color: #e04805 !important;
+    font-weight: bold;
+}
+
+.my-tab-nav-item a:hover {
+    color: #e04805 !important;
+}
+
+.my-tab-nav-item a.active {
+    color: #e04805 !important;
+    background-color: #ffffff !important;
+}
+
+.my-pt-1{padding-top:.15rem!important}
+
+.my-p-0-8 {
+    padding: .12rem !important;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-size-15 {
+    font-size: 15px;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.font-size-22 {
+    font-size: 22px;
+}
+
+.font-size-25 {
+    font-size: 25px;
+}
+
+.min-width-80-per {
+    min-width: 80% !important;
+}
+
+.min-width-55-per {
+    min-width: 55% !important;
+}
+
+.w-30 {
+    width: 28% !important;
+}
+
+.min-width-160 {
+    min-width: 160px !important;
+}
+
+.min-height-60 {
+    min-height: 60px !important;
+}
+
+.gender-check-box-container {
+    width: 120px;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+}
+
+.gender-check-box-container img, .gender-check-box-container p {
+    margin-left: -20px;
+}
+
+.gender-check-box {
+    width: 30px;
+    height: 30px;
+    background-color: #e3d4d4;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.gender-check-box img {
+    position: relative;
+    margin: auto;
+    top: 1px;
+}
+
+.btn-primary {
+    background-color: #e04805 !important;
+    border-color: #bf4103 !important;
+    border-radius: 8px;
+    color: #ffffff !important
+}
+
+.btn-primary.sm {
+    height: 30px !important;
+}
+
+.btn-primary:hover {
+    background-color: #bf4103 !important;
+    border-color: #bf4103 !important;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    box-shadow: 0 -1px 6px 0 rgba(191,65,3,0.75) !important;
+}
+
+.pagination-btn-primary a {
+    color: #bf4103 !important
+}
+
+.pagination-btn-primary.active a {
+    background-color: #e04805 !important;
+    border-color: #bf4103 !important;
+    color: #ffffff !important
+}
+
+.pagination-btn-primary.active a:hover {
+    background-color: #bf4103 !important;
+    border-color: #bf4103 !important;
+}
+
+.pagination-btn-primary a:focus, .pagination-btn-primary a:active {
+    box-shadow: 0 -1px 6px 0 rgba(191,65,3,0.75) !important;
+}
+
+.badge-danger {
+    padding: .3rem;
+    border: 1px solid #FAC7CF !important;
+    color: #f55f78 !important;
+    background-color: #FACAD2 !important;
+}
+
+.badge-info {
+    padding: .3rem;
+    border: 1px solid #a2d6fd !important;
+    color: #36a3f7 !important;
+    background-color: #a6d8ff !important;
+}
+
+.badge-pending {
+    padding: .3rem;
+    border: 1px solid #C1C1C1 !important;
+    color: #6C6C6C !important;
+    background-color: #CCCCCC !important;
+}
+
+.badge-success {
+    padding: .3rem;
+    border: 1px solid #AFDDBE !important;
+    color: #199739 !important;
+    background-color: #b6dfc3 !important;
+}
+
+.badge-warning {
+    padding: .3rem;
+    border: 1px solid #FAE0B6 !important;
+    color: #eaaa75 !important;
+    background-color: #fce4bd !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 60px rgba(191,65,3,0.1) inset !important;
+}
+
+input {
+    width: 100% !important;
+    height: 60px !important;
+    background-color: #f1efee !important;
+    border-color: #e2e0df !important;
+    box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+}
+
+select {
+    border-color: #e2e0df !important;
+    box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+}
+
+input.sm, select.sm {
+    height: 30px !important;
+}
+
+input:focus, input:active, select:focus, select:active {
+    box-shadow: 0 1px 3px 3px rgba(191,65,3,0.1) !important;
+}
+
+.react-datepicker-wrapper {
+    width: 100% !important;
+}
+
+a.navbar-brand {
+    color: #e04805;
+}
+
+.navbar-brand:hover {
+    color: #bf4103;
+}
+
+.mobile-bottom-sheet-container {
+    display: none;
+}
+
+.mobile-bottom-sheet {
+    display: none;
+}
+
+.mobile-header-menu {
+    display: none;
+}
+
+.loan-type-btn-aligner {
+    text-align: right;
+}
+
+@media only screen and (max-width: 991px) {
+    /* For mobile phones: */
+    .mobile-header-menu {
+        display: block;
+    }
+
+    .pc-side-nav, .pc-brand, .pc-header-menu {
+        display: none;
+    }
+
+    .pc-container {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    .font-size-13 {
+        font-size: 13px !important;
+    }
+
+    .mobile-bottom-sheet-container {
+        z-index: 10000;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        transition: all ease 0.8s;
+    }
+
+    .mobile-bottom-sheet-container.top {
+        display: block;
+        background-color: #000000;
+        opacity: .5;
+    }
+
+    .mobile-bottom-sheet {
+        width: 100%;
+        max-height: 80vh;
+        background-color: #ffffff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        overflow: hidden;
+        z-index: 10001;
+        display: block;
+        position: fixed;
+        bottom: -1000px;
+        transition: all ease 0.5s;
+        box-shadow: 1px -5px 5px 1px rgba(0,0,0,0.10);
+    }
+
+    .mobile-bottom-sheet .sheet-line {
+        background-color: #ffffff;
+        width: 100%;
+        height: 40px;
+    }
+
+    .sheet-line div {
+        width: 40px;
+        height: 4px;
+        margin-top: 20px;
+        border-radius: 5px;
+        background-color: #C1C1C1;
+    }
+
+    .mobile-bottom-sheet .sheet-holder {
+        width: 100%;
+        max-height: calc(80vh - 40px);
+        padding-left: 20px;
+        padding-bottom: 10px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .mobile-bottom-sheet .my-nav-item {
+        margin-bottom: 0 !important;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .mobile-bottom-sheet .my-nav-item:first-child {
+        padding-top: 0 !important;
+    }
+
+    .mobile-bottom-sheet .my-nav-item:not(:last-child) {
+        border-bottom: 1px solid #e9e8e8;
+    }
+
+    .mobile-bottom-sheet.top {
+        bottom: 0;
+    }
+
+    .loan-type-btn-aligner {
+        text-align: center;
+    }
 }
