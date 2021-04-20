@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Shimmer from "react-shimmer-effect";
 import injectSheet from "react-jss";
+import {Col, Row} from "react-bootstrap";
 
 const StyleSheet = {
     container: {
@@ -17,6 +18,16 @@ const StyleSheet = {
         width: "40px",
         borderRadius: "50%"
     },
+    lineLong: {
+        width: "90%",
+        height: "8px",
+        borderRadius: "8%"
+    },
+    lineMedium: {
+        width: "50%",
+        height: "8px",
+        borderRadius: "8%"
+    },
     line: {
         width: "60px",
         height: "8px",
@@ -27,14 +38,23 @@ class LoanShimmer extends Component {
     render() {
         const { classes, key } = this.props;
         return (
-            <tr className={`border-bottom`} key={key}>
-                <td><Shimmer><div className={classes.circle} /></Shimmer></td>
-                <td><Shimmer><div className={classes.line} /></Shimmer></td>
-                <td><Shimmer><div className={classes.line} /></Shimmer></td>
-                <td><Shimmer><div className={classes.line} /></Shimmer></td>
-                <td><Shimmer><div className={classes.line} /></Shimmer></td>
-                <td><Shimmer><div className={classes.line} /></Shimmer></td>
-            </tr>
+            <Col md={12} className={`pt-3 pb-3`} key={key}>
+                <Row>
+                    <Col lg={2} md={2} sm={2} xl={2} xs={2}><Shimmer><div className={classes.circle} /></Shimmer></Col>
+                    <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-left`} style={{marginTop: '-5px'}}>
+                        <Row>
+                            <Col md={12}><Shimmer><div className={classes.lineLong} /></Shimmer></Col>
+                            <Col md={12}><Shimmer><div className={classes.lineMedium} /></Shimmer></Col>
+                        </Row>
+                    </Col>
+                    <Col lg={4} md={4} sm={4} xl={4} xs={4} className={`text-right`}>
+                        <Row>
+                            <Col><Shimmer><div className={classes.line} /></Shimmer></Col>
+                            <Col><Shimmer><div className={classes.line} /></Shimmer></Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Col>
         );
     }
 }

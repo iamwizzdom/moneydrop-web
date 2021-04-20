@@ -8,18 +8,18 @@ import LoanRequests from "./LoanRequests";
 class Loans extends Component {
 
     state = {
-        currentNav: 'offers'
+        currentTab: 'offers'
     }
 
     onNavSelected = (key) => {
-        this.setState({currentNav: key});
+        this.setState({currentTab: key});
     };
 
     render() {
         return <>
             <Row>
                 <Col md={6}>
-                    <h4 className={`font-weight-bold text-muted rounded`}>{this.state.currentNav === 'offers' ? 'Loan Offers' : 'Loan Requests'}</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>{this.state.currentTab === 'offers' ? 'Loan Offers' : 'Loan Requests'}</h4>
                     <p>Loans on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
@@ -48,10 +48,10 @@ class Loans extends Component {
                                     <Col md={12} className={`mt-3`}>
                                         <Tab.Content className={`p-2`}>
                                             <Tab.Pane eventKey="offers">
-                                                <LoanOffers />
+                                                <LoanOffers currentTab={() => this.state.currentTab}/>
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="requests">
-                                                <LoanRequests />
+                                                <LoanRequests currentTab={() => this.state.currentTab}/>
                                             </Tab.Pane>
                                         </Tab.Content>
                                     </Col>

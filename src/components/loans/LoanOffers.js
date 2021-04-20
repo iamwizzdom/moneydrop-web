@@ -1,89 +1,102 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Badge, Table} from "react-bootstrap";
+import {Row, Spinner} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
 import Loan from "../../models/Loan";
 import NoContent from "../layout/NoContent";
 import {LoanAction} from "../../actions";
-import Pagination from "react-js-pagination";
 import LoanShimmer from "../layout/LoanShimmer";
+import LoanLayout from "../layout/LoanLayout";
 
 class LoanOffers extends Component {
 
     state = {
-        page: 1
+        loans: [],
+        nextPage: null,
+        hasMoreData: true,
+        isLoading: false
     };
 
     componentDidMount() {
-        const {dispatch} = this.props;
-        dispatch(LoanAction.getLoanOffers(this.state.page));
-    }
+        const {dispatch, currentTab} = this.props;
+        dispatch(LoanAction.getLoanOffers());
+        if (currentTab() === 'offers') window.onscroll = () => {
 
-    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
-        const {dispatch} = this.props;
-        if (prevState.page !== this.state.page) {
-            this.props.offers.data = {};
-            dispatch(LoanAction.getLoanOffers(this.state.page));
+            if (currentTab() === 'offers' && (window.scrollY >= (document.body.clientHeight - window.innerHeight)) &&
+                this.state.hasMoreData && !this.state.isLoading) {
+                this.loadMoreData(this.state.nextPage);
+            }
         }
     }
 
-    handlePageChange = (page) => {
-        this.setState({page});
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        const {offers} = this.props;
+        const {requesting} = offers;
+
+        const {loans, pagination} = {...{loans: [], pagination: {nextPage: null}}, ...offers.data};
+
+        if (loans.length > 0) {
+            this.setLoans(loans);
+            offers.data.loans = [];
+        }
+
+        if (requesting !== this.state.isLoading) this.setIsLoading(requesting === true);
+
+        let hasMoreData = (pagination.nextPage !== null && pagination.nextPage !== '#');
+
+        if (hasMoreData !== this.state.hasMoreData) this.setHasMoreData(hasMoreData);
+
+        if (hasMoreData && (pagination.nextPage !== this.state.nextPage)) {
+            this.setNextPage(pagination.nextPage);
+        }
+    }
+
+    setLoans = (data) => {
+        this.setState({loans: [...this.state.loans, ...data]});
+    };
+
+    setIsLoading = (status) => {
+        this.setState({isLoading: status});
+    };
+
+    setNextPage = (url) => {
+        this.setState({nextPage: url});
+    };
+
+    setHasMoreData = (status) => {
+        this.setState({hasMoreData: status});
+    };
+
+    loadMoreData = (url) => {
+        const {dispatch} = this.props;
+        dispatch(LoanAction.getLoanOffers(url));
     };
 
     render() {
         const {offers} = this.props;
+        const {requesting} = offers;
 
-        let {loans, pagination} = {...{loans: [1, 2, 3, 4, 5], pagination: {page: 1, totalRecords: 0, perPage: 0}}, ...offers.data};
+        let loanOffers = (this.state.loans.length > 0 ? this.state.loans : [1, 2, 3, 4]);
 
         return <>
-            {!Utility.isEmpty(loans) ? <Table className={`mt-3`} responsive borderless>
-                <thead className={`border-bottom`}>
-                <tr>
-                    <th>#</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {loans.map((v, k) => {
+            {!Utility.isEmpty(loanOffers) ? <Row className={`underline-children`}>
+                {loanOffers.map((v, k) => {
 
                     if (Utility.isNumeric(v)) return <LoanShimmer key={k}/>;
 
                     let loan = new Loan(v);
-                    let loanUser = loan.getUser();
-                    let theme = Utility.getTheme(loan.getStatus(), false);
 
-                    return <tr className={`border-bottom`} key={k}>
-                        <td>
-                            <img
-                                src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
-                                style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
-                                className={`img-thumbnail rounded-circle border-accent background-accent my-p-0-8`}/>
-                        </td>
-                        <td>Loan {loan.getLoanType()} {loanUser.isMe() && '(Me)'}</td>
-                        <td>{Utility.format(parseFloat(loan.getAmount()))}</td>
-                        <td><Badge variant={theme.badge}>{loan.getStatus()}</Badge></td>
-                        <td>{loan.getDate()}</td>
-                        <td>...</td>
-                    </tr>
+                    return <LoanLayout key={k} loan={loan}/>;
                 })}
-                </tbody>
-            </Table> : <NoContent/>}
-            <div className={`w-100 justify-content-center d-flex mt-3`}>
-                {!Utility.isEmpty(loans) && <Pagination
-                    activePage={pagination.page}
-                    itemsCountPerPage={pagination.perPage}
-                    totalItemsCount={pagination.totalRecords}
-                    onChange={this.handlePageChange}
-                    pageRangeDisplayed={5}
-                    itemClass="page-item pagination-btn-primary"
-                    linkClass="page-link"
-                />}
-            </div>
+            </Row> : <NoContent/>}
+            {(!requesting && !this.state.hasMoreData && this.state.loans.length > 0) && <p className="col-md-12 text-center mt-5">No more data</p>}
+            {
+                requesting && this.state.loans.length > 0 ?
+                    <div className="col-md-12 justify-content-center d-flex mt-5">
+                        <Spinner animation="border" variant="warning"/>
+                    </div> : null
+            }
         </>;
     }
 }

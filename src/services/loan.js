@@ -1,5 +1,4 @@
 import {AppConst, UrlConst} from "../constants";
-import Utility from "../helpers/Utility";
 
 function handleResponse(response) {
     if (response.status === 419) {
@@ -29,7 +28,7 @@ const getLoanRequests = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(`${UrlConst.LOAN_REQUEST_LIST_URL}?${Utility.serialize({page})}`, requestOptions).then(handleResponse);
+    return fetch(page || UrlConst.LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
 };
 
 const getLoanOffers = (page) => {
@@ -42,7 +41,7 @@ const getLoanOffers = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(`${UrlConst.LOAN_OFFER_LIST_URL}?${Utility.serialize({page})}`, requestOptions).then(handleResponse);
+    return fetch(page || UrlConst.LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
 };
 
 const getMyLoanRequests = (page) => {
@@ -55,7 +54,7 @@ const getMyLoanRequests = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(`${UrlConst.USER_LOAN_REQUEST_LIST_URL}?${Utility.serialize({page})}`, requestOptions).then(handleResponse);
+    return fetch(page || UrlConst.USER_LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
 };
 
 const getMyLoanOffers = (page) => {
@@ -68,7 +67,7 @@ const getMyLoanOffers = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(`${UrlConst.USER_LOAN_OFFER_LIST_URL}?${Utility.serialize({page})}`, requestOptions).then(handleResponse);
+    return fetch(page || UrlConst.USER_LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
 };
 
 export const LoanService = {

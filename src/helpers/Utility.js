@@ -59,34 +59,39 @@ class Utility {
      *
      * @param status
      * @param isIncoming
-     * @returns {{badge: null, icon: null}}
+     * @returns {{badge: null, color: null, icon: null}}
      */
     static getTheme(status, isIncoming) {
-        let theme = {icon: null, badge: null};
+        let theme = {icon: null, badge: null, color: null};
         switch (status.toLowerCase()) {
             case "inactive":
             case "pending":
                 theme.icon = isIncoming ? incomingPending : outgoingPending;
                 theme.badge = 'pending';
+                theme.color = '#555961';
                 break;
             case "awaiting":
             case "processing":
                 theme.icon = isIncoming ? incomingWarning : outgoingWarning;
                 theme.badge = 'warning';
+                theme.color = '#F5A623';
                 break;
             case "granted":
                 theme.icon = isIncoming ? incomingInfo : outgoingInfo;
                 theme.badge = 'info';
+                theme.color = '#36a3f7';
                 break;
             case "repaid":
             case "completed":
             case "successful":
                 theme.icon = isIncoming ? incomingSuccess : outgoingSuccess;
                 theme.badge = 'success';
+                theme.color = '#0B9437';
                 break;
             default:
                 theme.icon = isIncoming ? incomingDanger : outgoingDanger;
                 theme.badge = 'danger';
+                theme.color = '#F66E84';
                 break;
         }
         return theme;

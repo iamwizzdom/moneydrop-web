@@ -8,7 +8,7 @@ export const LoanAction = {
     getMyLoanOffers
 };
 
-function getLoanRequests(page) {
+function getLoanRequests(link) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
@@ -28,7 +28,7 @@ function getLoanRequests(page) {
         dispatch(request());
 
         try {
-            const res = await LoanService.getLoanRequests(page);
+            const res = await LoanService.getLoanRequests(link);
 
             if (res.status) dispatch(success(res));
             else dispatch(failure(res));
@@ -40,7 +40,7 @@ function getLoanRequests(page) {
     }
 }
 
-function getLoanOffers(page) {
+function getLoanOffers(link) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
@@ -60,7 +60,7 @@ function getLoanOffers(page) {
         dispatch(request());
 
         try {
-            const res = await LoanService.getLoanOffers(page);
+            const res = await LoanService.getLoanOffers(link);
 
             if (res.status) dispatch(success(res));
             else dispatch(failure(res));
@@ -72,7 +72,7 @@ function getLoanOffers(page) {
     }
 }
 
-function getMyLoanRequests(page) {
+function getMyLoanRequests(link) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
@@ -92,7 +92,7 @@ function getMyLoanRequests(page) {
         dispatch(request());
 
         try {
-            const res = await LoanService.getMyLoanRequests(page);
+            const res = await LoanService.getMyLoanRequests(link);
 
             if (res.status) dispatch(success(res));
             else dispatch(failure(res));
@@ -104,7 +104,7 @@ function getMyLoanRequests(page) {
     }
 }
 
-function getMyLoanOffers(page) {
+function getMyLoanOffers(link) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
@@ -124,7 +124,7 @@ function getMyLoanOffers(page) {
         dispatch(request());
 
         try {
-            const res = await LoanService.getMyLoanOffers(page);
+            const res = await LoanService.getMyLoanOffers(link);
 
             if (res.status) dispatch(success(res));
             else dispatch(failure(res));

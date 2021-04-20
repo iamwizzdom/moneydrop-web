@@ -121,6 +121,10 @@ code {
     padding: .12rem !important;
 }
 
+.my-p-0-9 {
+    padding: .20rem !important;
+}
+
 .font-size-14 {
     font-size: 14px;
 }
@@ -324,6 +328,10 @@ a.navbar-brand {
 
 .loan-type-btn-aligner {
     text-align: right;
+}
+
+.underline-children > div {
+    border-bottom: 1px solid #e9e8e8;
 }
 
 @media only screen and (max-width: 991px) {

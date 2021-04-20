@@ -8,18 +8,18 @@ import LoanRequests from "./MyLoanRequests";
 class MyLoans extends Component {
 
     state = {
-        currentNav: 'offers'
+        currentTab: 'offers'
     }
 
-    onNavSelected = (key) => {
-        this.setState({currentNav: key});
+    onTabSelected = (key) => {
+        this.setState({currentTab: key});
     };
 
     render() {
         return <>
             <Row>
                 <Col md={6}>
-                    <h4 className={`font-weight-bold text-muted rounded`}>{this.state.currentNav === 'offers' ? 'Loan Offers' : 'Loan Requests'}</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>{this.state.currentTab === 'offers' ? 'Loan Offers' : 'Loan Requests'}</h4>
                     <p>Loans you made on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
@@ -31,7 +31,7 @@ class MyLoans extends Component {
                 <Col md={12}>
                     <Card border={`light`} className={`border-radius-10`}>
                         <Card.Body>
-                            <Tab.Container id="left-tabs-example" defaultActiveKey="offers" onSelect={this.onNavSelected}>
+                            <Tab.Container id="left-tabs-example" defaultActiveKey="offers" onSelect={this.onTabSelected}>
                                 <Row>
                                     <Col md={12}>
                                         <Nav className={`justify-content-center`} variant="pills">
@@ -48,10 +48,10 @@ class MyLoans extends Component {
                                     <Col md={12} className={`mt-3`}>
                                         <Tab.Content className={`p-2`}>
                                             <Tab.Pane eventKey="offers">
-                                                <LoanOffers />
+                                                <LoanOffers currentTab={() => this.state.currentTab} />
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="requests">
-                                                <LoanRequests />
+                                                <LoanRequests currentTab={() => this.state.currentTab} />
                                             </Tab.Pane>
                                         </Tab.Content>
                                     </Col>
