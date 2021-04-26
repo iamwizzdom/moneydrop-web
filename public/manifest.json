@@ -1,6 +1,7 @@
 {
   "short_name": "Moneydrop",
   "name": "Moneydrop",
+  "description": "A decentralized Peer to Peer money lending platform.",
   "icons": [
     {
       "src": "favicon.ico",
