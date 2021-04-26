@@ -5,8 +5,11 @@ import Validator from "../../../../helpers/validator";
 import {AuthAction} from "../../../../actions";
 import {connect} from "react-redux";
 import { Redirect } from 'react-router-dom';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+// import PhoneInput from 'react-phone-input-2'
+import PhoneInput from 'react-phone-number-input'
+import {parsePhoneNumber} from 'react-phone-number-input'
+// import 'react-phone-input-2/lib/style.css'
+import 'react-phone-number-input/style.css'
 
 class VerifyPhone extends Component {
 
@@ -35,6 +38,10 @@ class VerifyPhone extends Component {
         e.target.phone.value = this.state.phone.indexOf('+') > -1 ? this.state.phone : '+' + this.state.phone;
         let validator = new Validator(e);
         validator.validate('phone').isPhoneNumber("Please enter a valid phone number");
+        const phoneNumber = parsePhoneNumber(validator.getValue('phone'))
+        if (phoneNumber && phoneNumber.country !== 'NG') {
+            validator.addError('phone', "Sorry, we only support nigerian phone numbers for now.");
+        }
 
         if (validator.hasError()) {
             this.setState({error: {...validator.getErrorsFlat()}});
@@ -94,14 +101,22 @@ class VerifyPhone extends Component {
                             <Form.Group controlId="phone">
                                 <Form.Label className={`text-dark font-size-16 text-uppercase`}>Phone number</Form.Label>
                                 <PhoneInput
-                                    inputProps={{
-                                        name: 'phone',
-                                        placeholder: "Enter phone"
-                                    }}
+                                    // inputProps={{
+                                    //     name: 'phone',
+                                    //     placeholder: "Enter phone"
+                                    // }}
+                                    flag
+                                    className={`form-control min-height-60`}
+                                    name={`phone`}
+                                    placeholder={`Enter phone`}
                                     enableSearch={true}
-                                    country={'ng'}
+                                    country="NG"
+                                    defaultCountry="NG"
                                     value={this.state.phone}
-                                    onChange={phone => this.setState({ phone })}
+                                    onChange={phone => {
+                                        if (!phone) return;
+                                        this.setState({phone})
+                                    }}
                                 />
                                 <Form.Text className={`text-danger`}>{error.phone}</Form.Text>
                             </Form.Group>

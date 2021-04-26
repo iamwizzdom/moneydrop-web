@@ -216,9 +216,16 @@ code {
     top: 1px;
 }
 
+.PhoneInput > input {
+    height: 100%;
+    -webkit-box-shadow: 0 0 0 60px #ffffff inset !important;
+}
+
+.PhoneInput > input, .PhoneInput > input:focus, .PhoneInput > input:active,
 .input-transparent, .input-transparent:focus, .input-transparent:active {
     background: none !important;
     border: none !important;
+    outline: none;
 }
 
 .btn-primary, .swal-button--confirm {
@@ -309,10 +316,10 @@ textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:active,
 textarea:-webkit-autofill:focus,
-input:not(input[type='range']):-webkit-autofill,
-input:not(input[type='range']):-webkit-autofill:hover,
-input:not(input[type='range']):-webkit-autofill:active,
-input:not(input[type='range']):-webkit-autofill:focus {
+input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill,
+input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill:hover,
+input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill:active,
+input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 60px rgba(191,65,3,0.1) inset !important;
 }
 
@@ -322,7 +329,7 @@ textarea {
     box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
 }
 
-input:not(input[type='range']):not(.input-transparent) {
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput) {
     width: 100% !important;
     height: 60px !important;
     background-color: #f1efee !important;
@@ -336,8 +343,8 @@ input:not(input[type='range']).sm, select.sm {
 
 textarea:focus,
 textarea:active,
-input:not(input[type='range']):focus,
-input:not(input[type='range']):active,
+input:not(input[type='range']):not(.PhoneInputInput):focus,
+input:not(input[type='range']):not(.PhoneInputInput):active,
 select:focus, select:active {
     box-shadow: 0 1px 3px 3px rgba(191,65,3,0.1) !important;
 }

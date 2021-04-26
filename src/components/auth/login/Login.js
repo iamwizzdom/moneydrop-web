@@ -69,13 +69,13 @@ class Login extends Component {
                         <Form onSubmit={this.submit}>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label className={`text-dark font-size-16 text-uppercase`}>Email address</Form.Label>
-                                <Form.Control style={{height: 60}} type="email" placeholder="Enter email" name="email" isInvalid={!!error.email}/>
+                                <Form.Control type="email" placeholder="Enter email" name="email" isInvalid={!!error.email}/>
                                 <Form.Control.Feedback type="invalid">{error.email}</Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group controlId="formBasicPassword" className="mt-4">
                                 <Form.Label className={`text-dark font-size-16 text-uppercase`}>Password</Form.Label>
-                                <Form.Control style={{height: 60}} type="password" placeholder="Password" name="password" isInvalid={!!error.password}/>
+                                <Form.Control type="password" placeholder="Password" name="password" isInvalid={!!error.password}/>
                                 <Form.Control.Feedback type="invalid">{error.password}</Form.Control.Feedback>
                             </Form.Group>
 
