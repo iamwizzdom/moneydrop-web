@@ -2,11 +2,15 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import LayoutRoute from "./components/layout/router";
 
-export const PrivateRoute = ({ ...rest }) => (
-    sessionStorage.getItem('token')
-        ? <LayoutRoute {...rest} />
-        : <Redirect to={{ pathname: '/login', state: { from: rest.location }, errorMessage: 'You must be logged in to access that route.' }} />
-)
+export const PrivateRoute = ({ ...rest }) => {
+    if (sessionStorage.getItem('token')) return <LayoutRoute {...rest} />;
+
+    let path = { pathname: '/login', state: { from: rest.location }};
+
+    if (rest.location.pathname !== '/') path.errorMessage = 'You must be logged in to access that route.';
+
+    return <Redirect to={path} />;
+}
 
 export const PrivateLogin = ({ ...rest }) => (
     sessionStorage.getItem('token')
