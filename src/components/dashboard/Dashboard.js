@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import {Badge, Button, Card, Col, Row, Table} from "react-bootstrap";
+import {Button, Card, Col, Row} from "react-bootstrap";
 import offer from '../../assets/images/offer-loan.svg';
 import request from '../../assets/images/request-loan.svg';
-import {DashboardAction} from "../../actions";
+import {DashboardAction, CardAction} from "../../actions";
 import {connect} from "react-redux";
 import User from "../../models/User";
 import {Link} from "react-router-dom";
@@ -12,6 +12,13 @@ import Transaction from "../../models/Transaction";
 import NoContent from "../layout/NoContent";
 import LoanShimmer from "../layout/LoanShimmer";
 import TransactionShimmer from "../layout/TransactionShimmer";
+import LoanLayout from "../layout/LoanLayout";
+import TransactionLayout from "../layout/TransactionLayout";
+import swal from "@sweetalert/with-react";
+import {AppConst} from "../../constants";
+import ReactDOM from 'react-dom';
+import InputAmount from "../layout/InputAmount";
+import CardList from "../layout/CardList";
 
 class Dashboard extends Component {
 
@@ -19,7 +26,9 @@ class Dashboard extends Component {
         error: {},
         navigate: false,
         mounted: false,
-        modalShow: false,
+        topUpAmount: 0,
+        showAmountModal: false,
+        showSelectCardModal: false,
         gender: 0
     };
 
@@ -35,27 +44,120 @@ class Dashboard extends Component {
         });
     }
 
-    setModalShow = (status) => {
-        this.setState({modalShow: status});
-    }
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
+        const {dispatch, chargeCard} = this.props;
 
-    submit = () => {
-
-        if (this.state.gender !== Dashboard.MALE && this.state.gender !== Dashboard.FEMALE) {
-            this.setState({error: {gender: 'Please select your gender'}});
-        } else {
-            this.setState({error: {gender: ''}});
+        if (chargeCard.data.message) {
+            swal({
+                title: chargeCard.data.title,
+                text: chargeCard.data.message,
+                icon: (chargeCard.data.status ? `success` : `error`),
+                button: "Ok",
+            });
+            chargeCard.data.message = null;
         }
 
-    };
+        if (this.state.showAmountModal) {
+
+            let wrapper = document.createElement('div');
+            ReactDOM.render(<InputAmount />, wrapper);
+
+            swal(`Amount not less than ${AppConst.MIN_TOP_UP_AMOUNT}.`, {
+                content: wrapper,
+                button: "Top Up"
+            }).then((value) => {
+
+                if (!value) {
+                    this.setShowAmountModal(false);
+                    return;
+                }
+
+                if (isNaN(value)) {
+                    swal("Please enter a valid amount").then(() => this.setShowAmountModal(true));
+                    return;
+                }
+
+                let amount = parseFloat(value);
+
+                if (!amount || amount < AppConst.MIN_TOP_UP_AMOUNT) {
+                    swal(`Top up amount must be greater than ${AppConst.MIN_TOP_UP_AMOUNT}.`).then(() => this.setShowAmountModal(true));
+                    return;
+                }
+
+                this.setState({showAmountModal: false, showSelectCardModal: true, topUpAmount: amount});
+
+            });
+        }
+
+        if (this.state.showSelectCardModal) {
+
+            let wrapper = document.createElement('div');
+            wrapper.classList.add("row");
+            ReactDOM.render(<CardList />, wrapper);
+
+            swal({
+                title: "Select Card",
+                content: wrapper,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: {
+                        text: "Proceed",
+                        closeModal: false
+                    }
+                }
+            }).then((cardID) => {
+
+                if (!cardID) {
+                    this.setState({showAmountModal: false, showSelectCardModal: false});
+                    return;
+                }
+
+                if (!Utility.isString(cardID)) {
+                    swal("Please select a card").then((val) => {
+
+                        if (!val) {
+                            this.setState({showAmountModal: false, showSelectCardModal: false});
+                            return;
+                        }
+
+                        this.setState({showAmountModal: false, showSelectCardModal: true})
+                    });
+                    return;
+                }
+
+                this.setState({showAmountModal: false, showSelectCardModal: false}, () => {
+                    dispatch(CardAction.chargeCard({amount: this.state.topUpAmount}, cardID));
+                });
+
+            });
+        }
+    }
+
+    setShowAmountModal = (status) => {
+        this.setState({showAmountModal: status, showSelectCardModal: false});
+    }
 
     render() {
 
-        const {dashboard} = this.props;
+        const {dashboard, chargeCard} = this.props;
         const user = new User(localStorage.getItem("user"));
 
-        let {available_balance, loans, transactions} = {...{available_balance: 0, loans: [1, 2, 3], transactions: [1, 2, 3]}, ...dashboard.data};
+        let {available_balance, loans, transactions} = {
+            ...{
+                available_balance: 0,
+                loans: [1, 2, 3, 4, 5, 6],
+                transactions: [1, 2, 3, 4, 5, 6]
+            }, ...dashboard.data
+        };
+
+        if (chargeCard.data.status) {
+            available_balance = chargeCard.data.response.available_balance;
+            if (!Utility.isEmpty(transactions) && !Utility.isNumeric(transactions[0])) {
+                transactions.pop()
+            }
+            transactions = [chargeCard.data.response.transaction, ...transactions];
+        }
 
         return <>
             <Row>
@@ -70,25 +172,30 @@ class Dashboard extends Component {
                         <Card.Body>
                             <p className={`m-0`}>Available balance</p>
                             <h3 className={`color-accent mt-2`}>{Utility.format(available_balance)}</h3>
-                            <Button className={`min-width-160 mt-1`}>Fund wallet</Button>
+                            <Button className={`min-width-160 mt-1`} onClick={() => this.setShowAmountModal(true)}>Fund wallet</Button>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col className={`mb-3`}>
-                    <Card border="light" className={`p-2 border-radius-10`}>
-                        <Card.Body className={`m-auto`}>
-                            <img src={offer} width={40} className={`img-fluid mx-auto d-block`} alt={`offer`}/>
-                            <p className={`mt-3 font-size-13`}>Offer Loan</p>
-                        </Card.Body>
-                    </Card>
+                    <Link to={`/loan/offer`} className={`text-decoration-none text-dark`}>
+                        <Card border="light" className={`p-2 border-radius-10`}>
+                            <Card.Body className={`m-auto`}>
+                                <img src={offer} width={40} className={`img-fluid mx-auto d-block`} alt={`offer`}/>
+                                <p className={`mt-3 font-size-13`}>Offer Loan</p>
+                            </Card.Body>
+                        </Card>
+                    </Link>
                 </Col>
                 <Col className={`mb-3`}>
-                    <Card border="light" className={`p-2 border-radius-10`}>
-                        <Card.Body className={`m-auto`}>
-                            <img src={request} width={37} className={`img-fluid mx-auto d-block m-3`} alt={`request`}/>
-                            <p className={`mt-4 font-size-13`}>Request Loan</p>
-                        </Card.Body>
-                    </Card>
+                    <Link to={`/loan/request`} className={`text-decoration-none text-dark`}>
+                        <Card border="light" className={`p-2 border-radius-10`}>
+                            <Card.Body className={`m-auto`}>
+                                <img src={request} width={37} className={`img-fluid mx-auto d-block m-3`}
+                                     alt={`request`}/>
+                                <p className={`mt-4 font-size-13`}>Request Loan</p>
+                            </Card.Body>
+                        </Card>
+                    </Link>
                 </Col>
             </Row>
             <Row>
@@ -97,80 +204,31 @@ class Dashboard extends Component {
                         <Card.Body>
                             <Card.Title as="small" className={`h5 font-weight-bold color-accent`}>My Loans</Card.Title>
                             <Link to={`/loans/mine`} className={`float-right color-accent`}>View all</Link>
-                            {!Utility.isEmpty(loans) ? <Table className={`mt-3`} responsive borderless>
-                                <thead className={`border-bottom`}>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                            {!Utility.isEmpty(loans) ? <Row className={`underline-children`}>
                                 {loans.map((v, k) => {
 
                                     if (Utility.isNumeric(v)) return <LoanShimmer key={k}/>;
 
-                                    let loan = new Loan(v);
-                                    let loanUser = loan.getUser();
-                                    let theme = Utility.getTheme(loan.getStatus(), false);
-
-                                    return <tr className={`border-bottom`} key={k}>
-                                        <td>
-                                            <img
-                                                src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
-                                                style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
-                                                className={`img-thumbnail rounded-circle border-accent background-accent my-p-0-8`}/>
-                                        </td>
-                                        <td>Loan {loan.getLoanType()} (Me)</td>
-                                        <td>{Utility.format(parseFloat(loan.getAmount()))}</td>
-                                        <td><Badge variant={theme.badge}>{loan.getStatus()}</Badge></td>
-                                        <td>{loan.getDate()}</td>
-                                        <td>...</td>
-                                    </tr>
+                                    return <LoanLayout key={k} loan={new Loan(v)}/>;
                                 })}
-                                </tbody>
-                            </Table> : <NoContent/>}
+                            </Row> : <NoContent title={`No Loan`}/>}
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={12}>
                     <Card border="light" className={`p-2 border-radius-10`}>
                         <Card.Body>
-                            <Card.Title as="small" className={`h5 font-weight-bold color-accent`}>Transactions</Card.Title>
+                            <Card.Title as="small"
+                                        className={`h5 font-weight-bold color-accent`}>Transactions</Card.Title>
                             <Link to={`/transactions`} className={`float-right color-accent`}>View all</Link>
-                            {!Utility.isEmpty(transactions) ? <Table className={`mt-3`} responsive borderless>
-                                <thead className={`border-bottom`}>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                            {!Utility.isEmpty(transactions) ? <Row className={`underline-children`}>
                                 {transactions.map((v, k) => {
 
                                     if (Utility.isNumeric(v)) return <TransactionShimmer key={k}/>;
 
-                                    let trans = new Transaction(v);
-                                    let theme = Utility.getTheme(trans.getStatus(), trans.getType()?.toLowerCase() === 'top-up');
-                                    return <tr className={`border-bottom`} key={k}>
-                                        <td>
-                                            <img src={theme.icon} width={25} alt={`transaction-direction`} className={`img-fluid rounded`}/></td>
-                                        <td>{trans.getType()}</td>
-                                        <td>{Utility.format(parseFloat(trans.getAmount()))}</td>
-                                        <td><Badge variant={theme.badge}>{trans.getStatus()}</Badge></td>
-                                        <td>{trans.getDate()}</td>
-                                        <td>...</td>
-                                    </tr>
+                                    return <TransactionLayout key={k} transaction={new Transaction(v)}/>;
                                 })}
-                                </tbody>
-                            </Table> : <NoContent/>}
+                            </Row> : <NoContent title={`No Transaction`}/>}
                         </Card.Body>
                     </Card>
                 </Col>
@@ -181,7 +239,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
     return {
-        dashboard: state.dashboard
+        dashboard: state.dashboard,
+        chargeCard: state.chargeCard
     }
 }
 

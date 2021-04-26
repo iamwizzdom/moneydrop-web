@@ -1,5 +1,4 @@
 import {AppConst, UrlConst} from "../constants";
-import Utility from "../helpers/Utility";
 
 function handleResponse(response) {
     if (response.status === 419) {
@@ -19,7 +18,7 @@ const getToken = () => {
     return sessionStorage.getItem("token");
 }
 
-const getTransactions = (page) => {
+const getTransactions = (link) => {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -29,7 +28,7 @@ const getTransactions = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(`${UrlConst.TRANSACTION_LIST_URL}?${Utility.serialize({page})}`, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.TRANSACTION_LIST_URL, requestOptions).then(handleResponse);
 };
 
 export const TransactionService = {

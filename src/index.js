@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GlobalStyle from "./GlobalStyle";
 import './index.css';
+import './styles.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";

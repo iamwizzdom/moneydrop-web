@@ -13,11 +13,11 @@
     background: rgba(35, 31, 32, 0.5);
 }
 
-.mobile-bottom-sheet .sheet-holder::-webkit-scrollbar-track {
+.scrollbar-invisible::-webkit-scrollbar-track {
     background: none;
 }
 
-.mobile-bottom-sheet .sheet-holder::-webkit-scrollbar-thumb {
+.scrollbar-invisible::-webkit-scrollbar-thumb {
     background: none;
 }
 
@@ -50,6 +50,10 @@ code {
     monospace;
 }
 
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
 .my-rounded {
     border-radius: 8px !important;
 }
@@ -59,7 +63,7 @@ code {
     border-top-right-radius: 10px !important;
 }
 
-.color-accent {
+.color-accent, .spinner-border.text-warning {
     color: #e04805 !important;
 }
 
@@ -68,6 +72,10 @@ code {
 }
 
 .background-accent {
+    background-color: #e04805 !important;
+}
+
+.background-accent-light {
     background-color: #f9beaa !important;
 }
 
@@ -153,6 +161,10 @@ code {
     font-size: 25px;
 }
 
+.font-size-30 {
+    font-size: 35px;
+}
+
 .min-width-80-per {
     min-width: 80% !important;
 }
@@ -171,6 +183,10 @@ code {
 
 .min-height-60 {
     min-height: 60px !important;
+}
+
+.min-height-48 {
+    min-height: 48px !important;
 }
 
 .gender-check-box-container {
@@ -200,7 +216,12 @@ code {
     top: 1px;
 }
 
-.btn-primary {
+.input-transparent, .input-transparent:focus, .input-transparent:active {
+    background: none !important;
+    border: none !important;
+}
+
+.btn-primary, .swal-button--confirm {
     background-color: #e04805 !important;
     border-color: #bf4103 !important;
     border-radius: 8px;
@@ -211,12 +232,12 @@ code {
     height: 30px !important;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .swal-button--confirm:hover {
     background-color: #bf4103 !important;
     border-color: #bf4103 !important;
 }
 
-.btn-primary:focus, .btn-primary:active {
+.btn-primary:focus, .btn-primary:active, .swal-button--confirm:focus, .swal-button--confirm:active {
     box-shadow: 0 -1px 6px 0 rgba(191,65,3,0.75) !important;
 }
 
@@ -260,6 +281,16 @@ code {
     background-color: #CCCCCC !important;
 }
 
+.loan-return {
+    color:#28a745!important;
+    background-color: #e9e8e8;
+}
+
+.loan-amounts {
+    color:#e04805!important;
+    background-color: #e9e8e8;
+}
+
 .badge-success {
     padding: .3rem;
     border: 1px solid #AFDDBE !important;
@@ -274,14 +305,24 @@ code {
     background-color: #fce4bd !important;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:active,
-input:-webkit-autofill:focus {
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:active,
+textarea:-webkit-autofill:focus,
+input:not(input[type='range']):-webkit-autofill,
+input:not(input[type='range']):-webkit-autofill:hover,
+input:not(input[type='range']):-webkit-autofill:active,
+input:not(input[type='range']):-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 60px rgba(191,65,3,0.1) inset !important;
 }
 
-input {
+textarea {
+    width: 100% !important;
+    border-color: #e2e0df !important;
+    box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+}
+
+input:not(input[type='range']):not(.input-transparent) {
     width: 100% !important;
     height: 60px !important;
     background-color: #f1efee !important;
@@ -289,17 +330,51 @@ input {
     box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
 }
 
+input:not(input[type='range']).sm, select.sm {
+    height: 30px !important;
+}
+
+textarea:focus,
+textarea:active,
+input:not(input[type='range']):focus,
+input:not(input[type='range']):active,
+select:focus, select:active {
+    box-shadow: 0 1px 3px 3px rgba(191,65,3,0.1) !important;
+}
+
 select {
     border-color: #e2e0df !important;
     box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
 }
 
-input.sm, select.sm {
-    height: 30px !important;
+.custom-select {
+    display: inline-block;
+    width: 100%;
+    height: 48px;
+    padding: .375rem 1.75rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-image: url("./assets/images/arrows.svg");
+    background-size: 8px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-input:focus, input:active, select:focus, select:active {
-    box-shadow: 0 1px 3px 3px rgba(191,65,3,0.1) !important;
+.custom-input-amount {
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    background-position: left .75rem center;
+    background-image: url("./assets/images/naira-sign-dark.svg");
+    background-size: 20px;
 }
 
 .react-datepicker-wrapper {
@@ -334,7 +409,20 @@ a.navbar-brand {
     border-bottom: 1px solid #e9e8e8;
 }
 
+.underline-grandchildren > div > div {
+    border-bottom: 1px solid #e9e8e8;
+}
+
+.loam-amount-font-size {
+    font-size: 35px;
+}
+
 @media only screen and (max-width: 991px) {
+
+    .loam-amount-font-size {
+        font-size: 25px;
+    }
+
     /* For mobile phones: */
     .mobile-header-menu {
         display: block;
@@ -403,8 +491,6 @@ a.navbar-brand {
         max-height: calc(80vh - 40px);
         padding-left: 20px;
         padding-bottom: 10px;
-        overflow-x: hidden;
-        overflow-y: scroll;
     }
 
     .mobile-bottom-sheet .my-nav-item {
@@ -428,4 +514,44 @@ a.navbar-brand {
     .loan-type-btn-aligner {
         text-align: center;
     }
+}
+
+.scroll-vertical {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
+
+.scroll-horizontal {
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+}
+
+.scroll-both {
+    overflow: scroll !important;
+}
+
+.swal-text {
+    font-size: 20px !important;
+    text-align: center !important;
+}
+
+.dropdown-item:active, .dropdown-item:focus {
+    color: #ffffff;
+    background-color: #e04805;
+}
+
+.dropdown-toggle:after {
+    display: none;
+}
+
+.no-shadow:focus,
+.no-shadow:active {
+    box-shadow: none;
+}
+
+.single-line-text {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

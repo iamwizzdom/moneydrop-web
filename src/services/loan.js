@@ -70,9 +70,50 @@ const getMyLoanOffers = (page) => {
     return fetch(page || UrlConst.USER_LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
 };
 
+const getLoanConst = () => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        }
+    };
+    return fetch(UrlConst.LOAN_CONSTANTS_URL, requestOptions).then(handleResponse);
+};
+
+const offerLoan = (data) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        },
+        body: JSON.stringify(data)
+    };
+    return fetch(UrlConst.LOAN_OFFER_URL, requestOptions).then(handleResponse);
+};
+
+const requestLoan = (data) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        },
+        body: JSON.stringify(data)
+    };
+    return fetch(UrlConst.LOAN_REQUEST_URL, requestOptions).then(handleResponse);
+};
+
 export const LoanService = {
     getLoanRequests,
     getLoanOffers,
     getMyLoanRequests,
-    getMyLoanOffers
+    getMyLoanOffers,
+    getLoanConst,
+    offerLoan,
+    requestLoan
 };

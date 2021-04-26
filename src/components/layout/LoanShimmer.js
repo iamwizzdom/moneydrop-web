@@ -38,7 +38,7 @@ class LoanShimmer extends Component {
     render() {
         const { classes, key } = this.props;
         return (
-            <Col md={12} className={`pt-3 pb-3`} key={key}>
+            <Col md={6} className={`pt-3 pb-3`} key={key}>
                 <Row>
                     <Col lg={2} md={2} sm={2} xl={2} xs={2}><Shimmer><div className={classes.circle} /></Shimmer></Col>
                     <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-left`} style={{marginTop: '-5px'}}>

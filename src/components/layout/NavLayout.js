@@ -5,6 +5,7 @@ import wallet from '../../assets/images/wallet-nav.svg';
 import transactions from "../../assets/images/transactions.svg";
 import bank from "../../assets/images/bank.svg";
 import card from "../../assets/images/card.svg";
+import history from "../../assets/images/history.svg";
 
 const NavLayout = (props) => {
 
@@ -38,6 +39,12 @@ const NavLayout = (props) => {
                 <Nav.Link href="/transactions" eventKey={`/transactions`}>
                     <img src={transactions} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
                     Transactions
+                </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className={`my-nav-item`}>
+                <Nav.Link href="/history" eventKey={`/history`}>
+                    <img src={history} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                    History
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>

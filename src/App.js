@@ -1,10 +1,10 @@
-// import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import LayoutRoute from "./components/layout/router";
 import AuthLayout from "./components/layout/AuthLayout";
-// import AppLayout from "./components/layout/AppLayout";
+import {PrivateLogin, PrivateRoute} from "./PrivateRoute";
+import AppLayout from "./components/layout/AppLayout";
 
 import Login from "./components/auth/login/Login";
 import {connect} from "react-redux";
@@ -14,13 +14,16 @@ import VerifyPhone from "./components/auth/signup/verification/VerifyPhone";
 import Signup from "./components/auth/signup/Signup";
 import SignupSuccessful from "./components/auth/signup/SignupSuccessful";
 import NotFound from "./components/NotFound";
-import {PrivateLogin, PrivateRoute} from "./PrivateRoute";
-import AppLayout from "./components/layout/AppLayout";
 import Dashboard from "./components/dashboard/Dashboard";
 import Loans from "./components/loans/Loans";
 import Wallet from "./components/wallet/Wallet";
 import MyLoans from "./components/my-loans/MyLoans";
 import Transactions from "./components/transaction/Transactions";
+import OfferLoan from "./components/loan/OfferLoan";
+import RequestLoan from "./components/loan/RequestLoan";
+import History from "./components/history/History";
+import Cards from "./components/cards/Cards";
+import BankAccounts from "./components/bank-accounts/BankAccounts";
 
 function App() {
     return (
@@ -36,10 +39,15 @@ function App() {
                     <PrivateLogin exact layout={AuthLayout} path="/signup" component={Signup}/>
                     <PrivateLogin exact layout={AuthLayout} path="/login" component={Login}/>
 
+                    <PrivateRoute exact layout={AppLayout} path="/bank-accounts" component={BankAccounts}/>
+                    <PrivateRoute exact layout={AppLayout} path="/cards" component={Cards}/>
+                    <PrivateRoute exact layout={AppLayout} path="/history" component={History}/>
                     <PrivateRoute exact layout={AppLayout} path="/transactions" component={Transactions}/>
                     <PrivateRoute exact layout={AppLayout} path="/wallet" component={Wallet}/>
                     <PrivateRoute exact layout={AppLayout} path="/loans" component={Loans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loans/mine" component={MyLoans}/>
+                    <PrivateRoute exact layout={AppLayout} path="/loan/offer" component={OfferLoan}/>
+                    <PrivateRoute exact layout={AppLayout} path="/loan/request" component={RequestLoan}/>
                     <PrivateRoute exact layout={AppLayout} path="/" component={Dashboard}/>
 
                     <LayoutRoute layout={AuthLayout} component={NotFound}/>

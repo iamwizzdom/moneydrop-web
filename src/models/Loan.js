@@ -26,11 +26,11 @@ class Loan {
     }
 
     isLoanOffer() {
-        return this.loanObject.getLoanType().toLowerCase().equals("offer");
+        return this.getLoanType().toLowerCase() === 'offer';
     }
 
     isLoanRequest() {
-        return this.loanObject.getLoanType().toLowerCase().equals("request");
+        return this.getLoanType().toLowerCase() === 'request';
     }
 
     getLoanType() {
@@ -114,11 +114,11 @@ class Loan {
     }
 
     isPending() {
-        return this.loanObject.getStatus().toLowerCase().equals("pending");
+        return this.getStatus().toLowerCase().equals("pending");
     }
 
     isAwaiting() {
-        return this.loanObject.getStatus().toLowerCase().equals("awaiting");
+        return this.getStatus().toLowerCase().equals("awaiting");
     }
 
     isMine() {

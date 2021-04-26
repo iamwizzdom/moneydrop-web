@@ -8,6 +8,7 @@ import bank from '../../assets/images/bank.svg';
 import card from '../../assets/images/card.svg';
 import logouts from '../../assets/images/logouts.svg';
 import {AuthAction} from "../../actions";
+import history from "../../assets/images/history.svg";
 
 const MobileNavLayout = (props) => {
 
@@ -47,6 +48,12 @@ const MobileNavLayout = (props) => {
                 <Nav.Link href="/transactions" eventKey={`/transactions`}>
                     <img src={transactions} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
                     Transactions
+                </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className={`my-nav-item`}>
+                <Nav.Link href="/history" eventKey={`/history`}>
+                    <img src={history} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                    History
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>

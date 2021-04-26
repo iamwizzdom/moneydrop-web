@@ -1,41 +1,84 @@
 import React, {Component} from "react";
-import {Badge, Card, Col, Row, Table} from "react-bootstrap";
+import {Card, Col, Row, Spinner} from "react-bootstrap";
 import {AppConst} from "../../constants";
 import {TransactionAction} from "../../actions";
 import {connect} from "react-redux";
 import Utility from "../../helpers/Utility";
 import NoContent from "../layout/NoContent";
-import Pagination from "react-js-pagination";
 import TransactionShimmer from "../layout/TransactionShimmer";
 import Transaction from "../../models/Transaction";
+import TransactionLayout from "../layout/TransactionLayout";
 
 class Transactions extends Component {
 
     state = {
-        page: 1
+        transactions: [],
+        nextPage: null,
+        hasMoreData: true,
+        isLoading: false
     };
 
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch(TransactionAction.getTransactions(this.state.page));
-    }
+        dispatch(TransactionAction.getTransactions());
+        window.onscroll = () => {
 
-    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
-        const {dispatch} = this.props;
-        if (prevState.page !== this.state.page) {
-            this.props.transaction.data = {};
-            dispatch(TransactionAction.getTransactions(this.state.page));
+            if ((window.scrollY >= (document.body.clientHeight - window.innerHeight)) &&
+                this.state.hasMoreData && !this.state.isLoading) {
+                this.loadMoreData(this.state.nextPage);
+            }
         }
     }
 
-    handlePageChange = (page) => {
-        this.setState({page});
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        const {transaction} = this.props;
+        const {requesting} = transaction;
+
+        const {transactions, pagination} = {...{transactions: [], pagination: {nextPage: null}}, ...transaction.data};
+
+        if (transactions.length > 0) {
+            this.setLoans(transactions);
+            transaction.data.transactions = [];
+        }
+
+        if (requesting !== this.state.isLoading) this.setIsLoading(requesting === true);
+
+        let hasMoreData = (pagination.nextPage !== null && pagination.nextPage !== '#');
+
+        if (hasMoreData !== this.state.hasMoreData) this.setHasMoreData(hasMoreData);
+
+        if (hasMoreData && (pagination.nextPage !== this.state.nextPage)) {
+            this.setNextPage(pagination.nextPage);
+        }
+    }
+
+    setLoans = (data) => {
+        this.setState({transactions: [...this.state.transactions, ...data]});
+    };
+
+    setIsLoading = (status) => {
+        this.setState({isLoading: status});
+    };
+
+    setNextPage = (url) => {
+        this.setState({nextPage: url});
+    };
+
+    setHasMoreData = (status) => {
+        this.setState({hasMoreData: status});
+    };
+
+    loadMoreData = (url) => {
+        const {dispatch} = this.props;
+        dispatch(TransactionAction.getTransactions(url));
     };
 
     render() {
         const {transaction} = this.props;
+        const {requesting} = transaction;
 
-        let {transactions, pagination} = {...{transactions: [1, 2, 3, 4, 5], pagination: {page: 1, totalRecords: 0, perPage: 0}}, ...transaction.data};
+        let transactions = (this.state.transactions.length > 0  || !requesting ? this.state.transactions : [1, 2, 3, 4, 5, 6]);
 
         return <>
             <Row>
@@ -46,49 +89,23 @@ class Transactions extends Component {
             </Row>
             <Row className={`mt-3`}>
                 <Col md={12}>
-                    <Card border={`light`} className={`border-radius-10`}>
-                        <Card.Body className={`p-2`}>
-                            {!Utility.isEmpty(transactions) ? <Table className={`mt-3`} responsive borderless>
-                                <thead className={`border-bottom`}>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                    <Card border={`light`} className={`border-radius-10 p-2`}>
+                        <Card.Body>
+                            {!Utility.isEmpty(transactions) ? <Row className={`underline-children`}>
                                 {transactions.map((v, k) => {
 
                                     if (Utility.isNumeric(v)) return <TransactionShimmer key={k}/>;
 
-                                    let trans = new Transaction(v);
-                                    let theme = Utility.getTheme(trans.getStatus(), trans.getType()?.toLowerCase() === 'top-up');
-                                    return <tr className={`border-bottom`} key={k}>
-                                        <td>
-                                            <img src={theme.icon} width={25} alt={`transaction-direction`} className={`img-fluid rounded`}/></td>
-                                        <td>{trans.getType()}</td>
-                                        <td>{Utility.format(parseFloat(trans.getAmount()))}</td>
-                                        <td><Badge variant={theme.badge}>{trans.getStatus()}</Badge></td>
-                                        <td>{trans.getDate()}</td>
-                                        <td>...</td>
-                                    </tr>
+                                    return <TransactionLayout key={k} transaction={new Transaction(v)}/>;
                                 })}
-                                </tbody>
-                            </Table> : <NoContent/>}
-                            <div className={`w-100 justify-content-center d-flex mt-3`}>
-                                {!Utility.isEmpty(transactions) && <Pagination
-                                    activePage={pagination.page}
-                                    itemsCountPerPage={pagination.perPage}
-                                    totalItemsCount={pagination.totalRecords}
-                                    onChange={this.handlePageChange}
-                                    pageRangeDisplayed={5}
-                                    itemClass="page-item pagination-btn-primary"
-                                    linkClass="page-link"
-                                />}
-                            </div>
+                            </Row> : <NoContent title={`No Transaction`}/>}
+                            {(!requesting && !this.state.hasMoreData && this.state.transactions.length > 0) && <p className="col-md-12 text-center text-muted mt-5">No more data</p>}
+                            {
+                                requesting && this.state.transactions.length > 0 ?
+                                    <div className="col-md-12 justify-content-center d-flex mt-5">
+                                        <Spinner animation="border" variant="warning"/>
+                                    </div> : null
+                            }
                         </Card.Body>
                     </Card>
                 </Col>

@@ -77,7 +77,7 @@ class MyLoanOffers extends Component {
         const {offers} = this.props;
         const {requesting} = offers;
 
-        let loanOffers = (this.state.loans.length > 0 ? this.state.loans : [1, 2, 3, 4]);
+        let loanOffers = (this.state.loans.length > 0 || !requesting ? this.state.loans : [1, 2, 3, 4]);
 
         return <>
             {!Utility.isEmpty(loanOffers) ? <Row className={`underline-children`}>
@@ -89,8 +89,8 @@ class MyLoanOffers extends Component {
 
                     return <LoanLayout key={k} loan={loan}/>;
                 })}
-            </Row> : <NoContent/>}
-            {(!requesting && !this.state.hasMoreData && this.state.loans.length > 0) && <p className="col-md-12 text-center mt-5">No more data</p>}
+            </Row> : <NoContent title={`No Loan Offer`}/>}
+            {(!requesting && !this.state.hasMoreData && this.state.loans.length > 0) && <p className="col-md-12 text-center text-muted mt-5">No more data</p>}
             {
                 requesting && this.state.loans.length > 0 ?
                 <div className="col-md-12 justify-content-center d-flex mt-5">

@@ -97,10 +97,11 @@ class Utility {
         return theme;
     }
 
-    static format(amount, style = 'currency', currency = 'NGN') {
+    static format(amount, decimals = 2, style = 'currency', currency = 'NGN') {
         return !isNaN(amount) && amount.toLocaleString(`en-${currency.substr(0, 2)}`, {
             style: style,
             currency,
+            maximumFractionDigits: decimals
         });
     }
 

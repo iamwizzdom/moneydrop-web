@@ -5,7 +5,7 @@ export const TransactionAction = {
     getTransactions
 };
 
-function getTransactions(page) {
+function getTransactions(link) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
@@ -25,7 +25,7 @@ function getTransactions(page) {
         dispatch(request());
 
         try {
-            const res = await TransactionService.getTransactions(page);
+            const res = await TransactionService.getTransactions(link);
 
             if (res.status) dispatch(success(res));
             else dispatch(failure(res));

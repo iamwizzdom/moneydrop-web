@@ -19,7 +19,7 @@ class LoanLayout extends Component {
                     <img
                         src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
                         style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
-                        className={`rounded-circle border-accent background-accent my-p-0-9`}/>
+                        className={`rounded-circle border-accent background-accent-light my-p-0-9`}/>
                 </Col>
                 <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-left`} style={{marginTop: '-5px'}}>
                     <Row>

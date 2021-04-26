@@ -1,14 +1,30 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Badge, Button, Card, Col, Row, Table} from "react-bootstrap";
+import {Button, Card, Col, Row} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
 import {Link} from "react-router-dom";
 import NoContent from "../layout/NoContent";
 import TransactionShimmer from "../layout/TransactionShimmer";
 import Transaction from "../../models/Transaction";
-import {WalletAction} from "../../actions";
+import {CardAction, WalletAction, BankAction} from "../../actions";
+import TransactionLayout from "../layout/TransactionLayout";
+import swal from "@sweetalert/with-react";
+import ReactDOM from "react-dom";
+import InputAmount from "../layout/InputAmount";
+import {AppConst} from "../../constants";
+import CardList from "../layout/CardList";
+import BankAccountList from "../layout/BankAccountList";
 
 class Wallet extends Component {
+
+    state = {
+        topUpAmount: 0,
+        showAmountModal: false,
+        showSelectCardModal: false,
+        cashOutAmount: 0,
+        showCashOutAmountModal: false,
+        showSelectBankModal: false,
+    };
 
     componentDidMount() {
         const {dispatch} = this.props;
@@ -16,11 +32,210 @@ class Wallet extends Component {
         dispatch(WalletAction.getWalletData());
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        const {dispatch, chargeCard, creditBank} = this.props;
+
+        if (chargeCard.data.message) {
+            swal({
+                title: chargeCard.data.title,
+                text: chargeCard.data.message,
+                icon: (chargeCard.data.status ? `success` : `error`),
+                button: "Ok",
+            });
+            chargeCard.data.message = null;
+        }
+
+        if (creditBank.data.message) {
+            swal({
+                title: creditBank.data.title,
+                text: creditBank.data.message,
+                icon: (creditBank.data.status ? `success` : `error`),
+                button: "Ok",
+            });
+            creditBank.data.message = null;
+        }
+
+        if (this.state.showAmountModal) {
+
+            let wrapper = document.createElement('div');
+            ReactDOM.render(<InputAmount />, wrapper);
+
+            swal(`Amount not less than ${AppConst.MIN_TOP_UP_AMOUNT}.`, {
+                content: wrapper,
+                button: "Top Up"
+            }).then((value) => {
+
+                if (!value) {
+                    this.setShowAmountModal(false);
+                    return;
+                }
+
+                if (isNaN(value)) {
+                    swal("Please enter a valid amount").then(() => this.setShowAmountModal(true));
+                    return;
+                }
+
+                let amount = parseFloat(value);
+
+                if (!amount || amount < AppConst.MIN_TOP_UP_AMOUNT) {
+                    swal(`Top up amount must be greater than ${AppConst.MIN_TOP_UP_AMOUNT}.`).then(() => this.setShowAmountModal(true));
+                    return;
+                }
+
+                this.setState({showAmountModal: false, showSelectCardModal: true, topUpAmount: amount});
+
+            });
+        }
+
+        if (this.state.showSelectCardModal) {
+
+            let wrapper = document.createElement('div');
+            wrapper.classList.add("row");
+            ReactDOM.render(<CardList />, wrapper);
+
+            swal({
+                title: "Select Card",
+                content: wrapper,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: {
+                        text: "Proceed",
+                        closeModal: false
+                    }
+                }
+            }).then((cardID) => {
+
+                if (!cardID) {
+                    this.setState({showAmountModal: false, showSelectCardModal: false});
+                    return;
+                }
+
+                if (!Utility.isString(cardID)) {
+                    swal("Please select a card").then((val) => {
+
+                        if (!val) {
+                            this.setState({showAmountModal: false, showSelectCardModal: false});
+                            return;
+                        }
+
+                        this.setState({showAmountModal: false, showSelectCardModal: true})
+                    });
+                    return;
+                }
+
+                this.setState({showAmountModal: false, showSelectCardModal: false}, () => {
+                    dispatch(CardAction.chargeCard({amount: this.state.topUpAmount}, cardID));
+                });
+
+            });
+        }
+
+        if (this.state.showCashOutAmountModal) {
+
+            let wrapper = document.createElement('div');
+            ReactDOM.render(<InputAmount />, wrapper);
+
+            swal(`Amount not less than ${AppConst.MIN_TOP_UP_AMOUNT}.`, {
+                content: wrapper,
+                button: "Cash-out"
+            }).then((value) => {
+
+                if (!value) {
+                    this.setShowCashOutModal(false);
+                    return;
+                }
+
+                if (isNaN(value)) {
+                    swal("Please enter a valid amount").then(() => this.setShowCashOutModal(true));
+                    return;
+                }
+
+                let amount = parseFloat(value);
+
+                if (!amount || amount < AppConst.MIN_TOP_UP_AMOUNT) {
+                    swal(`Cash-out amount must be greater than ${AppConst.MIN_TOP_UP_AMOUNT}.`).then(() => this.setShowCashOutModal(true));
+                    return;
+                }
+
+                this.setState({showCashOutAmountModal: false, showSelectBankModal: true, cashOutAmount: amount});
+
+            });
+        }
+
+        if (this.state.showSelectBankModal) {
+
+            let wrapper = document.createElement('div');
+            wrapper.classList.add("row");
+            ReactDOM.render(<BankAccountList />, wrapper);
+
+            swal({
+                title: "Select Bank Account",
+                content: wrapper,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: {
+                        text: "Proceed",
+                        closeModal: false
+                    }
+                }
+            }).then((bankID) => {
+
+                if (!bankID) {
+                    this.setState({showCashOutAmountModal: false, showSelectBankModal: false});
+                    return;
+                }
+
+                if (!Utility.isString(bankID)) {
+                    swal("Please select a bank account").then((val) => {
+
+                        if (!val) {
+                            this.setState({showCashOutAmountModal: false, showSelectBankModal: false});
+                            return;
+                        }
+
+                        this.setState({showCashOutAmountModal: false, showSelectBankModal: true})
+                    });
+                    return;
+                }
+
+                this.setState({showCashOutAmountModal: false, showSelectBankModal: false}, () => {
+                    dispatch(BankAction.creditBank({amount: this.state.cashOutAmount}, bankID));
+                });
+
+            });
+        }
+    }
+
+    setShowAmountModal = (status) => {
+        this.setState({showAmountModal: status, showSelectCardModal: false});
+    }
+
+    setShowCashOutModal = (status) => {
+        this.setState({showCashOutAmountModal: status, showSelectBankModal: false});
+    }
+
     render() {
 
-        const {wallet} = this.props;
+        const {wallet, chargeCard, creditBank} = this.props;
 
-        let {available_balance, transactions} = {...{available_balance: 0, transactions: [1, 2, 3]}, ...wallet.data};
+        let {available_balance, transactions} = {...{available_balance: 0, transactions: [1, 2, 3, 4, 5, 6]}, ...wallet.data};
+
+        if (chargeCard.data.status) {
+            available_balance = chargeCard.data.response.available_balance;
+            if (!Utility.isEmpty(transactions) && !Utility.isNumeric(transactions[0])) {
+                transactions.pop()
+            }
+            transactions = [chargeCard.data.response.transaction, ...transactions];
+        }
+
+        if (creditBank.data.status) {
+            available_balance = creditBank.data.response.available_balance;
+            if (!Utility.isEmpty(transactions) && !Utility.isNumeric(transactions[0])) {
+                transactions.pop()
+            }
+            transactions = [creditBank.data.response.transaction, ...transactions];
+        }
 
         return <>
             <Row>
@@ -35,8 +250,8 @@ class Wallet extends Component {
                         <Card.Body>
                             <p className={`m-0`}>Available balance</p>
                             <h3 className={`color-accent mt-2`}>{Utility.format(available_balance)}</h3>
-                            <Button className={`pl-4 pr-4 m-1`}>Fund wallet</Button>
-                            <Button variant={`warning`} className={`pl-4 pr-4 m-1 my-rounded`}>Cash out</Button>
+                            <Button className={`pl-4 pr-4 m-1`} onClick={() => this.setShowAmountModal(true)}>Fund wallet</Button>
+                            <Button variant={`warning`} className={`pl-4 pr-4 m-1 my-rounded`} onClick={() => this.setShowCashOutModal(true)}>Cash out</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -47,36 +262,14 @@ class Wallet extends Component {
                         <Card.Body>
                             <Card.Title as="small" className={`h5 font-weight-bold color-accent`}>Transactions</Card.Title>
                             <Link to={`/transactions`} className={`float-right color-accent`}>View all</Link>
-                            {!Utility.isEmpty(transactions) ? <Table className={`mt-3`} responsive borderless>
-                                <thead className={`border-bottom`}>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                            {!Utility.isEmpty(transactions) ? <Row className={`underline-children`}>
                                 {transactions.map((v, k) => {
 
                                     if (Utility.isNumeric(v)) return <TransactionShimmer key={k}/>;
 
-                                    let trans = new Transaction(v);
-                                    let theme = Utility.getTheme(trans.getStatus(), trans.getType()?.toLowerCase() === 'top-up');
-                                    return <tr className={`border-bottom`} key={k}>
-                                        <td>
-                                            <img src={theme.icon} width={25} alt={`transaction-direction`} className={`img-fluid rounded`}/></td>
-                                        <td>{trans.getType()}</td>
-                                        <td>{Utility.format(parseFloat(trans.getAmount()))}</td>
-                                        <td><Badge variant={theme.badge}>{trans.getStatus()}</Badge></td>
-                                        <td>{trans.getDate()}</td>
-                                        <td>...</td>
-                                    </tr>
+                                    return <TransactionLayout key={k} transaction={new Transaction(v)}/>;
                                 })}
-                                </tbody>
-                            </Table> : <NoContent/>}
+                            </Row> : <NoContent title={`No Transaction`}/>}
                         </Card.Body>
                     </Card>
                 </Col>
@@ -87,7 +280,9 @@ class Wallet extends Component {
 
 function mapStateToProps(state) {
     return {
-        wallet: state.wallet
+        wallet: state.wallet,
+        chargeCard: state.chargeCard,
+        creditBank: state.creditBank,
     }
 }
 

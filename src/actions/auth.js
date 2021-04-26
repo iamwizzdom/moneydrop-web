@@ -39,7 +39,7 @@ function login(email, password) {
                 sessionStorage.setItem('token', res.response.user.token);
                 localStorage.setItem('user', JSON.stringify(res.response.user));
                 localStorage.setItem('cards', JSON.stringify(res.response.cards));
-                localStorage.setItem('bank-accounts', JSON.stringify(res.response.banks));
+                localStorage.setItem('bank-accounts', JSON.stringify(res.response['bank-accounts']));
                 dispatch(success(res));
             } else {
                 dispatch(failure(res));

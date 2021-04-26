@@ -23,8 +23,8 @@ class MyLoans extends Component {
                     <p>Loans you made on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
-                    <Button variant={`link`} href={`loan/offer`} className={`btn btn-primary text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Offer Loan</Button>
-                    <Button variant={`link`} href={`loan/request`} className={`btn btn-warning text-dark text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Request Loan</Button>
+                    <Button variant={`link`} href={`/loan/offer`} className={`btn btn-primary text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Offer Loan</Button>
+                    <Button variant={`link`} href={`/loan/request`} className={`btn btn-warning text-dark text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Request Loan</Button>
                 </Col>
             </Row>
             <Row className={`mt-3`}>

@@ -26,7 +26,7 @@ const HeaderLayout = (props) => {
     return <>
         <Navbar bg="light" expand="lg" sticky={"top"}>
             <Container className={`pt-1 pb-1`}>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img src={logo} style={{marginTop: '-5px'}} alt={`${AppConst.APP_NAME} logo`} width={40} height={40} />
                     <span className="color-accent font-size-22 m-1 pc-brand">oney<b>Drop</b></span>
                 </Navbar.Brand>
@@ -37,17 +37,17 @@ const HeaderLayout = (props) => {
                     <Nav.Item className={`pt-2 float-right`} onClick={showMenu}>
                         <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                              style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`user`}
-                             className={`img-thumbnail rounded-circle border-accent background-accent my-p-0-8`}/>
+                             className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8`}/>
                     </Nav.Item>
                 </Nav>
                 <Nav className="ml-auto pc-header-menu">
-                    <Nav.Link href="#notification">
-                        <img src={notification} width={20} alt={`notification`} className={`img-fluid m-2`}/>
+                    <Nav.Link href="#notification" style={{width: 40, maxHeight: 40}} active={true} className={`m-2 rounded-circle border-accent`}>
+                        <img src={notification} width={20} alt={`notification`} className={`img-fluid m-auto d-block`}/>
                     </Nav.Link>
                     <Nav.Item className={`pt-2`}>
                         <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                              style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`user`}
-                             className={`img-thumbnail rounded-circle border-accent background-accent my-p-0-8`}/>
+                             className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8`}/>
                     </Nav.Item>
                     <NavDropdown title={`${user.getFirstname()} ${user.getLastname()}`} className={`pt-2 font-weight-bold`} id="basic-nav-dropdown" aria-dropeffect={`copy`}>
                         <NavDropdown.Item href="#action/3.1">

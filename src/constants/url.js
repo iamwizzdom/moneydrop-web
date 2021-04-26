@@ -1,9 +1,10 @@
 class UrlBaseConst {
     static HTTP_SCHEME = "http://";
     static HTTPS_SCHEME = "https://";
-    static SCHEME = UrlBaseConst.HTTP_SCHEME;
-    static HOST_URL = "moneydrop.test";
-// static HOST_URL = "192.168.0.109:8000";
+    static SCHEME = UrlBaseConst.HTTPS_SCHEME;
+    static HOST_URL = "moneydrop.ng:8085/moneydrop/server";
+    // static HOST_URL = "moneydrop.test";
+    // static HOST_URL = "192.168.0.109:8000";
 // static HOST_URL = "10.101.186.242:8000";
 // static HOST_URL = "54.93.104.127/moneydrop/server";
     static BASE_URL = UrlBaseConst.SCHEME + UrlBaseConst.HOST_URL;
@@ -41,12 +42,12 @@ export const UrlConst = {
     CARD_TRANS_LOG_URL: UrlBaseConst.API_URL + "/user/card/add/reference",
     CARD_VERIFICATION_URL: UrlBaseConst.API_URL + "/user/card/add/verify",
     CARD_RETRIEVE_ALL_URL: UrlBaseConst.API_URL + "/user/card/retrieve/all",
-    CARD_REMOVE_URL: UrlBaseConst.API_URL + "/user/card/remove/",
+    CARD_REMOVE_URL: UrlBaseConst.API_URL + "/user/card/remove/%s",
     BANK_ACCOUNT_ADD_URL: UrlBaseConst.API_URL + "/user/bank/add-account",
     BANK_ACCOUNT_RETRIEVE_ALL_URL: UrlBaseConst.API_URL + "/user/bank/retrieve/all",
-    BANK_ACCOUNT_REMOVE_URL: UrlBaseConst.API_URL + "/user/bank/remove/",
-    WALLET_TOP_UP_URL: UrlBaseConst.API_URL + "/user/wallet/top-up/",
-    WALLET_CASH_OUT_URL: UrlBaseConst.API_URL + "/user/wallet/cash-out/",
+    BANK_ACCOUNT_REMOVE_URL: UrlBaseConst.API_URL + "/user/bank/remove/%s",
+    WALLET_TOP_UP_URL: UrlBaseConst.API_URL + "/user/wallet/top-up/%s",
+    WALLET_CASH_OUT_URL: UrlBaseConst.API_URL + "/user/wallet/cash-out/%s",
     LOAN_REQUEST_URL: UrlBaseConst.API_URL + "/loan/request",
     LOAN_OFFER_URL: UrlBaseConst.API_URL + "/loan/offer",
     LOAN_CONSTANTS_URL: UrlBaseConst.API_URL + "/loan/constants",
