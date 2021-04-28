@@ -1,4 +1,5 @@
 export const AppConst = {
+    LIVE: false,
     APP_NAME: 'MoneyDrop',
     MALE: 1,
     FEMALE: 2,

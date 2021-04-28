@@ -30,7 +30,7 @@ class LoanDetails extends Component {
         if (mounted && !(loan instanceof Loan)) {
             if (Utility.isObject(loan)) {
                 loan = new Loan(loan.loanObject);
-            } else return <Redirect to={{ pathname: this.props.history.goBack(), errorMessage: 'You must first verify your email address'}} />;
+            } else return <Redirect to={{ pathname: this.props.history.goBack(), header: {status: 'warning', message: 'Invalid loan data'}}} />;
         }
 
         let loanUser = loan.getUser();

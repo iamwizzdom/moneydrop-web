@@ -126,9 +126,11 @@ class Cards extends Component {
             customer_phone: user.getPhone(),
             amount: 50,
             PBFPubKey: AppConst.FLUTTERWAVE_PUBKEY,
-            production: false,
+            production: AppConst.LIVE,
             onSuccess: () => {
-                this.setState({onSuccess: true});
+                this.setState({onSuccess: true}, () => {
+                    document.getElementById('web-close-btn').click();
+                });
             },
             onClose: () => {
                 if (this.state.onSuccess) {
