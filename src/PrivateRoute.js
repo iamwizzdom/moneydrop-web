@@ -12,8 +12,8 @@ export const PrivateRoute = ({ ...rest }) => {
     return <Redirect to={path} />;
 }
 
-export const PrivateLogin = ({ ...rest }) => (
-    sessionStorage.getItem('token')
+export const PrivateLogin = ({ forceView, ...rest }) => (
+    !forceView && sessionStorage.getItem('token')
         ? <Redirect to={{pathname: '/', state: {from: rest.location}}}/>
         : <LayoutRoute {...rest} />
 )
