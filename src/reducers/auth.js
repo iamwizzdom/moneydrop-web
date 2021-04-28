@@ -11,13 +11,6 @@ const AuthReducer = (state = {requesting: false, data: {}}, action) => {
         case AuthConst.SIGNUP_FAILURE:
             return {...state, requesting: false, data: action.payload};
 
-        case AuthConst.GENDER_REQUEST:
-            return {...state, requesting: true};
-        case AuthConst.GENDER_SUCCESS:
-            return {...state, requesting: false, data: action.payload};
-        case AuthConst.GENDER_FAILURE:
-            return {...state, requesting: false, data: action.payload};
-
         case AuthConst.VERIFY_REQUEST:
             return {...state, requesting: true};
         case AuthConst.VERIFY_SUCCESS:
@@ -53,4 +46,20 @@ const AuthReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
-export {AuthReducer};
+const GenderAuthReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case AuthConst.GENDER_REQUEST:
+            return {...state, requesting: true};
+        case AuthConst.GENDER_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case AuthConst.GENDER_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+export {AuthReducer, GenderAuthReducer};

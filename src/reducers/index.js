@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {AuthReducer} from './auth';
+import {AuthReducer, GenderAuthReducer} from './auth';
 import {DashboardReducer} from './dashboard';
 import {WalletReducer} from './wallet';
 import {TransactionReducer} from './transaction';
@@ -10,6 +10,7 @@ import {LoanRequestsReducer, LoanOffersReducer, LoanConstReducer, LoanRequestRed
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
+    genderAuth: GenderAuthReducer,
     dashboard: DashboardReducer,
     loanRequests: LoanRequestsReducer,
     loanOffers: LoanOffersReducer,

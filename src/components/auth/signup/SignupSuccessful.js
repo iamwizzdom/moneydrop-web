@@ -24,7 +24,6 @@ class SignupSuccessful extends Component {
 
     componentDidMount() {
         const {state} = this.props.location;
-        if (this.props.auth?.data) this.props.auth.data = {};
         this.setState({
             ...this.state,
             ...state,
@@ -137,7 +136,7 @@ class SignupSuccessful extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
+        auth: state.genderAuth
     }
 }
 
