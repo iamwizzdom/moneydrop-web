@@ -59,6 +59,8 @@ class SignupSuccessful extends Component {
 
         if (mounted && !signup) return <Redirect to={{ pathname: `/signup`, errorMessage: 'Sign up first.'}} />;
 
+        if (mounted && auth.data?.status) return <Redirect to={{pathname: `/`, header: {status: 'success', message: `Welcome to ${AppConst.APP_NAME}`}}}/>;
+
         if (mounted && auth.data?.status === false && Object.keys(auth.data.errors).length > 0) {
             this.setState({...this.state, ...{error: auth.data?.errors}});
             auth.data.errors = {};
