@@ -1,19 +1,31 @@
 import React, {Component} from "react";
 import {Badge, Button, Card, Col, Row} from "react-bootstrap";
 import Loan from "../../models/Loan";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Utility from "../../helpers/Utility";
 import backArrow from '../../assets/images/dark-back-arrow.svg';
+import ReactDOM from "react-dom";
+import swal from "@sweetalert/with-react";
+import LoanApplyLayout from "../layout/LoanApplyLayout";
+import {LoanAction} from "../../actions";
+import {connect} from "react-redux";
 
 class LoanDetails extends Component {
 
     state = {
         loan: null,
-        mounted: false
+        mounted: false,
+        showLoanApplyModal: false,
     }
+
+    player = null;
 
     componentDidMount() {
         const {state} = this.props.location;
+        this.player = React.createRef();
+        if (!(state.loan instanceof Loan) && Utility.isObject(state.loan)) {
+            state.loan = new Loan(state.loan.loanObject);
+        }
         this.setState({
             ...this.state,
             ...state,
@@ -21,25 +33,84 @@ class LoanDetails extends Component {
         });
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        const {dispatch, loanApply} = this.props;
+
+        if (loanApply.data.message) {
+            if (loanApply.data.hasOwnProperty("errors") && Object.keys(loanApply.data.errors).length > 0) {
+                loanApply.data.message = Utility.serializeObject(loanApply.data.errors);
+            }
+            swal({
+                title: loanApply.data.title,
+                text: loanApply.data.message,
+                icon: (loanApply.data.status ? `success` : `error`),
+                button: "Ok",
+            });
+            loanApply.data.message = null;
+        }
+
+        if (this.state.showLoanApplyModal) {
+
+            let wrapper = document.createElement('div');
+            ReactDOM.render(<LoanApplyLayout amount={this.state.loan.getAmount()} />, wrapper);
+
+            swal({
+                content: wrapper,
+                buttons: {
+                    cancel: "No, cancel",
+                    confirm: {
+                        text: "Yes, apply",
+                        closeModal: false
+                    }
+                }
+            }).then((data) => {
+
+                if (!data) {
+                    this.setState({showLoanApplyModal: false});
+                    return;
+                }
+
+                if (!Utility.isString(data) || !Utility.isObject(data = JSON.parse(data))) {
+                    swal("Please enter a valid data").then(() => this.setState({showLoanApplyModal: true}));
+                    return;
+                }
+
+                this.setState({showLoanApplyModal: false}, () => {
+                    dispatch(LoanAction.loanApply(data, this.state.loan.getUuid()));
+                });
+
+            });
+        }
+    }
+
     render() {
 
-        let {mounted, loan} = this.state;
+        let {mounted, loan, from} = this.state;
+        const {loanApply} = this.props;
 
         if (!mounted) return null;
 
         if (mounted && !(loan instanceof Loan)) {
-            if (Utility.isObject(loan)) {
-                loan = new Loan(loan.loanObject);
-            } else return <Redirect to={{ pathname: this.props.history.goBack(), header: {status: 'warning', message: 'Invalid loan data'}}} />;
+            return <Redirect to={{ pathname: from?.pathname || '/', header: {status: 'warning', message: 'Invalid loan data'}}} />;
         }
 
         let loanUser = loan.getUser();
         let theme = Utility.getTheme(loan.getStatus(), false);
 
-        let showBtn = true, btnTitle = "Apply";
+        let showBtn = true, btnTitle = "Apply", btnProps = {onClick: null, href: null};
+
 
         if (!loan.isMine() && loan.isGranted()) showBtn = false;
-        else btnTitle = (loan.isMine() ? "View Applicants" : (loan.isHasApplied() ? "Applied" : "Apply"));
+        else btnTitle = (loan.isMine() ? "View Applicants" : (loan.isHasApplied() || loanApply.data?.status ? "Applied" : "Apply"));
+
+        if (!(!loan.isMine() && loan.isHasApplied())) {
+            if (loan.isMine()) {
+                btnProps.href = {pathname: '/loan/applicants', loan};
+            } else {
+                btnProps.onClick = () => this.setState({showLoanApplyModal: true});
+            }
+        }
 
         return <>
             <Row>
@@ -132,9 +203,17 @@ class LoanDetails extends Component {
                     </Card>
                 </Col>
             </Row>
-            {showBtn && <Button variant={`primary`} className={`mt-4 min-height-48`} disabled={(!loan.isMine() && loan.isHasApplied())} block>{btnTitle}</Button>}
+            {showBtn && ((btnProps.href && <Link to={btnProps.href} className={`btn btn-primary mt-4 min-height-48 w-100`}>{btnTitle}</Link>) ||
+               (<Button variant={`primary`} className={`mt-4 min-height-48`} disabled={(!loan.isMine() && (loan.isHasApplied() || loanApply.data?.status))} block onClick={btnProps.onClick}>{btnTitle}</Button>)
+            )}
         </>;
     }
 }
 
-export default LoanDetails;
+function mapStateToProps(state) {
+    return {
+        loanApply: state.loanApply
+    }
+}
+
+export default connect(mapStateToProps)(LoanDetails)

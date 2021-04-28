@@ -3,19 +3,20 @@ import Loan from "../../models/Loan";
 import {Badge, Col, Row} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
 import {Link} from "react-router-dom";
+import LoanShimmer from "./LoanShimmer";
 
 class LoanLayout extends Component {
 
     render() {
-        const {loan} = this.props;
+        const {loan, location} = this.props;
 
-        if (!(loan instanceof Loan)) return null;
+        if (!(loan instanceof Loan)) return <LoanShimmer/>;
 
         let loanUser = loan.getUser();
         let theme = Utility.getTheme(loan.getStatus(), false);
 
         return <Col md={6} className={`pt-3 pb-3`}>
-            <Link to={{pathname: `/loan/details`, state: {loan}}} className={`text-decoration-none`}>
+            <Link to={{pathname: `/loan/details`, state: {loan, from: location}}} className={`text-decoration-none`}>
                 <Row>
                 <Col lg={2} md={2} sm={2} xl={2} xs={2}>
                     <img

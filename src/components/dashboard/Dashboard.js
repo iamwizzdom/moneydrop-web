@@ -209,7 +209,7 @@ class Dashboard extends Component {
 
                                     if (Utility.isNumeric(v)) return <LoanShimmer key={k}/>;
 
-                                    return <LoanLayout key={k} loan={new Loan(v)}/>;
+                                    return <LoanLayout key={k} loan={new Loan(v)} {...this.props}/>;
                                 })}
                             </Row> : <NoContent title={`No Loan`}/>}
                         </Card.Body>

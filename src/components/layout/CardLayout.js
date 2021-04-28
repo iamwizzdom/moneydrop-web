@@ -13,6 +13,7 @@ import jcb from '../../assets/images/jcb.svg';
 import card from '../../assets/images/card.svg';
 import option from '../../assets/images/three-small-dots.svg';
 import checkmark from '../../assets/images/select-checkmark.svg';
+import CardShimmer from "./CardShimmer";
 
 class CardLayout extends Component {
 
@@ -32,7 +33,7 @@ class CardLayout extends Component {
     render() {
         const {card, setCardToRemove, onClick, selectCard, selectedCardID} = this.props;
 
-        if (!(card instanceof Card)) return null;
+        if (!(card instanceof Card)) return <CardShimmer/>;
 
         let cardBrand = card.getName() || Utility.ucFirst(card.getBrand());
         cardBrand = cardBrand.toLowerCase().indexOf("card") > -1 ? cardBrand : Utility.sprintf("%s Card", cardBrand);

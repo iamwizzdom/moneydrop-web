@@ -52,10 +52,10 @@ class MyLoans extends Component {
                                     <Col md={12} className={`mt-3`}>
                                         <Tab.Content className={`p-2`}>
                                             <Tab.Pane eventKey="offers">
-                                                <LoanOffers currentTab={() => this.state.currentTab} />
+                                                <LoanOffers currentTab={() => this.state.currentTab} {...this.props}/>
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="requests">
-                                                <LoanRequests currentTab={() => this.state.currentTab} />
+                                                <LoanRequests currentTab={() => this.state.currentTab} {...this.props}/>
                                             </Tab.Pane>
                                         </Tab.Content>
                                     </Col>

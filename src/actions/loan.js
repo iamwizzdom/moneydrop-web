@@ -225,6 +225,38 @@ function requestLoan(data) {
     }
 }
 
+function loanApply(data, loanID) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_APPLY_REQUEST}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_APPLY_SUCCESS, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_APPLY_FAILURE, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.loanApply(data, loanID);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
 export const LoanAction = {
     getLoanRequests,
     getLoanOffers,
@@ -232,5 +264,6 @@ export const LoanAction = {
     getMyLoanOffers,
     getLoanConst,
     offerLoan,
-    requestLoan
+    requestLoan,
+    loanApply,
 };

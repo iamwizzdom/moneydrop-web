@@ -87,7 +87,7 @@ class MyLoanRequests extends Component {
 
                     let loan = new Loan(v);
 
-                    return <LoanLayout key={k} loan={loan}/>;
+                    return <LoanLayout key={k} loan={loan} {...this.props}/>;
                 })}
             </Row> : <NoContent title={`No Loan Request`}/>}
             {(!requesting && !this.state.hasMoreData && this.state.loans.length > 0) && <p className="col-md-12 text-center text-muted mt-5">No more data</p>}

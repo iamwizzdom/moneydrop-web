@@ -85,7 +85,7 @@ class SignupSuccessful extends Component {
                     <Card.Body className={`p-5 text-center`}>
                         <img src={success} className={`img-fluid`} alt={`success`}/>
                         <h3 className={`color-accent mt-2`}>Success!</h3>
-                        <p className={`font-size-15 mt-3 pr-5 pl-5`}>{signupMessage || 'You have successfully been registered on our app and can now start using it'}</p>
+                        <p className={`font-size-15 mt-3 pr-md-5 pl-md-5`}>{signupMessage || 'You have successfully been registered on our app and can now start using it'}</p>
                         <div className="col mt-5">
                             <Button variant="primary" type="button" size="lg" onClick={() => this.setModalShow(true)}
                                     className={`font-size-16 min-width-80-per min-height-60 text-uppercase`}>

@@ -333,9 +333,18 @@ textarea {
 input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput) {
     width: 100% !important;
     height: 55px !important;
-    background-color: #f1efee !important;
+    background-color: #ffffff !important;
     border-color: #e2e0df !important;
     box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+}
+
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):disabled {
+    background-color: #f1efee !important;
+    cursor: not-allowed;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }
 
 input:not(input[type='range']).sm, select.sm, .custom-select-sm {

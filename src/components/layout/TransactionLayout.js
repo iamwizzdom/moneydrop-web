@@ -8,7 +8,7 @@ class TransactionLayout extends Component {
     render() {
         const {transaction} = this.props;
 
-        if (!(transaction instanceof Transaction)) return null;
+        if (!(transaction instanceof Transaction)) return <TransactionLayout/>;
 
         let theme = Utility.getTheme(transaction.getStatus(), transaction.getType()?.toLowerCase() === 'top-up');
 

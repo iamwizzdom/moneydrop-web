@@ -1466,6 +1466,13 @@
     "@types/yargs" "^15.0.0"
     "chalk" "^4.0.0"
 
+"@lottiefiles/react-lottie-player@^3.1.2":
+  "integrity" "sha512-u8ApmkpV4bpiQ2hqHyZGy9mmsTKxFvrQBgIJC1epPjs8NdYuAyN//33UXMFzddmvmrVCMzM4WdJb8sPoN+bIIg=="
+  "resolved" "https://registry.npmjs.org/@lottiefiles/react-lottie-player/-/react-lottie-player-3.1.2.tgz"
+  "version" "3.1.2"
+  dependencies:
+    "lottie-web" "^5.7.8"
+
 "@mono.co/connect.js@^0.1.8":
   "integrity" "sha512-hBKnKq5Meakvb54udN7pL3Y2VXSM2JB/zPZUroGIulmi8DG3xQdHSsXjY+TeITEIDsiR5nrNXVnvhjM8yp/yAA=="
   "resolved" "https://registry.npmjs.org/@mono.co/connect.js/-/connect.js-0.1.8.tgz"
@@ -7722,6 +7729,11 @@
   dependencies:
     "js-tokens" "^3.0.0 || ^4.0.0"
 
+"lottie-web@^5.7.8":
+  "integrity" "sha512-VxKCZk33GwZac6mVHvT3grUFR/zrMsW85M7vxQPrgpJOP2IhcnjMbuD0h7muBkXgw84K9KmGulmcyzvhpzSMAg=="
+  "resolved" "https://registry.npmjs.org/lottie-web/-/lottie-web-5.7.8.tgz"
+  "version" "5.7.8"
+
 "loud-rejection@^1.0.0":
   "integrity" "sha1-W0b4AUft7leIcPCG0Eghz5mOVR8="
   "resolved" "https://registry.npmjs.org/loud-rejection/-/loud-rejection-1.6.0.tgz"
@@ -11715,7 +11727,7 @@
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
 
-"sweetalert@^2.1.x":
+"sweetalert@^2.1.2", "sweetalert@^2.1.x":
   "integrity" "sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA=="
   "resolved" "https://registry.npmjs.org/sweetalert/-/sweetalert-2.1.2.tgz"
   "version" "2.1.2"

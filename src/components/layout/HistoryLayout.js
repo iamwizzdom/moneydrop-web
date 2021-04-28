@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import {Badge, Col, Row} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
 import LoanApplication from "../../models/LoanApplication";
+import HistoryShimmer from "./HistoryShimmer";
 
 class HistoryLayout extends Component {
 
     render() {
         const {application} = this.props;
 
-        if (!(application instanceof LoanApplication)) return null;
+        if (!(application instanceof LoanApplication)) return <HistoryShimmer/>;
 
         let loan = application.getLoan();
         let loanUser = loan.getUser();

@@ -48,7 +48,7 @@ class Utility {
     }
 
     static isObject(variable) {
-        return typeof variable === "object";
+        return variable !== null && typeof variable === "object";
     }
 
     static isNumeric(variable) {
@@ -124,12 +124,23 @@ class Utility {
         let list = [], x;
         for (x in object) {
             if (object.hasOwnProperty(x)) {
-                list[list.length] = `${encodeURIComponent(x)}=${encodeURIComponent(!Utility.isEmpty(object[x]) ? 
+                list[list.length] = `${encodeURIComponent(x)}=${encodeURIComponent(!Utility.isEmpty(object[x]) ?
                     ((Utility.isObject(object[x]) || Utility.isArray(object[x])) ? JSON.stringify(object[x]) : object[x]) : "")}`;
             }
         }
         return list.join('&');
     };
+
+    static serializeObject(object) {
+        let message = "", count = 0;
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+            let value = object[key];
+            if (Utility.isEmpty(value)) continue;
+            message += (!Utility.isEmpty(message) ? "\n" : "") + (++count + ". " + value);
+        }
+        return message;
+    }
 
     static addPerPage(url) {
         let query = Utility.getSearchParameters(url), start = url.indexOf('?');
@@ -137,4 +148,5 @@ class Utility {
         return `${start > -1 ? url.substr(0, start) : url}?${Utility.serialize(query)}`;
     };
 }
+
 export default Utility;

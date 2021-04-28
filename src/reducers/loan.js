@@ -80,4 +80,20 @@ const LoanRequestReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
-export {LoanOffersReducer, LoanRequestsReducer, LoanConstReducer, LoanOfferReducer, LoanRequestReducer};
+const LoanApplyReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_APPLY_REQUEST:
+            return {...state, requesting: true};
+        case LoanConst.LOAN_APPLY_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case LoanConst.LOAN_APPLY_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+export {LoanOffersReducer, LoanRequestsReducer, LoanConstReducer, LoanOfferReducer, LoanRequestReducer, LoanApplyReducer};

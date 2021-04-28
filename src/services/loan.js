@@ -1,4 +1,5 @@
 import {AppConst, UrlConst} from "../constants";
+import Utility from "../helpers/Utility";
 
 function handleResponse(response) {
     if (response.status === 419) {
@@ -108,6 +109,19 @@ const requestLoan = (data) => {
     return fetch(UrlConst.LOAN_REQUEST_URL, requestOptions).then(handleResponse);
 };
 
+const loanApply = (data, loanID) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        },
+        body: JSON.stringify(data)
+    };
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLY_URL, loanID), requestOptions).then(handleResponse);
+};
+
 export const LoanService = {
     getLoanRequests,
     getLoanOffers,
@@ -115,5 +129,6 @@ export const LoanService = {
     getMyLoanOffers,
     getLoanConst,
     offerLoan,
-    requestLoan
+    requestLoan,
+    loanApply,
 };

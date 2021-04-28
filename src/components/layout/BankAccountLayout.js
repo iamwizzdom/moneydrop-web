@@ -3,13 +3,14 @@ import {Col, Dropdown, Row} from "react-bootstrap";
 import option from '../../assets/images/three-small-dots.svg';
 import BankAccount from "../../models/BankAccount";
 import checkmark from "../../assets/images/select-checkmark.svg";
+import BankAccountShimmer from "./BankAccountShimmer";
 
 class BankAccountLayout extends Component {
 
     render() {
         const {bankAccount, setBankToRemove, onClick, selectAccount, selectedAccountID} = this.props;
 
-        if (!(bankAccount instanceof BankAccount)) return null;
+        if (!(bankAccount instanceof BankAccount)) return <BankAccountShimmer/>;
 
         return <Col md={selectAccount ? 12 : 6} className={`mb-3 ${onClick ? 'cursor-pointer' : ''}`} onClick={onClick}>
             <Row className={`pt-3 pb-3 rounded`}
