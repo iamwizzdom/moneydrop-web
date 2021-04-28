@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Loan from "../../models/Loan";
 import {Badge, Col, Row} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
+import {Link} from "react-router-dom";
 
 class LoanLayout extends Component {
 
@@ -14,7 +15,8 @@ class LoanLayout extends Component {
         let theme = Utility.getTheme(loan.getStatus(), false);
 
         return <Col md={6} className={`pt-3 pb-3`}>
-            <Row>
+            <Link to={{pathname: `/loan/details`, state: {loan}}} className={`text-decoration-none`}>
+                <Row>
                 <Col lg={2} md={2} sm={2} xl={2} xs={2}>
                     <img
                         src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
@@ -23,7 +25,7 @@ class LoanLayout extends Component {
                 </Col>
                 <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-left`} style={{marginTop: '-5px'}}>
                     <Row>
-                        <Col md={12}><small className={`font-size-16`}>Loan {loan.getLoanType()} {loanUser.isMe() && '(Me)'}</small></Col>
+                        <Col md={12}><small className={`font-size-16 text-dark`}>Loan {loan.getLoanType()} {loanUser.isMe() && '(Me)'}</small></Col>
                         <Col md={12}><small className={`text-muted`}>{loan.getDate()}</small></Col>
                     </Row>
                 </Col>
@@ -34,6 +36,7 @@ class LoanLayout extends Component {
                     </Row>
                 </Col>
             </Row>
+            </Link>
         </Col>;
     }
 }

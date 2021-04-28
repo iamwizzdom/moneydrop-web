@@ -32,6 +32,7 @@
 body {
     margin: 0;
     font-family: 'CamptonLight', sans-serif;
+    font-size: 15px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #f3f3f3;
@@ -410,6 +411,14 @@ a.navbar-brand {
 
 .loan-type-btn-aligner {
     text-align: right;
+}
+
+.underline {
+    border-bottom: 1px solid #e9e8e8;
+}
+
+.underline-dotted {
+    border-bottom: 1px dashed #e9e8e8;
 }
 
 .underline-children > div {

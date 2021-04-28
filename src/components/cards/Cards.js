@@ -12,6 +12,7 @@ import {RavePaymentButton, RaveProvider} from "react-ravepayment";
 import User from "../../models/User";
 import {v4} from "uuid";
 import swal from "@sweetalert/with-react";
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class Cards extends Component {
 
@@ -140,7 +141,10 @@ class Cards extends Component {
         return <>
             <Row>
                 <Col md={6}>
-                    <h4 className={`font-weight-bold text-muted`}>Cards</h4>
+                    <h4 className={`font-weight-bold text-muted`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        Cards
+                    </h4>
                     <p>Your reusable cards on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>

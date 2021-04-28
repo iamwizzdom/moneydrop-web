@@ -14,6 +14,7 @@ import InputAmount from "../layout/InputAmount";
 import {AppConst} from "../../constants";
 import CardList from "../layout/CardList";
 import BankAccountList from "../layout/BankAccountList";
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class Wallet extends Component {
 
@@ -240,7 +241,10 @@ class Wallet extends Component {
         return <>
             <Row>
                 <Col>
-                    <h4 className={`font-weight-bold text-muted rounded`}>Wallet</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        Wallet
+                    </h4>
                     <p>Available wallet credit</p>
                 </Col>
             </Row>

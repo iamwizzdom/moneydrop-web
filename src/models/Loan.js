@@ -105,6 +105,14 @@ class Loan {
         this.loanObject.date = date;
     }
 
+    getDateTime() {
+        return this.loanObject.date_time;
+    }
+
+    setDateTime(dateTime) {
+        this.loanObject.date_time = dateTime;
+    }
+
     isFundRaiser() {
         return this.loanObject.is_fund_raiser;
     }
@@ -151,7 +159,7 @@ class Loan {
      */
     getUser(): User {
         if (!(this.loanObject.user instanceof User))
-            this.loanObject.user = new User(this.loanObject.user)
+            this.loanObject.user = new User(this.loanObject.user.userObject || this.loanObject.user)
         return this.loanObject.user;
     }
 

@@ -104,7 +104,7 @@ class Transaction {
      */
     getCard(): Card {
         if (!(this.transObject.card instanceof Card))
-            this.transObject.card = new Card(this.transObject.card)
+            this.transObject.card = new Card(this.transObject.card.cardObject || this.transObject.card)
         return this.transObject.card;
     }
 
@@ -118,7 +118,7 @@ class Transaction {
      */
     getUser(): Card {
         if (!(this.transObject.user instanceof User))
-            this.transObject.user = new User(this.transObject.user)
+            this.transObject.user = new User(this.transObject.user.userObject || this.transObject.user)
         return this.transObject.user;
     }
 

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.d5ef251a.chunk.css",
-    "main.js": "/static/js/main.eb7d04f0.chunk.js",
-    "main.js.map": "/static/js/main.eb7d04f0.chunk.js.map",
+    "main.css": "/static/css/main.870e0eae.chunk.css",
+    "main.js": "/static/js/main.99bcde34.chunk.js",
+    "main.js.map": "/static/js/main.99bcde34.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.9df55f86.js",
     "runtime-main.js.map": "/static/js/runtime-main.9df55f86.js.map",
     "static/css/2.a0f9ddfc.chunk.css": "/static/css/2.a0f9ddfc.chunk.css",
-    "static/js/2.e6f62aab.chunk.js": "/static/js/2.e6f62aab.chunk.js",
-    "static/js/2.e6f62aab.chunk.js.map": "/static/js/2.e6f62aab.chunk.js.map",
+    "static/js/2.af8fd713.chunk.js": "/static/js/2.af8fd713.chunk.js",
+    "static/js/2.af8fd713.chunk.js.map": "/static/js/2.af8fd713.chunk.js.map",
     "static/js/3.3d687dc8.chunk.js": "/static/js/3.3d687dc8.chunk.js",
     "static/js/3.3d687dc8.chunk.js.map": "/static/js/3.3d687dc8.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.a0f9ddfc.chunk.css.map": "/static/css/2.a0f9ddfc.chunk.css.map",
-    "static/css/main.d5ef251a.chunk.css.map": "/static/css/main.d5ef251a.chunk.css.map",
-    "static/js/2.e6f62aab.chunk.js.LICENSE.txt": "/static/js/2.e6f62aab.chunk.js.LICENSE.txt",
+    "static/css/main.870e0eae.chunk.css.map": "/static/css/main.870e0eae.chunk.css.map",
+    "static/js/2.af8fd713.chunk.js.LICENSE.txt": "/static/js/2.af8fd713.chunk.js.LICENSE.txt",
     "static/media/american-express.f094ecf9.svg": "/static/media/american-express.f094ecf9.svg",
     "static/media/index.css": "/static/media/naira-sign-dark.4f6388ef.svg",
     "static/media/bank.1bb32c67.svg": "/static/media/bank.1bb32c67.svg",
@@ -22,6 +22,7 @@
     "static/media/campton_medium.1e87a6be.ttf": "/static/media/campton_medium.1e87a6be.ttf",
     "static/media/card.b118b074.svg": "/static/media/card.b118b074.svg",
     "static/media/checkmark.dbbfd1c2.svg": "/static/media/checkmark.dbbfd1c2.svg",
+    "static/media/dark-back-arrow.5de35b9d.svg": "/static/media/dark-back-arrow.5de35b9d.svg",
     "static/media/diners-club.84ffe7b9.svg": "/static/media/diners-club.84ffe7b9.svg",
     "static/media/discover.6600272b.svg": "/static/media/discover.6600272b.svg",
     "static/media/female-icon.98b40355.svg": "/static/media/female-icon.98b40355.svg",
@@ -65,8 +66,8 @@
   "entrypoints": [
     "static/js/runtime-main.9df55f86.js",
     "static/css/2.a0f9ddfc.chunk.css",
-    "static/js/2.e6f62aab.chunk.js",
-    "static/css/main.d5ef251a.chunk.css",
-    "static/js/main.eb7d04f0.chunk.js"
+    "static/js/2.af8fd713.chunk.js",
+    "static/css/main.870e0eae.chunk.css",
+    "static/js/main.99bcde34.chunk.js"
   ]
 }

@@ -8,6 +8,7 @@ import NoContent from "../layout/NoContent";
 import TransactionShimmer from "../layout/TransactionShimmer";
 import Transaction from "../../models/Transaction";
 import TransactionLayout from "../layout/TransactionLayout";
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class Transactions extends Component {
 
@@ -83,7 +84,10 @@ class Transactions extends Component {
         return <>
             <Row>
                 <Col>
-                    <h4 className={`font-weight-bold text-muted rounded`}>Transactions</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        Transactions
+                    </h4>
                     <p>Transactions you made on {AppConst.APP_NAME}</p>
                 </Col>
             </Row>

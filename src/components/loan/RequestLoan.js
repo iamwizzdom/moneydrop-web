@@ -7,6 +7,7 @@ import CurrencyInput from "react-currency-input-field";
 import Utility from "../../helpers/Utility";
 import {LoanAction} from "../../actions";
 import swal from '@sweetalert/with-react'
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class OfferLoan extends Component {
 
@@ -128,7 +129,10 @@ class OfferLoan extends Component {
         return <>
             <Row>
                 <Col md={6}>
-                    <h4 className={`font-weight-bold text-muted rounded`}>Request Loan</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        Request Loan
+                    </h4>
                     <p>How much do you want to request?</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>

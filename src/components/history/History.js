@@ -8,6 +8,7 @@ import NoContent from "../layout/NoContent";
 import HistoryLayout from "../layout/HistoryLayout";
 import LoanApplication from "../../models/LoanApplication";
 import HistoryShimmer from "../layout/HistoryShimmer";
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class History extends Component {
 
@@ -32,14 +33,14 @@ class History extends Component {
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
-        const {history} = this.props;
-        const {requesting} = history;
+        const {historyData} = this.props;
+        const {requesting} = historyData;
 
-        const {applications, pagination} = {...{applications: [], pagination: {nextPage: null}}, ...history.data};
+        const {applications, pagination} = {...{applications: [], pagination: {nextPage: null}}, ...historyData.data};
 
         if (applications.length > 0) {
             this.setHistory(applications);
-            history.data.applications = [];
+            historyData.data.applications = [];
         }
 
         if (requesting !== this.state.isLoading) this.setIsLoading(requesting === true);
@@ -75,15 +76,18 @@ class History extends Component {
     };
 
     render() {
-        const {history} = this.props;
-        const {requesting} = history;
+        const {historyData} = this.props;
+        const {requesting} = historyData;
 
         let applications = (this.state.applications.length > 0 || !requesting ? this.state.applications : [1, 2, 3, 4, 5, 6]);
 
         return <>
             <Row>
                 <Col>
-                    <h4 className={`font-weight-bold text-muted rounded`}>History</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        History
+                    </h4>
                     <p>Your loan history on {AppConst.APP_NAME}</p>
                 </Col>
             </Row>
@@ -116,7 +120,7 @@ class History extends Component {
 
 function mapStateToProps(state) {
     return {
-        history: state.history
+        historyData: state.history
     }
 }
 

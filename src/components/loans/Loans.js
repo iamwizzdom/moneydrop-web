@@ -4,6 +4,7 @@ import {Nav, Tab, Col, Row, Card, Button} from "react-bootstrap";
 import {AppConst} from "../../constants";
 import LoanOffers from "./LoanOffers";
 import LoanRequests from "./LoanRequests";
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class Loans extends Component {
 
@@ -19,7 +20,10 @@ class Loans extends Component {
         return <>
             <Row>
                 <Col md={6}>
-                    <h4 className={`font-weight-bold text-muted rounded`}>{this.state.currentTab === 'offers' ? 'Loan Offers' : 'Loan Requests'}</h4>
+                    <h4 className={`font-weight-bold text-muted rounded`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        {this.state.currentTab === 'offers' ? 'Loan Offers' : 'Loan Requests'}
+                    </h4>
                     <p>Loans on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>

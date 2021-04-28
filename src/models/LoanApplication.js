@@ -80,7 +80,7 @@ class LoanApplication {
      */
     getLoan() {
         if (!(this.applicationObject.loan instanceof Loan)) {
-            this.applicationObject.loan = new Loan(this.applicationObject.loan);
+            this.applicationObject.loan = new Loan(this.applicationObject.loan.loanObject || this.applicationObject.loan);
         }
         return this.applicationObject.loan;
     }

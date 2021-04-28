@@ -11,6 +11,7 @@ import BankAccountLayout from "../layout/BankAccountLayout";
 import BankAccount from "../../models/BankAccount";
 import BankAccountShimmer from "../layout/BankAccountShimmer";
 import MonoConnect from '@mono.co/connect.js';
+import backArrow from "../../assets/images/dark-back-arrow.svg";
 
 class BankAccounts extends Component {
 
@@ -134,7 +135,10 @@ class BankAccounts extends Component {
         return <>
             <Row>
                 <Col md={6}>
-                    <h4 className={`font-weight-bold text-muted`}>Bank Accounts</h4>
+                    <h4 className={`font-weight-bold text-muted`}>
+                        <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
+                        Bank Accounts
+                    </h4>
                     <p>Your reusable bank accounts on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
