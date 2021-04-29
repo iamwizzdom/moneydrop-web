@@ -26,7 +26,7 @@ class HistoryLayout extends Component {
                     <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-left`} style={{marginTop: '-5px'}}>
                         <Row>
                             <Col md={12}><small
-                                className={`font-size-16`}>Loan {loan.getLoanType()} {loanUser.isMe() && '(Me)'}</small></Col>
+                                className={`font-size-16 text-dark`}>Loan {loan.getLoanType()} {loanUser.isMe() && '(Me)'}</small></Col>
                             <Col md={12}><small className={`text-muted`}>{application.getDate()}</small></Col>
                         </Row>
                     </Col>
