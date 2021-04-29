@@ -19,6 +19,7 @@ class LoanLayout extends Component {
             <Col lg={2} md={2} sm={2} xl={2} xs={2}>
                 <img
                     src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
+                    onError={(e) => {e.target.onerror = null; e.target.src = loanUser.getDefaultPicture()}}
                     style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
                     className={`rounded-circle border-accent background-accent-light my-p-0-9`}/>
             </Col>
