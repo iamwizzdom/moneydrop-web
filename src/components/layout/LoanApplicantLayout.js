@@ -86,6 +86,7 @@ class LoanApplicantLayout extends Component {
                     <Link to={{pathname: `/user/profile`, state: {user, from: location}}} className={`text-decoration-none`}>
                         <img
                             src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
+                            onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                             style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`application-user`}
                             className={`rounded-circle my-p-0-9`}/>
                     </Link>
