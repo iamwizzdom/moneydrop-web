@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Nav, Tab, Col, Row, Card, Button} from "react-bootstrap";
+import {Nav, Tab, Col, Row, Card} from "react-bootstrap";
 import {AppConst} from "../../constants";
 import LoanOffers from "./MyLoanOffers";
 import LoanRequests from "./MyLoanRequests";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
+import {Link} from "react-router-dom";
 
 class MyLoans extends Component {
 
@@ -27,8 +28,8 @@ class MyLoans extends Component {
                     <p>Loans you made on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
-                    <Button variant={`link`} href={`/loan/offer`} className={`btn btn-primary text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Offer Loan</Button>
-                    <Button variant={`link`} href={`/loan/request`} className={`btn btn-warning text-dark text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Request Loan</Button>
+                    <Link to={`/loan/offer`} className={`btn btn-primary text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Offer Loan</Link>
+                    <Link to={`/loan/request`} className={`btn btn-warning text-dark text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Request Loan</Link>
                 </Col>
             </Row>
             <Row className={`mt-3`}>

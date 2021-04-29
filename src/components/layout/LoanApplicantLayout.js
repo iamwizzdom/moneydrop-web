@@ -5,7 +5,6 @@ import LoanApplicantShimmer from "./LoanApplicantShimmer";
 import LoanApplication from "../../models/LoanApplication";
 import Utility from "../../helpers/Utility";
 import swal from "@sweetalert/with-react";
-import ReactDOM from "react-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import giveMoneyAnim from "../../assets/raw/lottie-give-money.json";
 import receiveMoneyAnim from "../../assets/raw/lottie-receive-money.json";

@@ -9,10 +9,11 @@ import card from '../../assets/images/card.svg';
 import logouts from '../../assets/images/logouts.svg';
 import {AuthAction} from "../../actions";
 import history from "../../assets/images/history.svg";
+import {LinkContainer} from "react-router-bootstrap";
 
 const MobileNavLayout = (props) => {
 
-    const {dispatch} = props;
+    const {dispatch, hideMenu} = props;
 
     const logout = () => {
         dispatch(AuthAction.logout())
@@ -21,61 +22,81 @@ const MobileNavLayout = (props) => {
     return <>
         <Nav variant="pills" activeKey={props.location.pathname} className="flex-column">
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/">
-                    <img src={home} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    Home
-                </Nav.Link>
+                <LinkContainer exact to="/">
+                    <Nav.Link eventKey={`/`} onSelect={hideMenu}>
+                        <img src={home} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Home
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/loans" eventKey={`/loans`}>
-                    <img src={loan} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    Loans
-                </Nav.Link>
+                <LinkContainer exact to="/loans">
+                    <Nav.Link eventKey={`/loans`} onSelect={hideMenu}>
+                        <img src={loan} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Loans
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/loans/mine" eventKey={`/loans/mine`}>
-                    <img src={loan} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    My Loans
-                </Nav.Link>
+                <LinkContainer exact to="/loans/mine">
+                    <Nav.Link eventKey={`/loans/mine`} onSelect={hideMenu}>
+                        <img src={loan} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        My Loans
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/wallet" eventKey={`/wallet`}>
-                    <img src={wallet} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    Wallet
-                </Nav.Link>
+                <LinkContainer exact to="/wallet">
+                    <Nav.Link eventKey={`/wallet`} onSelect={hideMenu}>
+                        <img src={wallet} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Wallet
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/transactions" eventKey={`/transactions`}>
-                    <img src={transactions} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    Transactions
-                </Nav.Link>
+                <LinkContainer exact to="/transactions">
+                    <Nav.Link eventKey={`/transactions`} onSelect={hideMenu}>
+                        <img src={transactions} width={20} className={`mr-3`} style={{marginTop: '-5px'}}
+                             alt={`nav-icon`}/>
+                        Transactions
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/history" eventKey={`/history`}>
-                    <img src={history} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    History
-                </Nav.Link>
+                <LinkContainer exact to="/history">
+                    <Nav.Link eventKey={`/history`} onSelect={hideMenu}>
+                        <img src={history} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        History
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/bank-accounts" eventKey={`/bank-accounts`}>
-                    <img src={bank} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    Bank Accounts
-                </Nav.Link>
+                <LinkContainer exact to="/bank-accounts">
+                    <Nav.Link eventKey={`/bank-accounts`} onSelect={hideMenu}>
+                        <img src={bank} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Bank Accounts
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/cards" eventKey={`/cards`}>
-                    <img src={card} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
-                    Cards
-                </Nav.Link>
+                <LinkContainer exact to="/cards">
+                    <Nav.Link eventKey={`/cards`} onSelect={hideMenu}>
+                        <img src={card} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Cards
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link href="/profile" eventKey={`/profile`}>
-                    <img src={user} width={20} className={`mr-3`} style={{marginTop: '-5px', padding: 1.5}} alt={`nav-icon`}/>
-                    User Account
-                </Nav.Link>
+                <LinkContainer exact to="/profile">
+                    <Nav.Link eventKey={`/profile`} onSelect={hideMenu}>
+                        <img src={user} width={20} className={`mr-3`} style={{marginTop: '-5px', padding: 1.5}}
+                             alt={`nav-icon`}/>
+                        User Account
+                    </Nav.Link>
+                </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <Nav.Link onClick={logout}>
+                <Nav.Link onClick={logout} onSelect={hideMenu}>
                     <img src={logouts} width={20} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
                     Logout
                 </Nav.Link>

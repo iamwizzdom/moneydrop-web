@@ -8,6 +8,7 @@ import Utility from "../../helpers/Utility";
 import {LoanAction} from "../../actions";
 import swal from '@sweetalert/with-react'
 import backArrow from "../../assets/images/dark-back-arrow.svg";
+import {Link} from "react-router-dom";
 
 class OfferLoan extends Component {
 
@@ -121,9 +122,9 @@ class OfferLoan extends Component {
                     <p>How much do you want to offer?</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
-                    <Button variant={`link`} href={`/loan/request`}
-                            className={`btn btn-warning text-dark text-decoration-none pl-4 pr-4 m-1 my-rounded`}>Request
-                        Loan</Button>
+                    <Link to={`/loan/request`} className={`btn btn-warning text-dark text-decoration-none pl-4 pr-4 m-1 my-rounded`}>
+                        Request Loan
+                    </Link>
                 </Col>
             </Row>
             <Row>
@@ -131,8 +132,7 @@ class OfferLoan extends Component {
                     <Card border="light" className={`p-2 border-radius-10`}>
                         <Card.Body>
                             <div className={`text-left`}>
-                                <small className={`h5 color-accent font-weight-bold`} style={{lineHeight: 2.3}}>Offer
-                                    amount</small>
+                                <small className={`h5 color-accent font-weight-bold`} style={{lineHeight: 2.3}}>Offer amount</small>
                                 <div className={`badge loan-return my-rounded font-size-16 float-right p-3`}>
                                     {this.state.interest}% return
                                 </div>

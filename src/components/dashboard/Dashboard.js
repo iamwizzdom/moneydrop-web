@@ -63,7 +63,7 @@ class Dashboard extends Component {
             let wrapper = document.createElement('div');
             ReactDOM.render(<InputAmount />, wrapper);
 
-            swal(`Amount not less than ${AppConst.MIN_TOP_UP_AMOUNT}.`, {
+            swal(`Amount not be less than ${Utility.format(AppConst.MIN_TOP_UP_AMOUNT, 0)}.`, {
                 content: wrapper,
                 button: "Top Up"
             }).then((value) => {
@@ -81,7 +81,7 @@ class Dashboard extends Component {
                 let amount = parseFloat(value);
 
                 if (!amount || amount < AppConst.MIN_TOP_UP_AMOUNT) {
-                    swal(`Top up amount must be greater than ${AppConst.MIN_TOP_UP_AMOUNT}.`).then(() => this.setShowAmountModal(true));
+                    swal(`Top up amount must be at least ${Utility.format(AppConst.MIN_TOP_UP_AMOUNT, 0)}.`).then(() => this.setShowAmountModal(true));
                     return;
                 }
 

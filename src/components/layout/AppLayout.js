@@ -36,7 +36,7 @@ class AppLayout extends Component {
                 <div className="mobile-bottom-sheet" id={`mobile-bottom-sheet`}>
                     <div className={`sheet-line justify-content-center d-flex`}><div/></div>
                     <div className={`sheet-holder scroll-vertical scrollbar-invisible`}>
-                        <MobileNavLayout {...this.props}/>
+                        <MobileNavLayout {...this.props} hideMenu={hideMenu}/>
                     </div>
                 </div>
             </div>
