@@ -159,6 +159,32 @@ const cancelLoanApplication = (loanID, applicationID) => {
     return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_CANCEL_URL, loanID, applicationID), requestOptions).then(handleResponse);
 };
 
+const repayLoan = (data, applicationID) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        },
+        body: JSON.stringify(data)
+    };
+    return fetch(Utility.sprintf(UrlConst.LOAN_REPAYMENT_URL, applicationID), requestOptions).then(handleResponse);
+};
+
+const getLoanRepaymentHistory = (applicationID, link) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-PerPage': AppConst.PAGINATION_PER_PAGE,
+            'Auth-Token': getToken()
+        }
+    };
+    return fetch(link || Utility.sprintf(UrlConst.LOAN_REPAYMENT_HISTORY_URL, applicationID), requestOptions).then(handleResponse);
+};
+
 export const LoanService = {
     getLoanRequests,
     getLoanOffers,
@@ -171,4 +197,6 @@ export const LoanService = {
     getLoanApplications,
     grantLoanApplication,
     cancelLoanApplication,
+    repayLoan,
+    getLoanRepaymentHistory,
 };

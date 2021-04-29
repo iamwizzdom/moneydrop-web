@@ -72,7 +72,7 @@ class Wallet extends Component {
                     return;
                 }
 
-                if (isNaN(value)) {
+                if (!Utility.isNumeric(value)) {
                     swal("Please enter a valid amount").then(() => this.setShowAmountModal(true));
                     return;
                 }
@@ -147,7 +147,7 @@ class Wallet extends Component {
                     return;
                 }
 
-                if (isNaN(value)) {
+                if (!Utility.isNumeric(value)) {
                     swal("Please enter a valid amount").then(() => this.setShowCashOutModal(true));
                     return;
                 }

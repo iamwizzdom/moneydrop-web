@@ -99,7 +99,7 @@ class LoanApplication {
      */
     getApplicant() {
         if (!(this.applicationObject.applicant instanceof User)) {
-            this.applicationObject.applicant = new User(this.applicationObject.applicant);
+            this.applicationObject.applicant = new User(this.applicationObject.applicant.userObject || this.applicationObject.applicant);
         }
         return this.applicationObject.applicant;
     }
@@ -157,15 +157,15 @@ class LoanApplication {
     }
 
     isGranted() {
-        return this.getStatus() === 'granted';
+        return this.getStatus().toLowerCase() === 'granted';
     }
 
     isAwaiting() {
-        return this.getStatus() === 'awaiting';
+        return this.getStatus().toLowerCase() === 'awaiting';
     }
 
     isRejected() {
-        return this.getStatus() === 'rejected';
+        return this.getStatus().toLowerCase() === 'rejected';
     }
 
     isRepaid() {

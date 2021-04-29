@@ -353,6 +353,70 @@ function cancelLoanApplication(loanID, applicationID) {
     }
 }
 
+function repayLoan(data, applicationID) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_REPAYMENT_REQUEST}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_REPAYMENT_SUCCESS, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_REPAYMENT_FAILURE, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.repayLoan(data, applicationID);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
+function getLoanRepaymentHistory(applicationID, link) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_REPAYMENT_HISTORY_REQUEST}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_REPAYMENT_HISTORY_SUCCESS, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_REPAYMENT_HISTORY_FAILURE, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.getLoanRepaymentHistory(applicationID, link);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
 export const LoanAction = {
     getLoanRequests,
     getLoanOffers,
@@ -365,4 +429,6 @@ export const LoanAction = {
     getLoanApplications,
     grantLoanApplication,
     cancelLoanApplication,
+    repayLoan,
+    getLoanRepaymentHistory,
 };

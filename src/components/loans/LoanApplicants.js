@@ -116,7 +116,7 @@ class LoanApplicants extends Component {
             <Row className={`mt-3`}>
                 <Col md={12}>
                    <h5 className={`color-accent font-weight-bold`}>Loan</h5>
-                   <LoanLayout loan={loan} />
+                   <LoanLayout loan={loan} bg/>
                 </Col>
             </Row>
             <Row className={`mt-3`}>

@@ -15,7 +15,9 @@ import {
     LoanApplyReducer,
     LoanApplicationsReducer,
     LoanApplicationGrantReducer,
-    LoanApplicationCancelReducer
+    LoanApplicationCancelReducer,
+    LoanRepaymentReducer,
+    LoanRepaymentHistoryReducer,
 } from './loan';
 
 const rootReducer = combineReducers({
@@ -31,6 +33,8 @@ const rootReducer = combineReducers({
     loanApplications: LoanApplicationsReducer,
     loanApplicationGrant: LoanApplicationGrantReducer,
     loanApplicationCancel: LoanApplicationCancelReducer,
+    loanRepayment: LoanRepaymentReducer,
+    loanRepaymentHistory: LoanRepaymentHistoryReducer,
     wallet: WalletReducer,
     transaction: TransactionReducer,
     history: HistoryReducer,

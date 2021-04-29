@@ -52,7 +52,7 @@ class Utility {
     }
 
     static isNumeric(variable) {
-        return (!isNaN(variable));
+        return (typeof variable === 'number' || (typeof variable === 'string' && !isNaN(variable)));
     }
 
     /**

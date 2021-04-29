@@ -144,6 +144,38 @@ const LoanApplicationCancelReducer = (state = {requesting: false, data: {}}, act
     }
 };
 
+const LoanRepaymentReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_REPAYMENT_REQUEST:
+            return {...state, requesting: true, id: action.id};
+        case LoanConst.LOAN_REPAYMENT_SUCCESS:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+        case LoanConst.LOAN_REPAYMENT_FAILURE:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+
+        default:
+            return state;
+    }
+};
+
+const LoanRepaymentHistoryReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_REPAYMENT_HISTORY_REQUEST:
+            return {...state, requesting: true, id: action.id};
+        case LoanConst.LOAN_REPAYMENT_HISTORY_SUCCESS:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+        case LoanConst.LOAN_REPAYMENT_HISTORY_FAILURE:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+
+        default:
+            return state;
+    }
+};
+
 export {
     LoanOffersReducer,
     LoanRequestsReducer,
@@ -154,4 +186,6 @@ export {
     LoanApplicationsReducer,
     LoanApplicationGrantReducer,
     LoanApplicationCancelReducer,
+    LoanRepaymentReducer,
+    LoanRepaymentHistoryReducer,
 };

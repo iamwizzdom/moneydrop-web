@@ -73,7 +73,7 @@ class Dashboard extends Component {
                     return;
                 }
 
-                if (isNaN(value)) {
+                if (!Utility.isNumeric(value)) {
                     swal("Please enter a valid amount").then(() => this.setShowAmountModal(true));
                     return;
                 }

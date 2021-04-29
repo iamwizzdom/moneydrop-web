@@ -8,7 +8,7 @@ import LoanShimmer from "./LoanShimmer";
 class LoanLayout extends Component {
 
     render() {
-        const {loan, location} = this.props;
+        const {loan, size, location, bg} = this.props;
 
         if (!(loan instanceof Loan)) return <LoanShimmer/>;
 
@@ -37,7 +37,7 @@ class LoanLayout extends Component {
             </Col>
         </Row>;
 
-        return <Col md={6} className={`pt-4 pb-4 ${!location && 'bg-white my-rounded'}`}>
+        return <Col md={size || 6} className={`pt-4 pb-4 ${bg && 'bg-white my-rounded'}`}>
             {location ? <Link to={{pathname: `/loan/details`, state: {loan, from: location}}} className={`text-decoration-none`}>
                 {layout}
             </Link> : layout}

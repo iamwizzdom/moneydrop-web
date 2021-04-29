@@ -26,6 +26,8 @@ import Cards from "./components/cards/Cards";
 import BankAccounts from "./components/bank-accounts/BankAccounts";
 import LoanDetails from "./components/loans/LoanDetails";
 import LoanApplicants from "./components/loans/LoanApplicants";
+import LoanApplicationDetail from "./components/history/LoanApplicationDetail";
+import LoanRepaymentHistory from "./components/history/LoanRepaymentHistory";
 
 function App() {
     return (
@@ -49,6 +51,8 @@ function App() {
                     <PrivateRoute exact layout={AppLayout} path="/loans" component={Loans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/details" component={LoanDetails}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/applicants" component={LoanApplicants}/>
+                    <PrivateRoute exact layout={AppLayout} path="/loan/application/details" component={LoanApplicationDetail}/>
+                    <PrivateRoute exact layout={AppLayout} path="/loan/application/repayments" component={LoanRepaymentHistory}/>
                     <PrivateRoute exact layout={AppLayout} path="/loans/mine" component={MyLoans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/offer" component={OfferLoan}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/request" component={RequestLoan}/>
