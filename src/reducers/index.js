@@ -6,7 +6,17 @@ import {TransactionReducer} from './transaction';
 import {HistoryReducer} from './history';
 import {VerifyCardReducer, FetchCardsReducer, LogTrxReducer, RemoveCardReducer, ChargeCardReducer} from './card';
 import {VerifyBankReducer, FetchBanksReducer, RemoveBankReducer, CreditBankReducer} from './bank';
-import {LoanRequestsReducer, LoanOffersReducer, LoanConstReducer, LoanRequestReducer, LoanOfferReducer, LoanApplyReducer} from './loan';
+import {
+    LoanRequestsReducer,
+    LoanOffersReducer,
+    LoanConstReducer,
+    LoanRequestReducer,
+    LoanOfferReducer,
+    LoanApplyReducer,
+    LoanApplicationsReducer,
+    LoanApplicationGrantReducer,
+    LoanApplicationCancelReducer
+} from './loan';
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
@@ -18,6 +28,9 @@ const rootReducer = combineReducers({
     loanRequest: LoanRequestReducer,
     loanOffer: LoanOfferReducer,
     loanApply: LoanApplyReducer,
+    loanApplications: LoanApplicationsReducer,
+    loanApplicationGrant: LoanApplicationGrantReducer,
+    loanApplicationCancel: LoanApplicationCancelReducer,
     wallet: WalletReducer,
     transaction: TransactionReducer,
     history: HistoryReducer,

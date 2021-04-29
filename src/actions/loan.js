@@ -257,6 +257,102 @@ function loanApply(data, loanID) {
     }
 }
 
+function getLoanApplications(loanID, link) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_APPLICATIONS_REQUEST}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_APPLICATIONS_SUCCESS, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_APPLICATIONS_FAILURE, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.getLoanApplications(loanID, link);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
+function grantLoanApplication(loanID, applicationID) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_APPLICATION_GRANT_REQUEST, id: applicationID}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_APPLICATION_GRANT_SUCCESS, id: applicationID, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_APPLICATION_GRANT_FAILURE, id: applicationID, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.grantLoanApplication(loanID, applicationID);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
+function cancelLoanApplication(loanID, applicationID) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_APPLICATION_CANCEL_REQUEST, id: applicationID}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_APPLICATION_CANCEL_SUCCESS, id: applicationID, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_APPLICATION_CANCEL_FAILURE, id: applicationID, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.cancelLoanApplication(loanID, applicationID);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
 export const LoanAction = {
     getLoanRequests,
     getLoanOffers,
@@ -266,4 +362,7 @@ export const LoanAction = {
     offerLoan,
     requestLoan,
     loanApply,
+    getLoanApplications,
+    grantLoanApplication,
+    cancelLoanApplication,
 };

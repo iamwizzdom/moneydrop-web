@@ -96,4 +96,62 @@ const LoanApplyReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
-export {LoanOffersReducer, LoanRequestsReducer, LoanConstReducer, LoanOfferReducer, LoanRequestReducer, LoanApplyReducer};
+const LoanApplicationsReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_APPLICATIONS_REQUEST:
+            return {...state, requesting: true};
+        case LoanConst.LOAN_APPLICATIONS_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case LoanConst.LOAN_APPLICATIONS_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+const LoanApplicationGrantReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_APPLICATION_GRANT_REQUEST:
+            return {...state, requesting: true, id: action.id};
+        case LoanConst.LOAN_APPLICATION_GRANT_SUCCESS:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+        case LoanConst.LOAN_APPLICATION_GRANT_FAILURE:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+
+        default:
+            return state;
+    }
+};
+
+const LoanApplicationCancelReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_APPLICATION_CANCEL_REQUEST:
+            return {...state, requesting: true, id: action.id};
+        case LoanConst.LOAN_APPLICATION_CANCEL_SUCCESS:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+        case LoanConst.LOAN_APPLICATION_CANCEL_FAILURE:
+            return {...state, requesting: false, data: action.payload, id: action.id};
+
+        default:
+            return state;
+    }
+};
+
+export {
+    LoanOffersReducer,
+    LoanRequestsReducer,
+    LoanConstReducer,
+    LoanOfferReducer,
+    LoanRequestReducer,
+    LoanApplyReducer,
+    LoanApplicationsReducer,
+    LoanApplicationGrantReducer,
+    LoanApplicationCancelReducer,
+};

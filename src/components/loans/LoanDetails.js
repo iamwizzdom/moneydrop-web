@@ -106,7 +106,7 @@ class LoanDetails extends Component {
 
         if (!(!loan.isMine() && loan.isHasApplied())) {
             if (loan.isMine()) {
-                btnProps.href = {pathname: '/loan/applicants', loan};
+                btnProps.href = {pathname: '/loan/applicants', state: {loan}};
             } else {
                 btnProps.onClick = () => this.setState({showLoanApplyModal: true});
             }

@@ -25,6 +25,7 @@ import History from "./components/history/History";
 import Cards from "./components/cards/Cards";
 import BankAccounts from "./components/bank-accounts/BankAccounts";
 import LoanDetails from "./components/loans/LoanDetails";
+import LoanApplicants from "./components/loans/LoanApplicants";
 
 function App() {
     return (
@@ -47,6 +48,7 @@ function App() {
                     <PrivateRoute exact layout={AppLayout} path="/wallet" component={Wallet}/>
                     <PrivateRoute exact layout={AppLayout} path="/loans" component={Loans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/details" component={LoanDetails}/>
+                    <PrivateRoute exact layout={AppLayout} path="/loan/applicants" component={LoanApplicants}/>
                     <PrivateRoute exact layout={AppLayout} path="/loans/mine" component={MyLoans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/offer" component={OfferLoan}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/request" component={RequestLoan}/>

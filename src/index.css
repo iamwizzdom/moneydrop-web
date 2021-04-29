@@ -64,12 +64,20 @@ code {
     border-top-right-radius: 10px !important;
 }
 
+.color-accent-lazy {
+    color: #e04805;
+}
+
 .color-accent, .spinner-border.text-warning {
     color: #e04805 !important;
 }
 
 .color-accent-hover:hover {
     color: #e04805 !important;
+}
+
+.color-white-hover:hover {
+    color: #ffffff !important;
 }
 
 .background-accent {
@@ -132,6 +140,14 @@ code {
 
 .my-p-0-9 {
     padding: .20rem !important;
+}
+
+.font-size-11 {
+    font-size: 11px !important;
+}
+
+.font-size-12 {
+    font-size: 12px !important;
 }
 
 .font-size-14 {
@@ -245,7 +261,7 @@ code {
     border-color: #bf4103 !important;
 }
 
-.btn-primary:focus, .btn-primary:active, .swal-button--confirm:focus, .swal-button--confirm:active {
+.btn-primary:focus, .btn-primary:active, .btn-outline-primary:focus, .btn-outline-primary:active, .swal-button--confirm:focus, .swal-button--confirm:active {
     box-shadow: 0 -1px 6px 0 rgba(191,65,3,0.75) !important;
 }
 

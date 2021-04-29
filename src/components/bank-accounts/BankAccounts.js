@@ -12,6 +12,7 @@ import BankAccount from "../../models/BankAccount";
 import BankAccountShimmer from "../layout/BankAccountShimmer";
 import MonoConnect from '@mono.co/connect.js';
 import backArrow from "../../assets/images/dark-back-arrow.svg";
+import remove from "../../assets/images/remove.svg";
 
 class BankAccounts extends Component {
 
@@ -75,10 +76,8 @@ class BankAccounts extends Component {
         }
 
         if (this.state.showRemoveBank) {
-            swal({
-                title: "Remove Bank Account?",
-                text: "Are you sure you want to remove this bank account?",
-                icon: "warning",
+            swal(<span className={`color-accent`}>Are you sure you want to remove this bank account?</span>, {
+                icon: remove,
                 buttons: {
                     cancel: "No, cancel",
                     confirm: {

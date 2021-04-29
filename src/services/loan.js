@@ -19,7 +19,7 @@ const getToken = () => {
     return sessionStorage.getItem("token");
 }
 
-const getLoanRequests = (page) => {
+const getLoanRequests = (link) => {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -29,10 +29,10 @@ const getLoanRequests = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(page || UrlConst.LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
 };
 
-const getLoanOffers = (page) => {
+const getLoanOffers = (link) => {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -42,10 +42,10 @@ const getLoanOffers = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(page || UrlConst.LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
 };
 
-const getMyLoanRequests = (page) => {
+const getMyLoanRequests = (link) => {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -55,10 +55,10 @@ const getMyLoanRequests = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(page || UrlConst.USER_LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.USER_LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
 };
 
-const getMyLoanOffers = (page) => {
+const getMyLoanOffers = (link) => {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -68,7 +68,7 @@ const getMyLoanOffers = (page) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(page || UrlConst.USER_LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.USER_LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
 };
 
 const getLoanConst = () => {
@@ -122,6 +122,43 @@ const loanApply = (data, loanID) => {
     return fetch(Utility.sprintf(UrlConst.LOAN_APPLY_URL, loanID), requestOptions).then(handleResponse);
 };
 
+const getLoanApplications = (loanID, link) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-PerPage': AppConst.PAGINATION_PER_PAGE,
+            'Auth-Token': getToken()
+        }
+    };
+    return fetch(link || Utility.sprintf(UrlConst.LOAN_APPLICANTS_URL, loanID), requestOptions).then(handleResponse);
+};
+
+const grantLoanApplication = (loanID, applicationID) => {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        }
+    };
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_GRANT_URL, loanID, applicationID), requestOptions).then(handleResponse);
+};
+
+const cancelLoanApplication = (loanID, applicationID) => {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        }
+    };
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_CANCEL_URL, loanID, applicationID), requestOptions).then(handleResponse);
+};
+
 export const LoanService = {
     getLoanRequests,
     getLoanOffers,
@@ -131,4 +168,7 @@ export const LoanService = {
     offerLoan,
     requestLoan,
     loanApply,
+    getLoanApplications,
+    grantLoanApplication,
+    cancelLoanApplication,
 };

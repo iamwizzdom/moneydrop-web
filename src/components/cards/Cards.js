@@ -13,6 +13,7 @@ import User from "../../models/User";
 import {v4} from "uuid";
 import swal from "@sweetalert/with-react";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
+import remove from "../../assets/images/remove.svg";
 
 class Cards extends Component {
 
@@ -75,10 +76,8 @@ class Cards extends Component {
         }
 
         if (this.state.showRemoveCard) {
-            swal({
-                title: "Remove card?",
-                text: "Are you sure you want to remove this card?",
-                icon: "warning",
+            swal(<span className={`color-accent`}>Are you sure you want to remove this card?</span>, {
+                icon: remove,
                 buttons: {
                     cancel: "No, cancel",
                     confirm: {
