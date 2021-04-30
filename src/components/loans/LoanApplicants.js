@@ -26,7 +26,7 @@ class LoanApplicants extends Component {
     componentDidMount() {
         const {dispatch, location} = this.props;
         const {state} = location;
-        if (!(state.loan instanceof Loan) && Utility.isObject(state.loan)) {
+        if (state && !(state.loan instanceof Loan) && Utility.isObject(state.loan)) {
             state.loan = new Loan(state.loan.loanObject);
         }
         this.setState({
@@ -34,7 +34,7 @@ class LoanApplicants extends Component {
             ...state,
             mounted: true
         }, () => {
-            dispatch(LoanAction.getLoanApplications(this.state.loan.getUuid()));
+            if (this.state.loan instanceof Loan) dispatch(LoanAction.getLoanApplications(this.state.loan.getUuid()));
             window.onscroll = () => {
 
                 if (window.scrollY >= (document.body.clientHeight - window.innerHeight) &&

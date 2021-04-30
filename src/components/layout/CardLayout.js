@@ -17,7 +17,7 @@ import CardShimmer from "./CardShimmer";
 
 class CardLayout extends Component {
 
-    getCardIcon = (brand) => {
+    static getCardIcon(brand) {
         brand = brand.toLowerCase();
         if (brand.indexOf("visa") > -1) return visa;
         else if (brand.indexOf("verve") > -1) return verve;
@@ -42,7 +42,7 @@ class CardLayout extends Component {
             <Row className={`pt-3 pb-3 rounded`}
                  style={{backgroundColor: '#f1f1f1', marginLeft: -10, marginRight: -10}}>
                 <Col lg={2} md={2} sm={2} xl={2} xs={2}>
-                    <img src={this.getCardIcon(card.getBrand())} style={{width: 40, maxHeight: 40, objectFit: 'cover'}}
+                    <img src={CardLayout.getCardIcon(card.getBrand())} style={{width: 40, maxHeight: 40, objectFit: 'cover'}}
                          alt={`transaction-direction`} className={`img-fluid`}/>
                 </Col>
                 <Col lg={8} md={8} sm={8} xl={8} xs={8} className={`text-left`} style={{marginTop: '-5px'}}>

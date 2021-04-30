@@ -27,19 +27,19 @@ class Transaction {
     }
 
     getFees() {
-        return this.transObject.fees;
+        return this.transObject.fee;
     }
 
     setFees(fees) {
-        this.transObject.fees = fees;
+        this.transObject.fee = fees;
     }
 
     getReference() {
-        return this.transObject.reference;
+        return this.transObject.uuid;
     }
 
     setReference(reference) {
-        this.transObject.reference = reference;
+        this.transObject.uuid = reference;
     }
 
     getType() {
@@ -103,7 +103,7 @@ class Transaction {
      * @returns {Card|*}
      */
     getCard(): Card {
-        if (!(this.transObject.card instanceof Card))
+        if (!Utility.isEmpty(this.transObject.card) && !(this.transObject.card instanceof Card))
             this.transObject.card = new Card(this.transObject.card.cardObject || this.transObject.card)
         return this.transObject.card;
     }
@@ -116,8 +116,8 @@ class Transaction {
      *
      * @returns {User}
      */
-    getUser(): Card {
-        if (!(this.transObject.user instanceof User))
+    getUser(): User {
+        if (!Utility.isEmpty(this.transObject.user) && !(this.transObject.user instanceof User))
             this.transObject.user = new User(this.transObject.user.userObject || this.transObject.user)
         return this.transObject.user;
     }

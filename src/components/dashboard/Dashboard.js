@@ -221,7 +221,7 @@ class Dashboard extends Component {
                             <Card.Title as="small"
                                         className={`h5 font-weight-bold color-accent`}>Transactions</Card.Title>
                             <Link to={`/transactions`} className={`float-right color-accent`}>View all</Link>
-                            {!Utility.isEmpty(transactions) ? <Row className={`underline-children`}>
+                            {!Utility.isEmpty(transactions) ? <Row className={`underline-children mt-2`}>
                                 {transactions.map((v, k) => {
 
                                     if (Utility.isNumeric(v)) return <TransactionShimmer key={k}/>;

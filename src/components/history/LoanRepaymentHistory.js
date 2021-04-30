@@ -8,6 +8,7 @@ import TransactionShimmer from "../layout/TransactionShimmer";
 import TransactionLayout from "../layout/TransactionLayout";
 import NoContent from "../layout/NoContent";
 import LoanRepayment from "../../models/LoanRepayment";
+import {Redirect} from "react-router-dom";
 
 class LoanRepaymentHistory extends Component {
 
@@ -16,7 +17,8 @@ class LoanRepaymentHistory extends Component {
         repayments: [],
         nextPage: null,
         hasMoreData: true,
-        isLoading: false
+        isLoading: false,
+        mounted: false
     };
 
     componentDidMount() {
@@ -26,9 +28,10 @@ class LoanRepaymentHistory extends Component {
 
         this.setState({
             ...this.state,
-            ...state
+            ...state,
+            mounted: true
         }, () => {
-            dispatch(LoanAction.getLoanRepaymentHistory(this.state.applicationReference));
+            if (!Utility.isEmpty(this.state.applicationReference)) dispatch(LoanAction.getLoanRepaymentHistory(this.state.applicationReference));
         });
 
         window.onscroll = () => {
@@ -89,6 +92,12 @@ class LoanRepaymentHistory extends Component {
         const {requesting} = loanRepaymentHistory;
 
         let repayments = (this.state.repayments.length > 0  || !requesting ? this.state.repayments : [1, 2, 3, 4, 5, 6]);
+
+        let {mounted, applicationReference, from} = this.state;
+
+        if (mounted && Utility.isEmpty(applicationReference)) {
+            return <Redirect to={{ pathname: from?.pathname || '/', header: {status: 'warning', message: 'Invalid loan application data'}}} />;
+        }
 
         return <>
             <Row>

@@ -23,7 +23,7 @@ class LoanDetails extends Component {
     componentDidMount() {
         const {state} = this.props.location;
         this.player = React.createRef();
-        if (!(state.loan instanceof Loan) && Utility.isObject(state.loan)) {
+        if (state && !(state.loan instanceof Loan) && Utility.isObject(state.loan)) {
             state.loan = new Loan(state.loan.loanObject);
         }
         this.setState({
@@ -143,6 +143,7 @@ class LoanDetails extends Component {
                                         <Col lg={12} md={12} sm={12} xl={12} xs={12}>
                                             <img
                                                 src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
+                                                onError={(e) => {e.target.onerror = null; e.target.src = loanUser.getDefaultPicture()}}
                                                 style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
                                                 className={`rounded-circle border-accent background-accent-light my-p-0-9 mb-3`}/>
                                         </Col>
@@ -203,8 +204,8 @@ class LoanDetails extends Component {
                     </Card>
                 </Col>
             </Row>
-            {showBtn && ((btnProps.href && <Link to={btnProps.href} className={`btn btn-primary mt-4 min-height-48 w-100`}>{btnTitle}</Link>) ||
-               (<Button variant={`primary`} className={`mt-4 min-height-48`} disabled={(!loan.isMine() && (loan.isHasApplied() || loanApply.data?.status))} block onClick={btnProps.onClick}>{btnTitle}</Button>)
+            {showBtn && ((btnProps.href && <Link to={btnProps.href} className={`btn btn-primary btn-block btn-lg font-size-16 mt-4`} style={{padding: '.7rem 1rem'}}>{btnTitle}</Link>) ||
+               (<Button variant={`primary`} className={`mt-4 font-size-16`} disabled={(!loan.isMine() && (loan.isHasApplied() || loanApply.data?.status))} size={`lg`} style={{padding: '.7rem 1rem'}} block onClick={btnProps.onClick}>{btnTitle}</Button>)
             )}
         </>;
     }

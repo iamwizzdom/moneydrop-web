@@ -29,7 +29,7 @@ class LoanApplicationDetail extends Component {
         const {location} = this.props;
 
         const {state} = location;
-        if (!(state.application instanceof Loan) && Utility.isObject(state.application)) {
+        if (state && !(state.application instanceof Loan) && Utility.isObject(state.application)) {
             state.application = new LoanApplication(state.application.applicationObject);
         }
         this.setState({
