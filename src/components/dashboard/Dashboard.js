@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Card, Col, Row} from "react-bootstrap";
+import {Button, Card, Col, Row, Spinner} from "react-bootstrap";
 import offer from '../../assets/images/offer-loan.svg';
 import request from '../../assets/images/request-loan.svg';
 import {DashboardAction, CardAction} from "../../actions";
@@ -101,10 +101,7 @@ class Dashboard extends Component {
                 content: wrapper,
                 buttons: {
                     cancel: "Cancel",
-                    confirm: {
-                        text: "Proceed",
-                        closeModal: false
-                    }
+                    confirm: "Proceed"
                 }
             }).then((cardID) => {
 
@@ -172,7 +169,9 @@ class Dashboard extends Component {
                         <Card.Body>
                             <p className={`m-0`}>Available balance</p>
                             <h3 className={`color-accent mt-2`}>{Utility.format(available_balance)}</h3>
-                            <Button className={`min-width-160 mt-1`} onClick={() => this.setShowAmountModal(true)}>Fund wallet</Button>
+                            <Button className={`min-width-160 mt-1`} onClick={() => this.setShowAmountModal(true)}>
+                                {chargeCard.requesting ? <Spinner animation="border" variant="light"/> : 'Fund wallet'}
+                            </Button>
                         </Card.Body>
                     </Card>
                 </Col>

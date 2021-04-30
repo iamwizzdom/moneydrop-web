@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, Card, Col, Row} from "react-bootstrap";
+import {Button, Card, Col, Row, Spinner} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
 import {Link} from "react-router-dom";
 import NoContent from "../layout/NoContent";
@@ -100,10 +100,7 @@ class Wallet extends Component {
                 content: wrapper,
                 buttons: {
                     cancel: "Cancel",
-                    confirm: {
-                        text: "Proceed",
-                        closeModal: false
-                    }
+                    confirm: "Proceed"
                 }
             }).then((cardID) => {
 
@@ -175,10 +172,7 @@ class Wallet extends Component {
                 content: wrapper,
                 buttons: {
                     cancel: "Cancel",
-                    confirm: {
-                        text: "Proceed",
-                        closeModal: false
-                    }
+                    confirm: "Proceed"
                 }
             }).then((bankID) => {
 
@@ -220,9 +214,10 @@ class Wallet extends Component {
 
         const {wallet, chargeCard, creditBank} = this.props;
 
-        let {available_balance, transactions} = {...{available_balance: 0, transactions: [1, 2, 3, 4, 5, 6]}, ...wallet.data};
+        let {balance, available_balance, transactions} = {...{balance: 0, available_balance: 0, transactions: [1, 2, 3, 4, 5, 6]}, ...wallet.data};
 
         if (chargeCard.data.status) {
+            balance = chargeCard.data.response.balance;
             available_balance = chargeCard.data.response.available_balance;
             if (!Utility.isEmpty(transactions) && !Utility.isNumeric(transactions[0])) {
                 transactions.pop()
@@ -231,6 +226,7 @@ class Wallet extends Component {
         }
 
         if (creditBank.data.status) {
+            balance = creditBank.data.response.balance;
             available_balance = creditBank.data.response.available_balance;
             if (!Utility.isEmpty(transactions) && !Utility.isNumeric(transactions[0])) {
                 transactions.pop()
@@ -249,13 +245,25 @@ class Wallet extends Component {
                 </Col>
             </Row>
             <Row>
-                <Col md={6} className={`mb-3`}>
+                <Col md={8} className={`mb-3`}>
                     <Card border="light" className={`p-2 border-radius-10`}>
                         <Card.Body>
-                            <p className={`m-0`}>Available balance</p>
-                            <h3 className={`color-accent mt-2`}>{Utility.format(available_balance)}</h3>
-                            <Button className={`pl-4 pr-4 m-1`} onClick={() => this.setShowAmountModal(true)}>Fund wallet</Button>
-                            <Button variant={`warning`} className={`pl-4 pr-4 m-1 my-rounded`} onClick={() => this.setShowCashOutModal(true)}>Cash out</Button>
+                            <Row>
+                                <Col className={`mb-2`}>
+                                    <p className={`m-0`}>Current balance</p>
+                                    <h3 className={`color-accent mt-2`}>{Utility.format(balance)}</h3>
+                                </Col>
+                                <Col className={`mb-2`}>
+                                    <p className={`m-0`}>Available balance</p>
+                                    <h3 className={`color-accent mt-2`}>{Utility.format(available_balance)}</h3>
+                                </Col>
+                            </Row>
+                            <Button className={`pl-4 pr-4 m-1`} onClick={() => this.setShowAmountModal(true)}>
+                                {chargeCard.requesting ? <Spinner animation="border" variant="light"/> : 'Fund wallet'}
+                            </Button>
+                            <Button variant={`warning`} className={`pl-4 pr-4 m-1 my-rounded`} onClick={() => this.setShowCashOutModal(true)}>
+                                {creditBank.requesting ? <Spinner animation="border" variant="light"/> : 'Cash out'}
+                            </Button>
                         </Card.Body>
                     </Card>
                 </Col>

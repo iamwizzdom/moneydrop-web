@@ -64,6 +64,21 @@ code {
     border-top-right-radius: 10px !important;
 }
 
+.notification-icon {
+    border-radius: 50%;
+    border: 2px solid #9c999f;
+}
+
+.notification-icon.active {
+    border-radius: 50%;
+    border: 2px solid #f9beaa;
+    background-color: #e04805;
+}
+
+.notification-icon.active img {
+    content: url("./assets/images/notification-white.svg");
+}
+
 .color-accent-lazy {
     color: #e04805;
 }
@@ -132,7 +147,9 @@ code {
     background-color: #ffffff !important;
 }
 
-.my-pt-1{padding-top:.15rem!important}
+.my-pt-1 {
+    padding-top: .15rem !important
+}
 
 .my-p-0-8 {
     padding: .12rem !important;
@@ -184,6 +201,11 @@ code {
 
 .min-width-80-per {
     min-width: 80% !important;
+}
+
+.size-40 {
+    width: 40px !important;
+    height: 40px !important;
 }
 
 .min-width-55-per {
@@ -262,7 +284,7 @@ code {
 }
 
 .btn-primary:focus, .btn-primary:active, .btn-outline-primary:focus, .btn-outline-primary:active, .swal-button--confirm:focus, .swal-button--confirm:active {
-    box-shadow: 0 -1px 6px 0 rgba(191,65,3,0.75) !important;
+    box-shadow: 0 -1px 6px 0 rgba(191, 65, 3, 0.75) !important;
 }
 
 .pagination-btn-primary a {
@@ -281,7 +303,7 @@ code {
 }
 
 .pagination-btn-primary a:focus, .pagination-btn-primary a:active {
-    box-shadow: 0 -1px 6px 0 rgba(191,65,3,0.75) !important;
+    box-shadow: 0 -1px 6px 0 rgba(191, 65, 3, 0.75) !important;
 }
 
 .badge-danger {
@@ -306,12 +328,12 @@ code {
 }
 
 .loan-return {
-    color:#28a745!important;
+    color: #28a745 !important;
     background-color: #e9e8e8;
 }
 
 .loan-amounts {
-    color:#e04805!important;
+    color: #e04805 !important;
     background-color: #e9e8e8;
 }
 
@@ -337,13 +359,13 @@ input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill,
 input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill:hover,
 input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill:active,
 input:not(input[type='range']):not(.PhoneInputInput):-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 60px rgba(191,65,3,0.1) inset !important;
+    -webkit-box-shadow: 0 0 0 60px rgba(191, 65, 3, 0.1) inset !important;
 }
 
 textarea {
     width: 100% !important;
     border-color: #e2e0df !important;
-    box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+    box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
 }
 
 input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput) {
@@ -351,7 +373,7 @@ input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput) {
     height: 55px !important;
     background-color: #ffffff !important;
     border-color: #e2e0df !important;
-    box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+    box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
 }
 
 input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):disabled {
@@ -377,12 +399,12 @@ textarea:active,
 input:not(input[type='range']):not(.PhoneInputInput):focus,
 input:not(input[type='range']):not(.PhoneInputInput):active,
 select:focus, select:active {
-    box-shadow: 0 1px 3px 3px rgba(191,65,3,0.1) !important;
+    box-shadow: 0 1px 3px 3px rgba(191, 65, 3, 0.1) !important;
 }
 
 select {
     border-color: #e2e0df !important;
-    box-shadow: 0 1px 3px 3px rgba(226,224,223,0.2) !important;
+    box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
 }
 
 .custom-select {
@@ -515,7 +537,7 @@ a.navbar-brand {
         position: fixed;
         bottom: -1000px;
         transition: all ease 0.5s;
-        box-shadow: 1px -5px 5px 1px rgba(0,0,0,0.10);
+        box-shadow: 1px -5px 5px 1px rgba(0, 0, 0, 0.10);
     }
 
     .mobile-bottom-sheet .sheet-line {

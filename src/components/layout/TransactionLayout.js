@@ -3,13 +3,14 @@ import {Badge, Col, Row} from "react-bootstrap";
 import Utility from "../../helpers/Utility";
 import Transaction from "../../models/Transaction";
 import {Link} from "react-router-dom";
+import TransactionShimmer from "./TransactionShimmer";
 
 class TransactionLayout extends Component {
 
     render() {
         const {transaction, location, noLink} = this.props;
 
-        if (!(transaction instanceof Transaction)) return <TransactionLayout/>;
+        if (!(transaction instanceof Transaction)) return <TransactionShimmer/>;
 
         let theme = Utility.getTheme(transaction.getStatus(), transaction.getType()?.toLowerCase() === 'top-up');
 

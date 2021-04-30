@@ -29,6 +29,7 @@ import LoanApplicants from "./components/loans/LoanApplicants";
 import LoanApplicationDetail from "./components/history/LoanApplicationDetail";
 import LoanRepaymentHistory from "./components/history/LoanRepaymentHistory";
 import TransactionReceipt from "./components/transaction/TransactionReceipt";
+import Notifications from "./components/notification/Notifications";
 
 function App() {
     return (
@@ -58,6 +59,7 @@ function App() {
                     <PrivateRoute exact layout={AppLayout} path="/loans/mine" component={MyLoans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/offer" component={OfferLoan}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/request" component={RequestLoan}/>
+                    <PrivateRoute exact layout={AppLayout} path="/notifications" component={Notifications}/>
                     <PrivateRoute exact layout={AppLayout} path="/" component={Dashboard}/>
 
                     <LayoutRoute layout={AuthLayout} component={NotFound}/>

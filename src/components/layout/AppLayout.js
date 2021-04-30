@@ -19,7 +19,7 @@ class AppLayout extends Component {
 
         return (
             <div>
-                {hasHeader && <Header/>}
+                {hasHeader && <Header {...this.props}/>}
                 {location.header && <Message header={location.header}/>}
                 <Container className={`mt-5 pb-5 position-relative`}>
                     <Row>

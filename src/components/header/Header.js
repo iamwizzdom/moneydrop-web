@@ -7,6 +7,7 @@ import User from "../../models/User";
 import {AuthAction} from "../../actions";
 import userIcon from "../../assets/images/user.svg";
 import logouts from "../../assets/images/logouts.svg";
+import {LinkContainer} from "react-router-bootstrap";
 
 const HeaderLayout = (props) => {
 
@@ -30,21 +31,25 @@ const HeaderLayout = (props) => {
                     <img src={logo} style={{marginTop: '-5px'}} alt={`${AppConst.APP_NAME} logo`} width={40} height={40} />
                     <span className="color-accent font-size-22 m-1 pc-brand">oney<b>Drop</b></span>
                 </Navbar.Brand>
-                <Nav className="ml-auto mobile-header-menu">
-                    <Nav.Link href="#notification" className={`float-left mr-2`}>
-                        <img src={notification} width={20} alt={`notification`} className={`img-fluid m-2`}/>
-                    </Nav.Link>
-                    <Nav.Item className={`pt-2 float-right`} onClick={showMenu}>
+                <Nav className="ml-auto mobile-header-menu" activeKey={props.location.pathname}>
+                    <LinkContainer exact to="/notifications">
+                        <Nav.Link eventKey={`/notifications`} className={`float-left m-2 notification-icon size-40`}>
+                            <img src={notification} width={15} alt={`notification`} className={`img-fluid m-auto d-block`}/>
+                        </Nav.Link>
+                    </LinkContainer>
+                    <Nav.Item className={`ml-auto float-right`} onClick={showMenu}>
                         <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                              onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                              style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`user`}
-                             className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8`}/>
+                             className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8 m-2`}/>
                     </Nav.Item>
                 </Nav>
-                <Nav className="ml-auto pc-header-menu">
-                    <Nav.Link href="#notification" style={{width: 40, maxHeight: 40}} active={true} className={`m-2 rounded-circle border-accent`}>
-                        <img src={notification} width={20} alt={`notification`} className={`img-fluid m-auto d-block`}/>
-                    </Nav.Link>
+                <Nav className="ml-auto pc-header-menu" activeKey={props.location.pathname}>
+                    <LinkContainer exact to="/notifications">
+                        <Nav.Link eventKey={`/notifications`} className={`m-2 mr-3 notification-icon size-40`}>
+                            <img src={notification} width={16} alt={`notification`} className={`img-fluid m-auto d-block`}/>
+                        </Nav.Link>
+                    </LinkContainer>
                     <Nav.Item className={`pt-2`}>
                         <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                              onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}

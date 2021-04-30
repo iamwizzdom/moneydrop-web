@@ -19,6 +19,7 @@ import {
     LoanRepaymentReducer,
     LoanRepaymentHistoryReducer,
 } from './loan';
+import {FetchNotificationsReducer} from "./notification";
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
@@ -46,7 +47,8 @@ const rootReducer = combineReducers({
     creditBank: CreditBankReducer,
     verifyBank: VerifyBankReducer,
     fetchBanks: FetchBanksReducer,
-    removeBank: RemoveBankReducer
+    removeBank: RemoveBankReducer,
+    fetchNotifications: FetchNotificationsReducer,
 });
 
 export default rootReducer;
