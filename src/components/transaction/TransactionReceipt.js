@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Badge, Button, Card, Col, Row} from "react-bootstrap";
+import {Badge, Button, Card, Col, Row, Spinner} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 import Utility from "../../helpers/Utility";
 import backArrow from '../../assets/images/dark-back-arrow.svg';
@@ -15,6 +15,7 @@ class TransactionReceipt extends Component {
     state = {
         transaction: null,
         mounted: false,
+        savingReceipt: false,
     }
 
     componentDidMount() {
@@ -31,7 +32,9 @@ class TransactionReceipt extends Component {
 
     saveReceipt = () => {
         const {transaction} = this.state;
+        const instance = this;
         let elem = document.getElementById('receipt-layout');
+        this.setState({savingReceipt: true});
         htmlToImage.toPng(elem, { quality: 0.95 })
             .then(function (dataUrl) {
                 watermark([dataUrl, logo])
@@ -63,13 +66,14 @@ class TransactionReceipt extends Component {
                         link.download = `moneydrop-receipt-${transaction.getReference()}.png`;
                         link.href = url;
                         link.click();
+                        instance.setState({savingReceipt: false});
                     });
             });
     }
 
     render() {
 
-        let {mounted, transaction, from} = this.state;
+        let {mounted, transaction, savingReceipt, from} = this.state;
 
         if (!mounted) return null;
 
@@ -89,7 +93,9 @@ class TransactionReceipt extends Component {
                     </h4>
                 </Col>
                 <Col className={`mb-3 text-right`}>
-                    <Button variant={`outline-primary`} className={`border-accent background-accent-hover color-accent-lazy`} onClick={this.saveReceipt}>Save</Button>
+                    <Button variant={`outline-primary`} className={`border-accent background-accent-hover color-accent-lazy`} onClick={this.saveReceipt}>
+                        {savingReceipt ? <Spinner animation="border" variant="light" size={`sm`}/> : 'Save'}
+                    </Button>
                 </Col>
             </Row>
             <Row className={`mt-3`}>

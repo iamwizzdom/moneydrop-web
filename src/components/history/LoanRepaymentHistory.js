@@ -119,7 +119,7 @@ class LoanRepaymentHistory extends Component {
 
                                     let repayment = new LoanRepayment(v);
 
-                                    return <TransactionLayout key={k} transaction={repayment.getTransaction()}/>;
+                                    return <TransactionLayout key={k} transaction={repayment.getTransaction()} noLink={!repayment.getPayer().isMe()}/>;
                                 })}
                             </Row> : <NoContent title={`No Transaction`}/>}
                             {(!requesting && !this.state.hasMoreData && this.state.repayments.length > 0) && <p className="col-md-12 text-center text-muted mt-5">No more data</p>}
