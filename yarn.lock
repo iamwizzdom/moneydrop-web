@@ -10118,6 +10118,11 @@
     "typed-styles" "^0.0.7"
     "warning" "^4.0.2"
 
+"react-rating-stars-component@^2.2.0":
+  "integrity" "sha512-A3lgLxumfFQQicKQmxacZ91fq/zRaVWlCPnVodJmJV6obvod4/yCotetN9WuyBiUfnKsEFDBo/8B85ocwmL7ng=="
+  "resolved" "https://registry.npmjs.org/react-rating-stars-component/-/react-rating-stars-component-2.2.0.tgz"
+  "version" "2.2.0"
+
 "react-ravepayment@^3.0.1":
   "integrity" "sha512-2CTru1sgYCyQGa8phYZQkrUh2lYwDO8lJTO4C1XJBGOpgdnznCY6asZLhfzY2bSqfPEvBK69JzDNACppFl0PYA=="
   "resolved" "https://registry.npmjs.org/react-ravepayment/-/react-ravepayment-3.0.1.tgz"

@@ -44,7 +44,7 @@ class LoanApplicantLayout extends Component {
             }
 
             swal(<div><Player
-                ref={this.player} // set the ref to your class instance
+                ref={React.createRef()} // set the ref to your class instance
                 autoplay={true}
                 loop={true}
                 src={loan.isLoanOffer() ? giveMoneyAnim : receiveMoneyAnim}

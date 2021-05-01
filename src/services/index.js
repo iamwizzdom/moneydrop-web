@@ -7,3 +7,4 @@ export * from './history';
 export * from './card';
 export * from './bank';
 export * from './notification';
+export * from './review';

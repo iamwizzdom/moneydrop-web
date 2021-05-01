@@ -182,7 +182,7 @@ class LoanApplicationDetail extends Component {
                 </Col>
                 <Col md={6} className={`mt-3`}>
                     <h5 className={`color-accent font-weight-bold`}>Recipient</h5>
-                    <LoanRecipientLayout size={12} application={application} />
+                    <LoanRecipientLayout size={12} application={application} location={location}/>
                 </Col>
             </Row>
             <Row className={`mt-4`}>
@@ -190,7 +190,7 @@ class LoanApplicationDetail extends Component {
                     <h5 className={`color-accent font-weight-bold`}>Application Details</h5>
                     <Card border="light" className={`p-3 border-radius-10`}>
                         <Card.Body>
-                            <Row className={`mt-3`}>
+                            <Row>
                                 <Col lg={12} md={12} sm={12} xl={12} xs={12}>
                                     <small className={`p text-muted`}>Application Reference</small>
                                     <p className={`font-size-13 mt-1`}>{application.getReference()}</p>

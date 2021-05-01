@@ -20,6 +20,7 @@ import {
     LoanRepaymentHistoryReducer,
 } from './loan';
 import {FetchNotificationsReducer} from "./notification";
+import {ReviewUserReducer, FetchReviewsReducer, EditReviewReducer, DeleteReviewReducer} from "./review";
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
@@ -49,6 +50,10 @@ const rootReducer = combineReducers({
     fetchBanks: FetchBanksReducer,
     removeBank: RemoveBankReducer,
     fetchNotifications: FetchNotificationsReducer,
+    reviewUser: ReviewUserReducer,
+    editReview: EditReviewReducer,
+    deleteReview: DeleteReviewReducer,
+    fetchReviews: FetchReviewsReducer,
 });
 
 export default rootReducer;
