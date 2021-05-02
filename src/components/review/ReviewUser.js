@@ -36,7 +36,7 @@ class ReviewUser extends Component {
         const {reviewUser} = this.props;
         const {data} = reviewUser;
 
-        if (data.message && Object.keys(data.errors).length <= 0) {
+        if (data.message && Utility.isEmpty(data.errors)) {
             swal({
                 title: data.title,
                 text: data.message,
