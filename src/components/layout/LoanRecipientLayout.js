@@ -20,7 +20,7 @@ class LoanRecipientLayout extends Component {
                         <img
                             src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
-                            style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`application-user`}
+                            style={{width: 40, height: 40, objectFit: 'cover'}} alt={`application-user`}
                             className={`rounded-circle my-p-0-9`}/>
                     </Col>
                     <Col lg={10} md={10} sm={10} xl={10} xs={10} className={`text-left`} style={{marginTop: '-5px'}}>

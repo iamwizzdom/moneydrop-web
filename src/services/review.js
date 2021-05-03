@@ -34,7 +34,7 @@ const reviewUser = (data, applicationID) => {
 
 const editReview = (data, reviewID) => {
     const requestOptions = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -57,7 +57,7 @@ const deleteReview = (reviewID) => {
     return fetch(Utility.sprintf(UrlConst.DELETE_REVIEW_URL, reviewID), requestOptions).then(handleResponse);
 };
 
-const fetchReviews = (userID) => {
+const fetchReviews = (userID, url) => {
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -67,7 +67,7 @@ const fetchReviews = (userID) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.USER_REVIEWS_URL, userID), requestOptions).then(handleResponse);
+    return fetch(url || Utility.sprintf(UrlConst.USER_REVIEWS_URL, userID), requestOptions).then(handleResponse);
 };
 
 export const ReviewService = {

@@ -144,7 +144,7 @@ class LoanDetails extends Component {
                                             <img
                                                 src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
                                                 onError={(e) => {e.target.onerror = null; e.target.src = loanUser.getDefaultPicture()}}
-                                                style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
+                                                style={{width: 40, height: 40, objectFit: 'cover'}} alt={`loan-user`}
                                                 className={`rounded-circle border-accent background-accent-light my-p-0-9 mb-3`}/>
                                         </Col>
                                         <Col lg={12} md={12} sm={12} xl={12} xs={12}>

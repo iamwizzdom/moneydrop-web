@@ -149,7 +149,7 @@ const grantLoanApplication = (loanID, applicationID) => {
 
 const cancelLoanApplication = (loanID, applicationID) => {
     const requestOptions = {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',

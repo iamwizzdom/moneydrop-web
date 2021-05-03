@@ -86,7 +86,7 @@ class LoanApplicantLayout extends Component {
                         <img
                             src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
-                            style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`application-user`}
+                            style={{width: 40, height: 40, objectFit: 'cover'}} alt={`application-user`}
                             className={`rounded-circle my-p-0-9`}/>
                     </Link>
                 </Col>

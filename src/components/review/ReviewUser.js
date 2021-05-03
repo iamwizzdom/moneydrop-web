@@ -15,8 +15,6 @@ class ReviewUser extends Component {
     state = {
         application: null,
         mounted: false,
-        savingReceipt: false,
-        errors: {},
         review: ''
     }
 
@@ -59,7 +57,7 @@ class ReviewUser extends Component {
 
     render() {
 
-        const {reviewUser} = this.props;
+        const {reviewUser, location} = this.props;
         let {mounted, application, from} = this.state;
 
         let {errors} = {errors: {}, ...reviewUser.data};
@@ -102,7 +100,7 @@ class ReviewUser extends Component {
                                 <Col xl={10} lg={10} md={9} sm={8} xs={7}>
                                     <h5 className={`mt-1`}>{loanRecipient.getFirstname()} {loanRecipient.getLastname()}</h5>
                                     <p className={`small m-0 mb-1`}>{loanRecipient.getEmail()}</p>
-                                    <Link to={`/user/reviews`} className={`color-accent`}>View reviews <img src={arrow} className={`ml-1 mb-1`} alt={`icon`}/> </Link>
+                                    <Link to={{pathname: `/user/reviews`, state: {user: loanRecipient, from: location}}} className={`color-accent`}>View reviews <img src={arrow} className={`ml-1 mb-1`} alt={`icon`}/> </Link>
                                     <ReactStars
                                         count={5}
                                         size={30}

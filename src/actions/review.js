@@ -104,7 +104,7 @@ function deleteReview(reviewID) {
     }
 }
 
-function fetchReviews(userID) {
+function fetchReviews(userID, url) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
@@ -124,7 +124,7 @@ function fetchReviews(userID) {
         dispatch(request());
 
         try {
-            const res = await ReviewService.fetchReviews(userID);
+            const res = await ReviewService.fetchReviews(userID, url);
 
             if (res.status) dispatch(success(res));
             else dispatch(failure(res));

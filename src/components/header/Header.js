@@ -40,7 +40,7 @@ const HeaderLayout = (props) => {
                     <Nav.Item className={`ml-auto float-right`} onClick={showMenu}>
                         <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                              onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
-                             style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`user`}
+                             style={{width: 40, height: 40, objectFit: 'cover'}} alt={`user`}
                              className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8 m-2`}/>
                     </Nav.Item>
                 </Nav>
@@ -53,7 +53,7 @@ const HeaderLayout = (props) => {
                     <Nav.Item className={`pt-2`}>
                         <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                              onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
-                             style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`user`}
+                             style={{width: 40, height: 40, objectFit: 'cover'}} alt={`user`}
                              className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8`}/>
                     </Nav.Item>
                     <NavDropdown title={`${user.getFirstname()} ${user.getLastname()}`} className={`pt-2 font-weight-bold`} id="basic-nav-dropdown" aria-dropeffect={`copy`}>

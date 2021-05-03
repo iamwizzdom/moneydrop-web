@@ -120,7 +120,7 @@ class TransactionReceipt extends Component {
                                         <Col lg={12} md={12} sm={12} xl={12} xs={12}>
                                             <img
                                                 src={card !== null ? CardLayout.getCardIcon(card.getBrand()) : logo}
-                                                style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`transaction-card`}
+                                                style={{width: 40, height: 40, objectFit: 'cover'}} alt={`transaction-card`}
                                                 className={`mb-3`}/>
                                         </Col>
                                         <Col lg={12} md={12} sm={12} xl={12} xs={12}>

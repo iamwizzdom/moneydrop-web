@@ -159,6 +159,10 @@ code {
     padding: .20rem !important;
 }
 
+.mt-36 {
+    margin-top: 36px !important;
+}
+
 .font-size-11 {
     font-size: 11px !important;
 }
@@ -483,6 +487,15 @@ a.navbar-brand {
 
 .loam-amount-font-size {
     font-size: 35px;
+}
+
+.spinner-center {
+    position: absolute;
+    margin: auto;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 @media only screen and (max-width: 991px) {

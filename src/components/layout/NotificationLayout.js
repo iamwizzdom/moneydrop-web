@@ -83,7 +83,7 @@ class NotificationLayout extends Component {
                                 e.target.onerror = null;
                                 e.target.src = unisex
                             }}
-                            style={{width: 40, maxHeight: 40, objectFit: 'cover'}} alt={`loan-user`}
+                            style={{width: 40, height: 40, objectFit: 'cover'}} alt={`loan-user`}
                             className={`rounded-circle border-accent background-accent-light my-p-0-9`}/>
                     </Col>}
                 </Row>
