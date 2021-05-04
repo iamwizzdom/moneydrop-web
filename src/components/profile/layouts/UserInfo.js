@@ -6,7 +6,7 @@ import Utility from "../../../helpers/Utility";
 
 const InfoLayout = (props) => {
     const {title, info, showCursor, underline} = props;
-    return <Col xl={12} lg={12} md={12} sm={12} xs={12} className={`p-3 ${underline && 'underline'} ${showCursor && 'cursor-pointer'}`}>
+    return <Col xl={12} lg={12} md={12} sm={12} xs={12} title={`Click to update`} className={`p-3 ${underline && 'underline'} ${showCursor && 'cursor-pointer'}`}>
         <Row>
             <Col xl={3} lg={3} md={3} sm={3} xs={3} className={`p-0 pl-1`}><small className={`font-size-16 font-weight-bold`}>{title}</small></Col>
             <Col xl={9} lg={9} md={9} sm={9} xs={9} className={`text-right`} style={{color: '#777777'}}>
