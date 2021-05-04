@@ -107,7 +107,7 @@ class User {
      * @returns {*}
      */
     getCountry(): Country {
-        if (!(this.userObject.country instanceof Country))
+        if (this.userObject.country && !(this.userObject.country instanceof Country))
             this.userObject.country = new Country(this.userObject.country.countryObject || this.userObject.country)
         return this.userObject.country;
     }
@@ -121,7 +121,7 @@ class User {
      * @returns {*}
      */
     getState(): State {
-        if (!(this.userObject.state instanceof State))
+        if (this.userObject.state && !(this.userObject.state instanceof State))
             this.userObject.state = new State(this.userObject.state.stateObject || this.userObject.state)
         return this.userObject.state;
     }

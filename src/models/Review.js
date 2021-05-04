@@ -1,6 +1,6 @@
 import Utility from "../helpers/Utility";
 import User from "./User";
-import LoanApplication from "./LoanApplication";
+import Loan from "./Loan";
 
 class Review {
 
@@ -62,10 +62,10 @@ class Review {
         return this.reviewObject.reviewer;
     }
 
-    getLoanApplication() {
-        if (!Utility.isEmpty(this.reviewObject.application) && !(this.reviewObject.application instanceof LoanApplication))
-            this.reviewObject.application = new LoanApplication(this.reviewObject.application.applicationObject || this.reviewObject.application);
-        return this.reviewObject.application;
+    getLoan() {
+        if (!Utility.isEmpty(this.reviewObject.loan) && !(this.reviewObject.loan instanceof Loan))
+            this.reviewObject.loan = new Loan(this.reviewObject.loan.loanObject || this.reviewObject.loan);
+        return this.reviewObject.loan;
     }
 
     setValues(reviewObject) {

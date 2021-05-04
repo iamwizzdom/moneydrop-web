@@ -14,12 +14,17 @@ import {connect} from "react-redux";
 class LoanApplicantLayout extends Component {
 
     state = {
-        showGrantModal: false
+        showGrantModal: false,
+        lottie: null
     }
+
+    player = null;
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
         const {dispatch, application, applicantGrant} = this.props;
+
+        this.player = React.createRef();
 
         if (applicantGrant.data.message) {
             if (applicantGrant.data.hasOwnProperty("errors") && Object.keys(applicantGrant.data.errors).length > 0) {
@@ -44,7 +49,10 @@ class LoanApplicantLayout extends Component {
             }
 
             swal(<div><Player
-                ref={React.createRef()} // set the ref to your class instance
+                lottieRef={instance => {
+                    this.setState({ lottie: instance });
+                }}
+                ref={this.player} // set the ref to your class instance
                 autoplay={true}
                 loop={true}
                 src={loan.isLoanOffer() ? giveMoneyAnim : receiveMoneyAnim}
@@ -59,11 +67,16 @@ class LoanApplicantLayout extends Component {
             }).then((data) => {
 
                 if (!data) {
-                    this.setState({showGrantModal: false});
+                    this.setState({showGrantModal: false}, () => {
+                        this.player.current.stop();
+                        this.state.lottie.destroy();
+                    });
                     return;
                 }
 
                 this.setState({showGrantModal: false}, () => {
+                    this.player.current.stop();
+                    this.state.lottie.destroy();
                     dispatch(LoanAction.grantLoanApplication(loan.getUuid(), application.getReference()));
                 });
 

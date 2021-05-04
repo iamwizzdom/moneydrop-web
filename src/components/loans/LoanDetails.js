@@ -18,11 +18,11 @@ class LoanDetails extends Component {
         showLoanApplyModal: false,
     }
 
-    player = null;
+    loanApplyRef = null;
 
     componentDidMount() {
         const {state} = this.props.location;
-        this.player = React.createRef();
+        this.loanApplyRef = React.createRef();
         if (state && !(state.loan instanceof Loan) && Utility.isObject(state.loan)) {
             state.loan = new Loan(state.loan.loanObject);
         }
@@ -52,8 +52,9 @@ class LoanDetails extends Component {
 
         if (this.state.showLoanApplyModal) {
 
+            const {loanApplyRef} = this;
             let wrapper = document.createElement('div');
-            ReactDOM.render(<LoanApplyLayout amount={this.state.loan.getAmount()} />, wrapper);
+            ReactDOM.render(<LoanApplyLayout amount={this.state.loan.getAmount()} ref={loanApplyRef} />, wrapper);
 
             swal({
                 content: wrapper,
@@ -67,16 +68,20 @@ class LoanDetails extends Component {
             }).then((data) => {
 
                 if (!data) {
-                    this.setState({showLoanApplyModal: false});
+                    this.setState({showLoanApplyModal: false}, () => {
+                        loanApplyRef.current.stop();
+                    });
                     return;
                 }
 
                 if (!Utility.isString(data) || !Utility.isObject(data = JSON.parse(data))) {
+                    loanApplyRef.current.stop();
                     swal("Please enter a valid data").then(() => this.setState({showLoanApplyModal: true}));
                     return;
                 }
 
                 this.setState({showLoanApplyModal: false}, () => {
+                    loanApplyRef.current.stop();
                     dispatch(LoanAction.loanApply(data, this.state.loan.getUuid()));
                 });
 

@@ -90,14 +90,14 @@ class ReviewUser extends Component {
                     <Card border="light" className={`p-3 border-radius-10`}>
                         <Card.Body>
                             <Row>
-                                <Col xl={2} lg={2} md={3} sm={4} xs={5}>
+                                <Col xl={2} lg={2} md={3} sm={3} xs={4} className={`p-0`}>
                                     <img
                                         src={(loanRecipient.getPicture() ? loanRecipient.getPictureUrl() : null) || loanRecipient.getDefaultPicture()}
                                         onError={(e) => {e.target.onerror = null; e.target.src = loanRecipient.getDefaultPicture()}}
-                                        style={{width: 100, height: 100, objectFit: 'cover'}} alt={`loan-user`}
+                                        style={{width: 95, height: 95, objectFit: 'cover'}} alt={`user`}
                                         className={`rounded-circle border-accent background-accent-light p-2 m-auto d-block`}/>
                                 </Col>
-                                <Col xl={10} lg={10} md={9} sm={8} xs={7}>
+                                <Col xl={10} lg={10} md={9} sm={9} xs={8}>
                                     <h5 className={`mt-1`}>{loanRecipient.getFirstname()} {loanRecipient.getLastname()}</h5>
                                     <p className={`small m-0 mb-1`}>{loanRecipient.getEmail()}</p>
                                     <Link to={{pathname: `/user/reviews`, state: {user: loanRecipient, from: location}}} className={`color-accent`}>View reviews <img src={arrow} className={`ml-1 mb-1`} alt={`icon`}/> </Link>

@@ -489,7 +489,7 @@ a.navbar-brand {
     font-size: 35px;
 }
 
-.spinner-center {
+.item-center {
     position: absolute;
     margin: auto;
     top:0;
@@ -616,7 +616,7 @@ a.navbar-brand {
     text-align: center !important;
 }
 
-.dropdown-item:active, .dropdown-item:focus {
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:focus {
     color: #ffffff;
     background-color: #e04805;
 }

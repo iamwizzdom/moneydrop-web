@@ -147,6 +147,10 @@ class Utility {
         query.perPage = AppConst.PAGINATION_PER_PAGE;
         return `${start > -1 ? url.substr(0, start) : url}?${Utility.serialize(query)}`;
     };
+
+    static convertGender(gender, defaultValue) {
+        return (gender === AppConst.MALE ? "Male" : (gender === AppConst.FEMALE ? "Female" : defaultValue));
+    }
 }
 
 export default Utility;

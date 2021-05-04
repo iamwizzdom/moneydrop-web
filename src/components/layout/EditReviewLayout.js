@@ -4,13 +4,15 @@ import {Player} from "@lottiefiles/react-lottie-player";
 import {Form} from "react-bootstrap";
 import swal from "@sweetalert/with-react";
 
-class LoanApplyLayout extends Component {
+class EditReviewLayout extends Component {
 
     state = {
+        lottie: null,
         review: ''
     }
 
     componentDidMount() {
+        this.player = React.createRef();
         this.setState({review: this.props.review}, () => {
             let tm = setTimeout(() => {
                 swal.setActionValue(this.state.review);
@@ -26,10 +28,18 @@ class LoanApplyLayout extends Component {
         });
     }
 
+    stop() {
+        this.player.current.stop();
+        this.state.lottie.destroy();
+    }
+
     render() {
 
         return <>
             <Player
+                lottieRef={instance => {
+                    this.setState({ lottie: instance });
+                }}
                 ref={this.player} // set the ref to your class instance
                 autoplay={true}
                 loop={true}
@@ -47,4 +57,4 @@ class LoanApplyLayout extends Component {
     }
 }
 
-export default LoanApplyLayout;
+export default EditReviewLayout;

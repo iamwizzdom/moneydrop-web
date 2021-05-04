@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {NotificationAction} from "../../actions";
 import {Card, Col, Row, Spinner} from "react-bootstrap";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
-import {AppConst} from "../../constants";
 import Utility from "../../helpers/Utility";
 import Notification from "../../models/Notification";
 import NoContent from "../layout/NoContent";

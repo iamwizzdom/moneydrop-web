@@ -21,6 +21,8 @@ class SingleReview extends Component {
         showDeleteReviewModal: false
     }
 
+    editorRef = null;
+
     componentDidMount() {
         const {state} = this.props.location;
         if (state && !(state.review instanceof Review) && Utility.isObject(state.review)) {
@@ -31,6 +33,7 @@ class SingleReview extends Component {
             ...state,
             mounted: true
         });
+        this.editorRef = React.createRef();
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
@@ -77,27 +80,32 @@ class SingleReview extends Component {
         if (this.state.showEditReviewModal) {
 
             let wrapper = document.createElement('div');
-            ReactDOM.render(<EditReviewLayout review={this.state.review.getReview()} />, wrapper);
+            const {editorRef} = this;
+            ReactDOM.render(<EditReviewLayout review={this.state.review.getReview()} ref={editorRef} />, wrapper);
 
             swal({
                 content: wrapper,
                 buttons: {
                     cancel: "Cancel",
                     confirm: "Update"
-                }
+                },
             }).then((data) => {
 
                 if (!data) {
-                    this.setState({showEditReviewModal: false});
+                    this.setState({showEditReviewModal: false}, () => {
+                        editorRef.current.stop();
+                    });
                     return;
                 }
 
                 if (Utility.isEmpty(data)) {
+                    editorRef.current.stop();
                     swal("Please enter a valid review").then(() => this.setState({showEditReviewModal: true}));
                     return;
                 }
 
                 this.setState({showEditReviewModal: false}, () => {
+                    editorRef.current.stop();
                     dispatch(ReviewAction.editReview({review: data}, this.state.review.getUuid()));
                 });
 
@@ -134,9 +142,7 @@ class SingleReview extends Component {
             return <Redirect to={{ pathname: from?.pathname || '/', header: {status: 'warning', message: 'Invalid review data'}}} />;
         }
 
-        let application = review.getLoanApplication();
-
-        let loan = application.getLoan(), user = loan.isLoanOffer() ? application.getApplicant() : loan.getUser();
+        let loan = review.getLoan(), user = loan.getUser();
         let reviewer = review.getReviewer();
 
         return <>
@@ -180,7 +186,7 @@ class SingleReview extends Component {
                     <Card border="light" className={`border-radius-10 position-relative overflow-hidden`}>
                         {(editReview.requesting || deleteReview.requesting) && <div className={`position-absolute w-100 h-100 bg-secondary`}
                               style={{opacity: .6, zIndex: 10}}>
-                            <Spinner animation="border" variant="warning" className={`spinner-center`}/>
+                            <Spinner animation="border" variant="warning" className={`item-center`}/>
                         </div>}
                         <Card.Body>
                             <Row className={`pt-3 pb-3`}>

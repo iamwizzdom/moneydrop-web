@@ -57,10 +57,12 @@ const HeaderLayout = (props) => {
                              className={`img-thumbnail rounded-circle border-accent background-accent-light my-p-0-8`}/>
                     </Nav.Item>
                     <NavDropdown title={`${user.getFirstname()} ${user.getLastname()}`} className={`pt-2 font-weight-bold`} id="basic-nav-dropdown" aria-dropeffect={`copy`}>
-                        <NavDropdown.Item href="#action/3.1">
-                            <img src={userIcon} width={18} className={`mr-3`} style={{marginTop: '-5px', padding: 1.5}} alt={`nav-icon`}/>
-                            User Account
-                        </NavDropdown.Item>
+                        <LinkContainer exact to="/user/profile">
+                            <NavDropdown.Item eventKey="/user/profile">
+                                <img src={userIcon} width={18} className={`mr-3`} style={{marginTop: '-5px', padding: 1.5}} alt={`nav-icon`}/>
+                                User Account
+                            </NavDropdown.Item>
+                        </LinkContainer>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={logout}>
                             <img src={logouts} width={18} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
