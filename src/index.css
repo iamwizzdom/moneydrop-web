@@ -636,3 +636,10 @@ a.navbar-brand {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.text-arrow {
+    background-image: url("./assets/images/arrow.svg");
+    background-size: 6px;
+    background-repeat: no-repeat;
+    background-position: right 6px;
+}
