@@ -79,7 +79,7 @@ class Profile extends Component {
                                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                                             style={{objectFit: 'cover'}} alt={`user`}
                                             className={`w-100 h-100 rounded-circle border-accent background-accent-light p-2`}/>
-                                        {user.isMe() && <div className={`rounded-circle background-accent position-absolute`}
+                                        {user.isMe() && <div className={`rounded-circle background-accent position-absolute cursor-pointer`}
                                               style={{width: 25, height: 25, top: 60, left: 70}}>
                                             <img src={camera} alt={`nav-icon`} className={`img-fluid item-center`}/>
                                         </div>}
