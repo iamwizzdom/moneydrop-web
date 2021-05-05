@@ -41,11 +41,11 @@ class BankAccount {
     }
 
     getAccountNumber() {
-        return this.accountObject.account_number;
+        return this.accountObject.acct_no;
     }
 
     setAccountNumber(accountNumber) {
-        this.accountObject.account_number = accountNumber;
+        this.accountObject.acct_no = accountNumber;
     }
 
     getRecipientCode() {

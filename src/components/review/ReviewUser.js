@@ -122,7 +122,7 @@ class ReviewUser extends Component {
                         <Card.Title className={`color-accent font-weight-bold`}>Review</Card.Title>
                         <Card.Body>
                             <Form.Group className={`mt-2 text-left`} controlId="review">
-                                <Form.Control as={`textarea`} rows={5} className={`mt-1`} placeholder={`Enter Note`}
+                                <Form.Control as={`textarea`} rows={5} className={`mt-1`} placeholder={`Enter Review`}
                                               name={`review`} value={this.state.review} onChange={(e) => this.setReview(e.target.value)}/>
                                 <p className={`text-danger`}>{errors.review}</p>
                             </Form.Group>

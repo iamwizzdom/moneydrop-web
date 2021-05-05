@@ -101,21 +101,14 @@ class VerifyPhone extends Component {
                             <Form.Group controlId="phone">
                                 <Form.Label className={`text-dark font-size-16 text-uppercase`}>Phone number</Form.Label>
                                 <PhoneInput
-                                    // inputProps={{
-                                    //     name: 'phone',
-                                    //     placeholder: "Enter phone"
-                                    // }}
-                                    flag
                                     className={`form-control min-height-60`}
                                     name={`phone`}
                                     placeholder={`Enter phone`}
-                                    enableSearch={true}
                                     country="NG"
                                     defaultCountry="NG"
                                     value={this.state.phone}
                                     onChange={phone => {
-                                        if (!phone) return;
-                                        this.setState({phone})
+                                        this.setState({phone : phone ? phone : ''})
                                     }}
                                 />
                                 <Form.Text className={`text-danger`}>{error.phone}</Form.Text>

@@ -12,13 +12,20 @@ import User from "../../models/User";
 import {connect} from "react-redux";
 import UserInfo from "./layouts/UserInfo";
 import Settings from "./layouts/Settings";
+import EditNameLayout from "./layouts/edit/EditNameLayout";
+import ReactDOM from "react-dom";
+import swal from "@sweetalert/with-react";
+import EditPhoneLayout from "./layouts/edit/EditPhoneLayout";
+import {ProfileAction} from "../../actions/profile";
 
 class Profile extends Component {
 
     state = {
         user: null,
         mounted: false,
-        currentTab: 'user-info'
+        currentTab: 'user-info',
+        editType: '',
+        showEditModal: false,
     }
 
     componentDidMount() {
@@ -40,13 +47,87 @@ class Profile extends Component {
         this.setState({...mState});
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        const {dispatch, profileInfoUpdate} = this.props;
+
+        if (profileInfoUpdate.data.message) {
+            if (profileInfoUpdate.data.hasOwnProperty("errors") && Object.keys(profileInfoUpdate.data.errors).length > 0) {
+                profileInfoUpdate.data.message = Utility.serializeObject(profileInfoUpdate.data.errors);
+            }
+            swal({
+                title: profileInfoUpdate.data.title,
+                text: profileInfoUpdate.data.message,
+                icon: (profileInfoUpdate.data.status ? `success` : `error`),
+                button: "Ok",
+            });
+            profileInfoUpdate.data.message = null;
+            if (profileInfoUpdate.data.response?.user) {
+                this.setState({user: new User(profileInfoUpdate.data.response.user)}, () => {
+                    this.state.user.update();
+                });
+            }
+        }
+
+        if (this.state.showEditModal) {
+
+            let wrapper = document.createElement('div');
+            ReactDOM.render(this.getEditLayout(this.state.editType, this.state.user), wrapper);
+
+            swal({
+                content: wrapper,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: {
+                        text: "Update",
+                        closeModal: false
+                    }
+                },
+            }).then((data) => {
+
+                if (!data) {
+                    this.setState({showEditModal: false, editType: ''});
+                    return;
+                }
+
+                let type = this.state.editType;
+                this.setState({showEditModal: false, editType: ''}, () => {
+                    dispatch(ProfileAction.updateInfo(JSON.parse(data), type));
+                });
+
+            });
+        }
+    }
+
     onNavSelected = (key) => {
         this.setState({currentTab: key});
     };
 
+    /**
+     *
+     * @param type
+     * @param user
+     * @returns {JSX.Element|null}
+     */
+    getEditLayout = (type, user: User) => {
+        switch (type) {
+            case "name":
+                return <EditNameLayout firstname={user.getFirstname()} middlename={user.getMiddlename()} lastname={user.getLastname()}/>
+            case 'phone':
+                return <EditPhoneLayout phone={user.getPhone()}/>
+            default:
+                break;
+        }
+        return null;
+    }
+
+    showEditModal = (type) => {
+        this.setState({showEditModal: true, editType: type});
+    }
+
     render() {
 
-        const {reviewUser, location} = this.props;
+        const {location} = this.props;
 
         let {mounted, user, from} = this.state;
 
@@ -133,7 +214,7 @@ class Profile extends Component {
                         <Card.Body>
                             <Tab.Content>
                                 <Tab.Pane eventKey="user-info" className={`pl-3`}>
-                                    <UserInfo user={user} isMe={isMe}/>
+                                    <UserInfo user={user} isMe={isMe} showEditModal={this.showEditModal}/>
                                 </Tab.Pane>
                                 {isMe && <Tab.Pane eventKey="settings" className={`pl-3`}>
                                     <Settings/>
@@ -150,7 +231,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        reviewUser: state.reviewUser
+        profileInfoUpdate: state.profileInfoUpdate
     }
 }
 

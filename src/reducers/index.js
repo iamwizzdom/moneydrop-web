@@ -21,6 +21,7 @@ import {
 } from './loan';
 import {FetchNotificationsReducer} from "./notification";
 import {ReviewUserReducer, FetchReviewsReducer, EditReviewReducer, DeleteReviewReducer} from "./review";
+import {ProfileInfoUpdateReducer, ProfilePictureUpdateReducer, ProfilePictureRemoveReducer} from "./profile";
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
@@ -54,6 +55,9 @@ const rootReducer = combineReducers({
     editReview: EditReviewReducer,
     deleteReview: DeleteReviewReducer,
     fetchReviews: FetchReviewsReducer,
+    profileInfoUpdate: ProfileInfoUpdateReducer,
+    profilePictureUpdate: ProfilePictureUpdateReducer,
+    profileRemoveUpdate: ProfilePictureRemoveReducer,
 });
 
 export default rootReducer;
