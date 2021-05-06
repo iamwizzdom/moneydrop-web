@@ -31,7 +31,7 @@ class UserInfo extends Component {
                 {isMe && <InfoLayout title={`Date of Birth`} info={user.getDob()} showEditModal={showEditModal} showCursor={isMe} type={`dob`} underline/>}
                 <InfoLayout title={`Country`} info={user.getCountry()?.getName() || "Unknown"} showEditModal={showEditModal} showCursor={isMe} type={`country`} underline/>
                 <InfoLayout title={`State`} info={user.getState()?.getName() || "Unknown"} showEditModal={showEditModal} showCursor={isMe} type={`state`} underline={isMe}/>
-                {isMe && <InfoLayout title={`Address`} info={user.getAddress()} showEditModal={showEditModal} showCursor={isMe}/>}
+                {isMe && <InfoLayout title={`Address`} info={user.getAddress()} showEditModal={showEditModal} showCursor={isMe} type={`address`}/>}
             </Row>
         </>;
     }

@@ -9,3 +9,4 @@ export * from './bank';
 export * from './notification';
 export * from './review';
 export * from './profile';
+export * from './import';

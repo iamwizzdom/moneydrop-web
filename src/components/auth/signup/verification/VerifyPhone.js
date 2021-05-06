@@ -49,7 +49,7 @@ class VerifyPhone extends Component {
             this.setState({error: {phone: ''}});
             const {dispatch} = this.props;
             let phone = validator.getValue('phone');
-            dispatch(AuthAction.verifyRequest(phone, "phone"));
+            dispatch(AuthAction.verifyRequest({phone}, "phone"));
         }
     };
 
@@ -130,7 +130,7 @@ class VerifyPhone extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
+        auth: state.verifyRequest
     }
 }
 

@@ -6,12 +6,13 @@ import PhoneInput from "react-phone-number-input";
 class EditPhoneLayout extends Component {
 
     state = {
-        phone: ''
+        phone: '',
+        old_phone: '',
     }
 
     componentDidMount() {
         const {phone} = this.props;
-        this.setState({phone}, () => {
+        this.setState({phone, old_phone: phone}, () => {
             let tm = setTimeout(() => {
                 swal.setActionValue(JSON.stringify(this.state));
                 clearTimeout(tm);
@@ -20,6 +21,7 @@ class EditPhoneLayout extends Component {
     }
 
     onChange(e) {
+        e.target.value = e.target.value.indexOf('+') > -1 ? e.target.value : ('+' + e.target.value);
         const {name, value} = e.target;
         this.setState({[name]: value}, () => {
             swal.setActionValue(JSON.stringify(this.state));

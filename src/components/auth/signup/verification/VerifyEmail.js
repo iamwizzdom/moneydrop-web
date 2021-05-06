@@ -40,7 +40,7 @@ class VerifyEmail extends Component {
             this.setState({error: {email: ''}});
             const {dispatch} = this.props;
             let email = validator.getValue('email');
-            dispatch(AuthAction.verifyRequest(email, "email"));
+            dispatch(AuthAction.verifyRequest({email}, "email"));
         }
 
     };
@@ -117,7 +117,7 @@ class VerifyEmail extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
+        auth: state.verifyRequest
     }
 }
 

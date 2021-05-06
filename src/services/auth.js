@@ -32,26 +32,26 @@ const login = (credentials) => {
     return fetch(UrlConst.LOGIN_URL, requestOptions).then(handleResponse);
 };
 
-const verifyRequest = ({data, type}) => {
+const verifyRequest = (data, type) => {
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
-        body: JSON.stringify({[type]: data})
+        body: JSON.stringify(data)
     };
     return fetch(type === 'email' ? UrlConst.VERIFY_EMAIL_REQUEST_URL : UrlConst.VERIFY_PHONE_REQUEST_URL, requestOptions).then(handleResponse);
 };
 
-const verify = ({data, type}) => {
+const verify = (data, type) => {
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
-        body: JSON.stringify({...data})
+        body: JSON.stringify(data)
     };
     return fetch(type === 'email' ? UrlConst.VERIFY_EMAIL_URL : UrlConst.VERIFY_PHONE_URL, requestOptions).then(handleResponse);
 };

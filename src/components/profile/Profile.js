@@ -17,6 +17,15 @@ import ReactDOM from "react-dom";
 import swal from "@sweetalert/with-react";
 import EditPhoneLayout from "./layouts/edit/EditPhoneLayout";
 import {ProfileAction} from "../../actions/profile";
+import EditEmailLayout from "./layouts/edit/EditEmailLayout";
+import EditGenderLayout from "./layouts/edit/EditGenderLayout";
+import EditDobLayout from "./layouts/edit/EditDobLayout";
+import {ImportAction} from "../../actions/import";
+import EditCountryLayout from "./layouts/edit/EditCountryLayout";
+import EditStateLayout from "./layouts/edit/EditStateLayout";
+import EditAddressLayout from "./layouts/edit/EditAddressLayout";
+import {AuthAction} from "../../actions";
+import VerifyData from "./layouts/edit/VerifyData";
 
 class Profile extends Component {
 
@@ -29,7 +38,8 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        const {state} = this.props.location;
+        const {dispatch, location} = this.props;
+        const {state} = location;
         const mState = {
             ...this.state,
             ...state,
@@ -44,12 +54,25 @@ class Profile extends Component {
             mState.user = new User(localStorage.getItem('user'));
         }
 
-        this.setState({...mState});
+        this.setState({...mState}, () => {
+            let countries = localStorage.getItem('countries');
+            let states = localStorage.getItem('states');
+            if (Utility.isEmpty(countries)) dispatch(ImportAction.importCountries());
+            if (Utility.isEmpty(states)) dispatch(ImportAction.importStates());
+        });
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
-        const {dispatch, profileInfoUpdate} = this.props;
+        const {dispatch, verifyRequest, verifyAuth, importCountries, importStates, profileInfoUpdate} = this.props;
+
+        if (importCountries.data.status) {
+            localStorage.setItem('countries', JSON.stringify(importCountries.data.response?.countries));
+        }
+
+        if (importStates.data.status) {
+            localStorage.setItem('states', JSON.stringify(importStates.data.response?.states));
+        }
 
         if (profileInfoUpdate.data.message) {
             if (profileInfoUpdate.data.hasOwnProperty("errors") && Object.keys(profileInfoUpdate.data.errors).length > 0) {
@@ -67,6 +90,45 @@ class Profile extends Component {
                     this.state.user.update();
                 });
             }
+        }
+
+        if (verifyRequest.data.message) {
+            if (verifyRequest.data.hasOwnProperty("errors") && Object.keys(verifyRequest.data.errors).length > 0) {
+                verifyRequest.data.message = Utility.serializeObject(verifyRequest.data.errors);
+            }
+            swal({
+                title: verifyRequest.data.title,
+                text: verifyRequest.data.message,
+                icon: (verifyRequest.data.status ? `success` : `error`),
+                closeOnClickOutside: !verifyRequest.data.status,
+                button: "Ok",
+            }).then(() => {
+                if (verifyRequest.data.status) this.showOTPModal()
+            });
+            verifyRequest.data.message = null;
+        }
+
+        if (verifyAuth.data.message) {
+            if (verifyAuth.data.hasOwnProperty("errors") && Object.keys(verifyAuth.data.errors).length > 0) {
+                verifyAuth.data.message = Utility.serializeObject(verifyAuth.data.errors);
+            }
+            swal({
+                title: verifyAuth.data.title,
+                text: verifyAuth.data.message,
+                icon: (verifyAuth.data.status ? `success` : `error`),
+                closeOnClickOutside: !verifyAuth.data.status,
+                button: "Ok",
+            }).then(() => {
+                if (!verifyAuth.data.status && verifyAuth.data.code === 422) this.showOTPModal();
+                else if (verifyAuth.data.status) {
+                    const {user, editType: type } = this.state;
+                    if (type === 'email') user.setEmail(verifyRequest.data[type]);
+                    else user.setPhone(verifyRequest.data[type]);
+                    user.update();
+                    this.setState({user});
+                }
+            });
+            verifyAuth.data.message = null;
         }
 
         if (this.state.showEditModal) {
@@ -91,12 +153,37 @@ class Profile extends Component {
                 }
 
                 let type = this.state.editType;
-                this.setState({showEditModal: false, editType: ''}, () => {
-                    dispatch(ProfileAction.updateInfo(JSON.parse(data), type));
+                this.setState({showEditModal: false}, () => {
+                    if (type === 'phone' || type === 'email') dispatch(AuthAction.verifyRequest(JSON.parse(data), type));
+                    else dispatch(ProfileAction.updateInfo(JSON.parse(data), type));
                 });
 
             });
         }
+    }
+
+    showOTPModal = () => {
+
+        const {dispatch, verifyRequest} = this.props;
+        const {user, editType: type } = this.state;
+
+        let wrapper = document.createElement('div');
+        ReactDOM.render(<VerifyData data={verifyRequest.data[type]} oldData={type === 'email' ? user.getEmail() : user.getPhone()} type={type} />, wrapper);
+
+        swal({
+            content: wrapper,
+            buttons: {
+                confirm: {
+                    text: "Verify",
+                    closeModal: false
+                }
+            },
+            closeOnClickOutside: false
+        }).then((data) => {
+
+            dispatch(AuthAction.verify(JSON.parse(data), type));
+
+        });
     }
 
     onNavSelected = (key) => {
@@ -115,6 +202,18 @@ class Profile extends Component {
                 return <EditNameLayout firstname={user.getFirstname()} middlename={user.getMiddlename()} lastname={user.getLastname()}/>
             case 'phone':
                 return <EditPhoneLayout phone={user.getPhone()}/>
+            case 'email':
+                return <EditEmailLayout email={user.getEmail()}/>
+            case 'gender':
+                return <EditGenderLayout gender={user.getGender()}/>
+            case 'dob':
+                return <EditDobLayout dob={user.getDob()}/>
+            case 'country':
+                return <EditCountryLayout country={user.getCountry().getId()}/>
+            case 'state':
+                return <EditStateLayout country={user.getCountry().getId()} state={user.getState().getId()}/>
+            case 'address':
+                return <EditAddressLayout address={user.getAddress()}/>
             default:
                 break;
         }
@@ -231,7 +330,11 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        profileInfoUpdate: state.profileInfoUpdate
+        verifyAuth: state.verifyAuth,
+        verifyRequest: state.verifyRequest,
+        importStates: state.importStates,
+        importCountries: state.importCountries,
+        profileInfoUpdate: state.profileInfoUpdate,
     }
 }
 

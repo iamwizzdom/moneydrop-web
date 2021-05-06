@@ -35,7 +35,7 @@ class Signup extends Component {
     submit = (e) => {
         e.preventDefault();
 
-        e.target.phone.value = this.state.phone.indexOf('+') > -1 ? this.state.phone : '+' + this.state.phone;
+        e.target.phone.value = this.state.phone.indexOf('+') > -1 ? this.state.phone : ('+' + this.state.phone);
         e.target.dob.value = this.state.dob;
         let validator = new Validator(e);
         validator.validate('firstname').isBlank("Please enter your first name");
@@ -222,6 +222,7 @@ class Signup extends Component {
                                             )}
                                             name={`dob`}
                                             selected={this.state.date}
+                                            autoComplete={`off`}
                                             dateFormat="yyyy-MM-dd"
                                             className={`form-control`}
                                             onChange={date => {
@@ -269,7 +270,7 @@ class Signup extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
+        auth: state.signup
     }
 }
 

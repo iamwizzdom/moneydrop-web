@@ -72,7 +72,7 @@ function verifyRequest(data, type) {
         dispatch(request());
 
         try {
-            const res = await AuthService.verifyRequest({data, type});
+            const res = await AuthService.verifyRequest(data, type);
 
             if (res.status) {
                 dispatch(success(res));
@@ -91,15 +91,15 @@ function verify(data, type) {
     // return the promise using fetch which adds to localstorage on resolve
 
     function request() {
-        return {type: AuthConst.VERIFY_REQUEST}
+        return {type: AuthConst.VERIFY_AUTH_REQUEST}
     }
 
     function success(payload) {
-        return {type: AuthConst.VERIFY_SUCCESS, payload}
+        return {type: AuthConst.VERIFY_AUTH_SUCCESS, payload}
     }
 
     function failure(payload) {
-        return {type: AuthConst.VERIFY_FAILURE, payload}
+        return {type: AuthConst.VERIFY_AUTH_FAILURE, payload}
     }
 
     return async function dispatch(dispatch) {
@@ -107,7 +107,7 @@ function verify(data, type) {
         dispatch(request());
 
         try {
-            const res = await AuthService.verify({data, type});
+            const res = await AuthService.verify(data, type);
 
             if (res.status) {
                 dispatch(success(res));

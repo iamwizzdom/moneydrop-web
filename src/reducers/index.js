@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {AuthReducer, GenderAuthReducer} from './auth';
+import {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer} from './auth';
 import {DashboardReducer} from './dashboard';
 import {WalletReducer} from './wallet';
 import {TransactionReducer} from './transaction';
@@ -22,10 +22,16 @@ import {
 import {FetchNotificationsReducer} from "./notification";
 import {ReviewUserReducer, FetchReviewsReducer, EditReviewReducer, DeleteReviewReducer} from "./review";
 import {ProfileInfoUpdateReducer, ProfilePictureUpdateReducer, ProfilePictureRemoveReducer} from "./profile";
+import {ImportCountriesReducer, ImportStatesReducer} from "./import";
 
 const rootReducer = combineReducers({
-    auth: AuthReducer,
+    loginAuth: LoginReducer,
+    verifyRequest: VerifyReducer,
+    verifyAuth: VerifyAuthReducer,
+    signup: SignupReducer,
     genderAuth: GenderAuthReducer,
+    forgotPassword: ForgotPasswordReducer,
+    resetPassword: ResetPasswordReducer,
     dashboard: DashboardReducer,
     loanRequests: LoanRequestsReducer,
     loanOffers: LoanOffersReducer,
@@ -58,6 +64,8 @@ const rootReducer = combineReducers({
     profileInfoUpdate: ProfileInfoUpdateReducer,
     profilePictureUpdate: ProfilePictureUpdateReducer,
     profileRemoveUpdate: ProfilePictureRemoveReducer,
+    importCountries: ImportCountriesReducer,
+    importStates: ImportStatesReducer,
 });
 
 export default rootReducer;

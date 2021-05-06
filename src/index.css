@@ -372,7 +372,16 @@ textarea {
     box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
 }
 
-input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput) {
+input[inputmode] {
+    width: calc((100% - 40px) / 5) !important;
+    max-width: 55px;
+    height: 55px !important;
+    outline: none !important;
+    text-align: center;
+    padding: 0 !important;
+}
+
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not(input[inputmode]) {
     width: 100% !important;
     height: 55px !important;
     background-color: #ffffff !important;

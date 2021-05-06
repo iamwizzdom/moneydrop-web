@@ -1,6 +1,54 @@
 import {AuthConst} from '../constants';
 
-const AuthReducer = (state = {requesting: false, data: {}}, action) => {
+const LoginReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case AuthConst.LOGIN_REQUEST:
+            return {...state, requesting: true};
+        case AuthConst.LOGIN_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case AuthConst.LOGIN_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+const VerifyReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case AuthConst.VERIFY_REQUEST:
+            return {...state, requesting: true};
+        case AuthConst.VERIFY_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case AuthConst.VERIFY_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+const VerifyAuthReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case AuthConst.VERIFY_AUTH_REQUEST:
+            return {...state, requesting: true};
+        case AuthConst.VERIFY_AUTH_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case AuthConst.VERIFY_AUTH_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+const SignupReducer = (state = {requesting: false, data: {}}, action) => {
 
     switch (action.type) {
 
@@ -11,19 +59,14 @@ const AuthReducer = (state = {requesting: false, data: {}}, action) => {
         case AuthConst.SIGNUP_FAILURE:
             return {...state, requesting: false, data: action.payload};
 
-        case AuthConst.VERIFY_REQUEST:
-            return {...state, requesting: true};
-        case AuthConst.VERIFY_SUCCESS:
-            return {...state, requesting: false, data: action.payload};
-        case AuthConst.VERIFY_FAILURE:
-            return {...state, requesting: false, data: action.payload};
+        default:
+            return state;
+    }
+};
 
-        case AuthConst.LOGIN_REQUEST:
-            return {...state, requesting: true};
-        case AuthConst.LOGIN_SUCCESS:
-            return {...state, requesting: false, data: action.payload};
-        case AuthConst.LOGIN_FAILURE:
-            return {...state, requesting: false, data: action.payload};
+const ForgotPasswordReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
 
         case AuthConst.FORGOT_PASSWORD_REQUEST:
             return {...state, requesting: true};
@@ -31,6 +74,15 @@ const AuthReducer = (state = {requesting: false, data: {}}, action) => {
             return {...state, requesting: false, data: action.payload};
         case AuthConst.FORGOT_PASSWORD_FAILURE:
             return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
+const ResetPasswordReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
 
         case AuthConst.RESET_PASSWORD_REQUEST:
             return {...state, requesting: true};
@@ -62,4 +114,4 @@ const GenderAuthReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
-export {AuthReducer, GenderAuthReducer};
+export {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer};

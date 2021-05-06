@@ -106,7 +106,7 @@ class VerifyEmail extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
+        auth: state.verifyAuth
     }
 }
 
