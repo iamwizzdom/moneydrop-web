@@ -95,7 +95,7 @@ class LoanApplicantLayout extends Component {
         return <Col md={6} className={`pt-2 pb-2`}>
             <Row>
                 <Col lg={2} md={2} sm={2} xl={2} xs={2}>
-                    <Link to={{pathname: `/user/profile`, state: {user, from: location}}} className={`text-decoration-none`}>
+                    <Link to={{pathname: `/user/${user.getUuid()}/profile`, state: {user, from: location}}} className={`text-decoration-none`}>
                         <img
                             src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
@@ -106,7 +106,7 @@ class LoanApplicantLayout extends Component {
                 <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-left`} style={{marginTop: '-5px'}}>
                     <Row>
                         <Col md={12}>
-                            <Link to={{pathname: `/user/profile`, state: {user, from: location}}}>
+                            <Link to={{pathname: `/user/${user.getUuid()}/profile`, state: {user, from: location}}}>
                                 <small className={`font-size-13 text-dark`}>{user.getFirstname()} {user.getLastname()}</small>
                             </Link>
                         </Col>

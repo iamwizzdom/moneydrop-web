@@ -51,6 +51,10 @@ code {
     monospace;
 }
 
+.container-min-height {
+    min-height: calc(100vh - 180px);
+}
+
 .cursor-pointer {
     cursor: pointer !important;
 }
@@ -87,7 +91,7 @@ code {
     color: #e04805 !important;
 }
 
-.color-accent-hover:hover {
+a.color-accent-hover:hover, .color-accent-hover:hover {
     color: #e04805 !important;
 }
 
@@ -226,6 +230,10 @@ code {
 
 .min-height-60 {
     min-height: 60px !important;
+}
+
+.min-height-55 {
+    min-height: 55px !important;
 }
 
 .min-height-48 {
@@ -385,8 +393,11 @@ input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not
     width: 100% !important;
     height: 55px !important;
     background-color: #ffffff !important;
-    border-color: #e2e0df !important;
     box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
+}
+
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not(input[inputmode]):focus {
+    border-color: #e2e0df !important;
 }
 
 input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):disabled {
@@ -416,8 +427,11 @@ select:focus, select:active {
 }
 
 select {
-    border-color: #e2e0df !important;
     box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
+}
+
+select:focus {
+    border-color: #e2e0df !important;
 }
 
 .custom-select {

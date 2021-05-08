@@ -87,7 +87,7 @@ const MobileNavLayout = (props) => {
                 </LinkContainer>
             </Nav.Item>
             <Nav.Item className={`my-nav-item`}>
-                <LinkContainer exact to="/user/profile">
+                <LinkContainer exact to={{pathname: `/user/profile`, state: {user: null}}}>
                     <Nav.Link eventKey={`/user/profile`} onSelect={hideMenu}>
                         <img src={user} width={20} className={`mr-3`} style={{marginTop: '-5px', padding: 1.5}}
                              alt={`nav-icon`}/>

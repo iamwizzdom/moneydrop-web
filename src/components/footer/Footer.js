@@ -1,36 +1,14 @@
 import React from 'react';
-import './footer.css';
-import logo from '../../assets/images/logo.svg';
 import {AppConst} from "../../constants";
+import {Link} from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="footer align-self-baseline">
+        <footer className="mb-4 text-center font-size-14">
             <div className="container">
-                <div className="row">
-                    <div className="col-md-3">
-                        <img className="img-fluid" src={logo} width={100} alt={AppConst.APP_NAME}/>
-                    </div>
-                    <div className="col-md-2">
-                        <h5 className="title">About</h5>
-                        <ul>
-                            <li><a href="/about">About {AppConst.APP_NAME}</a></li>
-                        </ul>
-                    </div>
-                    <div className="col-md-3">
-                        <h5 className="title">Contact</h5>
-                        <ul>
-                            <li><a href="/contact">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div className="col-md-3">
-                        <h5 className="title">Legal</h5>
-                        <ul>
-                            <li><a href="/terms">Terms and conditions</a></li>
-                            <li><a href="/privacy">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
+                {AppConst.APP_NAME} © {AppConst.APP_YEAR}.
+                {` `}<Link to={'#'} className={`text-dark color-accent-hover`}>Privacy Policy</Link> |
+                {` `}<Link to={'#'} className={`text-dark color-accent-hover`}>Terms and Conditions</Link>
             </div>
         </footer>
     );

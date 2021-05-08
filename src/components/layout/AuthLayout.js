@@ -8,7 +8,7 @@ class AppLayout extends Component {
         return <Container>
             <Row className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
                 <Col lg={this.props.path === '/signup' ? 10 : 6}>
-                    { this.props.children }
+                    { this.props.component }
                 </Col>
             </Row>
         </Container>;

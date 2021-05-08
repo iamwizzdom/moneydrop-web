@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Col, Nav, Row, Tab} from "react-bootstrap";
+import {Card, Col, Modal, Nav, Row, Spinner, Tab} from "react-bootstrap";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
 import {Link, Redirect} from "react-router-dom";
 import arrow from "../../assets/images/arrow-accent.svg";
@@ -13,7 +13,6 @@ import {connect} from "react-redux";
 import UserInfo from "./layouts/UserInfo";
 import Settings from "./layouts/Settings";
 import EditNameLayout from "./layouts/edit/EditNameLayout";
-import ReactDOM from "react-dom";
 import swal from "@sweetalert/with-react";
 import EditPhoneLayout from "./layouts/edit/EditPhoneLayout";
 import {ProfileAction} from "../../actions/profile";
@@ -26,6 +25,11 @@ import EditStateLayout from "./layouts/edit/EditStateLayout";
 import EditAddressLayout from "./layouts/edit/EditAddressLayout";
 import {AuthAction} from "../../actions";
 import VerifyData from "./layouts/edit/VerifyData";
+import ChangePasswordLayout from "./layouts/edit/ChangePasswordLayout";
+import capture from "../../assets/images/capture.svg";
+import gallery from "../../assets/images/gallery.svg";
+import deletePhoto from "../../assets/images/delete-photo.svg";
+import remove from "../../assets/images/remove.svg";
 
 class Profile extends Component {
 
@@ -34,7 +38,9 @@ class Profile extends Component {
         mounted: false,
         currentTab: 'user-info',
         editType: '',
+        editLayout: '',
         showEditModal: false,
+        showRemovePicture: false,
     }
 
     componentDidMount() {
@@ -64,7 +70,8 @@ class Profile extends Component {
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
-        const {dispatch, verifyRequest, verifyAuth, importCountries, importStates, profileInfoUpdate} = this.props;
+        const {dispatch, verifyRequest, verifyAuth, importCountries, importStates, profilePictureUpdate, profileRemoveUpdate,
+            profileRateUpdate, profileInfoUpdate, forceUpdateHandler, setHeaderMessage} = this.props;
 
         if (importCountries.data.status) {
             localStorage.setItem('countries', JSON.stringify(importCountries.data.response?.countries));
@@ -74,161 +81,299 @@ class Profile extends Component {
             localStorage.setItem('states', JSON.stringify(importStates.data.response?.states));
         }
 
-        if (profileInfoUpdate.data.message) {
-            if (profileInfoUpdate.data.hasOwnProperty("errors") && Object.keys(profileInfoUpdate.data.errors).length > 0) {
-                profileInfoUpdate.data.message = Utility.serializeObject(profileInfoUpdate.data.errors);
-            }
-            swal({
-                title: profileInfoUpdate.data.title,
-                text: profileInfoUpdate.data.message,
-                icon: (profileInfoUpdate.data.status ? `success` : `error`),
-                button: "Ok",
-            });
-            profileInfoUpdate.data.message = null;
-            if (profileInfoUpdate.data.response?.user) {
-                this.setState({user: new User(profileInfoUpdate.data.response.user)}, () => {
-                    this.state.user.update();
+        if (profileRateUpdate.data.message) {
+            setHeaderMessage(profileRateUpdate.data.message, profileRateUpdate.data.status ? 'success' : 'error');
+            profileRateUpdate.data.message = null;
+            if (profileRateUpdate.data.status) {
+                this.state.user.setRating(profileRateUpdate.data.response.rating);
+                this.props.history.replace({
+                    ...this.props.location,
+                    state: {
+                        ...this.props.location.state,
+                        user: this.state.user
+                    }
                 });
             }
         }
 
-        if (verifyRequest.data.message) {
-            if (verifyRequest.data.hasOwnProperty("errors") && Object.keys(verifyRequest.data.errors).length > 0) {
-                verifyRequest.data.message = Utility.serializeObject(verifyRequest.data.errors);
-            }
-            swal({
-                title: verifyRequest.data.title,
-                text: verifyRequest.data.message,
-                icon: (verifyRequest.data.status ? `success` : `error`),
-                closeOnClickOutside: !verifyRequest.data.status,
-                button: "Ok",
-            }).then(() => {
-                if (verifyRequest.data.status) this.showOTPModal()
+        if (profileInfoUpdate.data.status) {
+
+            let status = profileInfoUpdate.data.status;
+            profileInfoUpdate.data.status = null;
+
+            this.hideEditModal(() => {
+
+                swal({
+                    title: profileInfoUpdate.data.title,
+                    text: profileInfoUpdate.data.message,
+                    icon: (status ? `success` : `error`),
+                    button: "Ok",
+                });
+
+                if (profileInfoUpdate.data.response?.user) {
+                    this.setState({user: new User(profileInfoUpdate.data.response.user)}, () => {
+                        this.state.user.update();
+                        forceUpdateHandler();
+                    });
+                }
+
             });
-            verifyRequest.data.message = null;
         }
 
-        if (verifyAuth.data.message) {
-            if (verifyAuth.data.hasOwnProperty("errors") && Object.keys(verifyAuth.data.errors).length > 0) {
-                verifyAuth.data.message = Utility.serializeObject(verifyAuth.data.errors);
-            }
-            swal({
-                title: verifyAuth.data.title,
-                text: verifyAuth.data.message,
-                icon: (verifyAuth.data.status ? `success` : `error`),
-                closeOnClickOutside: !verifyAuth.data.status,
-                button: "Ok",
-            }).then(() => {
-                if (!verifyAuth.data.status && verifyAuth.data.code === 422) this.showOTPModal();
-                else if (verifyAuth.data.status) {
+        if (profileRemoveUpdate.data.status) {
+
+            let status = profileRemoveUpdate.data.status;
+            profileRemoveUpdate.data.status = null;
+
+            this.hideEditModal(() => {
+
+                swal({
+                    title: profileRemoveUpdate.data.title,
+                    text: profileRemoveUpdate.data.message,
+                    icon: (status ? `success` : `error`),
+                    button: "Ok",
+                });
+
+                if (profileRemoveUpdate.data.response?.user) {
+                    this.setState({user: new User(profileRemoveUpdate.data.response.user)}, () => {
+                        this.state.user.update();
+                        forceUpdateHandler();
+                    });
+                }
+
+            });
+        }
+
+        if (profilePictureUpdate.data.status) {
+
+            let status = profilePictureUpdate.data.status;
+            profilePictureUpdate.data.status = null;
+
+            this.hideEditModal(() => {
+
+                swal({
+                    title: profilePictureUpdate.data.title,
+                    text: profilePictureUpdate.data.message,
+                    icon: (status ? `success` : `error`),
+                    button: "Ok",
+                });
+
+                if (profilePictureUpdate.data.response?.user) {
+                    this.setState({user: new User(profilePictureUpdate.data.response.user)}, () => {
+                        this.state.user.update();
+                        forceUpdateHandler();
+                    });
+                }
+
+            });
+        }
+
+        if (verifyRequest.data.status) {
+
+            let status = verifyRequest.data.status;
+            verifyRequest.data.status = null;
+
+            this.hideEditModal(() => {
+
+                swal({
+                    title: verifyRequest.data.title,
+                    text: verifyRequest.data.message,
+                    icon: (status ? `success` : `error`),
+                    button: "Ok",
+                }).then(() => {
+                    if (status && verifyRequest.data.code === 200) this.showEditModal(this.state.editType, 'otp')
+                });
+
+            });
+        }
+
+        if (verifyAuth.data.status) {
+
+            let status = verifyAuth.data.status;
+            verifyAuth.data.status = null;
+
+            this.hideEditModal(() => {
+
+                swal({
+                    title: verifyAuth.data.title,
+                    text: verifyAuth.data.message,
+                    icon: (status ? `success` : `error`),
+                    button: "Ok",
+                });
+
+                if (status) {
                     const {user, editType: type } = this.state;
                     if (type === 'email') user.setEmail(verifyRequest.data[type]);
                     else user.setPhone(verifyRequest.data[type]);
                     user.update();
                     this.setState({user});
                 }
+
             });
-            verifyAuth.data.message = null;
         }
 
-        if (this.state.showEditModal) {
+        if (this.state.showRemovePicture) {
 
-            let wrapper = document.createElement('div');
-            ReactDOM.render(this.getEditLayout(this.state.editType, this.state.user), wrapper);
-
-            swal({
-                content: wrapper,
-                buttons: {
-                    cancel: "Cancel",
-                    confirm: {
-                        text: "Update",
-                        closeModal: false
-                    }
-                },
-            }).then((data) => {
-
-                if (!data) {
-                    this.setState({showEditModal: false, editType: ''});
-                    return;
-                }
-
-                let type = this.state.editType;
-                this.setState({showEditModal: false}, () => {
-                    if (type === 'phone' || type === 'email') dispatch(AuthAction.verifyRequest(JSON.parse(data), type));
-                    else dispatch(ProfileAction.updateInfo(JSON.parse(data), type));
+            if (this.state.showEditModal) this.hideEditModal(() => {
+                swal(<span className={`color-accent`}>Are you sure you want to remove your photo?</span>, {
+                    icon: remove,
+                    buttons: {
+                        cancel: "No, cancel",
+                        confirm: "Yes, proceed"
+                    },
+                    dangerMode: true,
+                }).then((willDo) => {
+                    this.setState({showRemovePicture: false}, () => {
+                        if (willDo) dispatch(ProfileAction.removePhoto());
+                    });
                 });
-
-            });
+            })
         }
-    }
-
-    showOTPModal = () => {
-
-        const {dispatch, verifyRequest} = this.props;
-        const {user, editType: type } = this.state;
-
-        let wrapper = document.createElement('div');
-        ReactDOM.render(<VerifyData data={verifyRequest.data[type]} oldData={type === 'email' ? user.getEmail() : user.getPhone()} type={type} />, wrapper);
-
-        swal({
-            content: wrapper,
-            buttons: {
-                confirm: {
-                    text: "Verify",
-                    closeModal: false
-                }
-            },
-            closeOnClickOutside: false
-        }).then((data) => {
-
-            dispatch(AuthAction.verify(JSON.parse(data), type));
-
-        });
     }
 
     onNavSelected = (key) => {
         this.setState({currentTab: key});
     };
 
-    /**
-     *
-     * @param type
-     * @param user
-     * @returns {JSX.Element|null}
-     */
-    getEditLayout = (type, user: User) => {
+    submit = (state, type) => {
+        const {dispatch} = this.props;
+        if (type === 'phone' || type === 'email') dispatch(AuthAction.verifyRequest(state, type));
+        else dispatch(ProfileAction.updateInfo(state, type));
+    }
+
+    verify = (state, type) => {
+        const {dispatch} = this.props;
+        dispatch(AuthAction.verify(state, type));
+    }
+
+    getEditTitle = (type) => {
         switch (type) {
             case "name":
-                return <EditNameLayout firstname={user.getFirstname()} middlename={user.getMiddlename()} lastname={user.getLastname()}/>
+                return "Update Name";
             case 'phone':
-                return <EditPhoneLayout phone={user.getPhone()}/>
+                return "Update Phone";
             case 'email':
-                return <EditEmailLayout email={user.getEmail()}/>
+                return "Update Email";
             case 'gender':
-                return <EditGenderLayout gender={user.getGender()}/>
+                return "Update Gender";
             case 'dob':
-                return <EditDobLayout dob={user.getDob()}/>
+                return "Update Date of Birth";
             case 'country':
-                return <EditCountryLayout country={user.getCountry().getId()}/>
+                return "Update Country";
             case 'state':
-                return <EditStateLayout country={user.getCountry().getId()} state={user.getState().getId()}/>
+                return "Update State";
             case 'address':
-                return <EditAddressLayout address={user.getAddress()}/>
+                return "Update Address";
+            case 'password':
+                return "Change Password";
+            case 'otp':
+                return "Verification";
             default:
                 break;
         }
         return null;
     }
 
-    showEditModal = (type) => {
-        this.setState({showEditModal: true, editType: type});
+    /**
+     *
+     * @param type
+     * @param layout
+     * @param user
+     * @returns {JSX.Element|null}
+     */
+    getEditLayout = (type, layout, user: User) => {
+        const {profileInfoUpdate, verifyRequest, verifyAuth} = this.props;
+        switch (layout) {
+            case "name":
+                return <EditNameLayout firstname={user.getFirstname()} middlename={user.getMiddlename()} lastname={user.getLastname()}
+                                       profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'phone':
+                return <EditPhoneLayout phone={user.getPhone()} verifyRequest={verifyRequest} submit={this.submit} type={type}/>
+            case 'email':
+                return <EditEmailLayout email={user.getEmail()} verifyRequest={verifyRequest} submit={this.submit} type={type}/>
+            case 'gender':
+                return <EditGenderLayout gender={user.getGender()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'dob':
+                return <EditDobLayout dob={user.getDob()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'country':
+                return <EditCountryLayout country={user.getCountry().getId()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'state':
+                return <EditStateLayout country={user.getCountry().getId()} state={user.getState().getId()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'address':
+                return <EditAddressLayout address={user.getAddress()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'password':
+                return <ChangePasswordLayout profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+            case 'otp':
+                return <VerifyData verifyRequest={verifyRequest} verifyAuth={verifyAuth} data={verifyRequest.data[type]} countDownTime={verifyRequest.data.expire}
+                                   oldData={type === 'email' ? user.getEmail() : user.getPhone()} submit={this.verify} resend={this.submit} type={type} />
+            case 'picture':
+                return <Nav variant="pills" className="flex-column">
+                    <Nav.Item className={`my-nav-item pl-2 pb-3 m-0 underline cursor-pointer`}>
+                        <img src={capture} width={19} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Take Photo
+                    </Nav.Item>
+                    <Nav.Item className={`my-nav-item pl-2 pt-3 pb-3 m-0 underline cursor-pointer`} onClick={this.selectImage}>
+                        <img src={gallery} width={19} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Choose from Device
+                    </Nav.Item>
+                    <Nav.Item className={`my-nav-item pl-2 pt-3 pb-3 m-0 cursor-pointer`} onClick={() => this.setState({showRemovePicture: true})}>
+                        <img src={deletePhoto} width={18} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
+                        Remove Photo
+                    </Nav.Item>
+                </Nav>;
+            default:
+                break;
+        }
+        return null;
+    }
+
+    showEditModal = (type, layout) => {
+        this.setState({showEditModal: true, editType: type, editLayout: layout || type});
+    }
+
+    hideEditModal = (callback) => {
+        this.setState({showEditModal: false}, callback || (() => {
+           if (!Utility.isEmpty(this.props.profileInfoUpdate.data?.errors)) this.props.profileInfoUpdate.data.errors = {};
+           if (this.props.verifyAuth.data?.message) this.props.verifyAuth.data.message = null;
+        }));
+    }
+
+    rateUser = (rating) => {
+        const {dispatch, setHeaderMessage} = this.props;
+        if (this.state.user.isMe()) {
+            setHeaderMessage("You can't rate yourself", "warning");
+            return;
+        }
+        dispatch(ProfileAction.rateUser(rating, this.state.user.getUuid()));
+    }
+
+    selectImage = (e) => {
+        this.hideEditModal(() => {
+            let tm = setTimeout(() => {
+                document.getElementById("image-picker").click();
+                clearTimeout(tm);
+            }, 500);
+        });
+    };
+
+    uploadFile = (file) => {
+        const {dispatch} = this.props;
+        this.toBase64(file, (base64) => {
+            dispatch(ProfileAction.updatePhoto(base64));
+        })
+    };
+
+    toBase64(file, callback){
+        let reader = new FileReader();
+        reader.onload = (e) => callback(btoa(e.target.result));
+        reader.readAsBinaryString(file);
     }
 
     render() {
 
-        const {location} = this.props;
+        const {location, profilePictureUpdate, profileRemoveUpdate} = this.props;
 
-        let {mounted, user, from} = this.state;
+        let {mounted, user, editType, editLayout, from} = this.state;
 
         if (!mounted) return null;
 
@@ -254,16 +399,22 @@ class Profile extends Component {
                             <Row>
                                 <Col xl={2} lg={2} md={3} sm={3} xs={4} className={`p-0`}>
                                     <div style={{width: 95, height: 95}} className={`position-relative m-auto`}>
+                                        {(profilePictureUpdate.requesting || profileRemoveUpdate.requesting) && <Spinner animation="border" variant="warning" size={`sm`}
+                                                  className={`position-absolute`}
+                                                  style={{top: 'calc(50% - 5px)', left: 'calc(50% - 5px)'}}/>}
                                         <img
                                             src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                                             style={{objectFit: 'cover'}} alt={`user`}
                                             className={`w-100 h-100 rounded-circle border-accent background-accent-light p-2`}/>
                                         {user.isMe() && <div className={`rounded-circle background-accent position-absolute cursor-pointer`}
-                                              style={{width: 25, height: 25, top: 60, left: 70}}>
+                                              style={{width: 25, height: 25, top: 60, left: 70}}
+                                        onClick={() => this.showEditModal('picture')}>
                                             <img src={camera} alt={`nav-icon`} className={`img-fluid item-center`}/>
                                         </div>}
                                     </div>
+                                    {user.isMe() && <input id={`image-picker`} type="file" hidden accept="image/png, image/jpeg"
+                                            onChange={(event) => this.uploadFile(event.target.files[0])}/>}
                                 </Col>
                                 <Col xl={10} lg={10} md={9} sm={9} xs={8}>
                                     <h5 className={`mt-1`}>{user.getFirstname()} {user.getLastname()}</h5>
@@ -273,7 +424,9 @@ class Profile extends Component {
                                         count={5}
                                         size={30}
                                         isHalf={true}
+                                        edit={!user.isMe()}
                                         value={user.getRating()}
+                                        onChange={this.rateUser}
                                         color="#d1d1d1"
                                         activeColor="#e04805"
                                     />
@@ -316,7 +469,7 @@ class Profile extends Component {
                                     <UserInfo user={user} isMe={isMe} showEditModal={this.showEditModal}/>
                                 </Tab.Pane>
                                 {isMe && <Tab.Pane eventKey="settings" className={`pl-3`}>
-                                    <Settings/>
+                                    <Settings isMe={isMe} showEditModal={this.showEditModal}/>
                                 </Tab.Pane>}
                             </Tab.Content>
                         </Card.Body>
@@ -324,6 +477,20 @@ class Profile extends Component {
                     </Card>
                 </Col>
             </Row>
+            <Modal
+                show={this.state.showEditModal}
+                onHide={() => this.hideEditModal()}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                backdrop="static">
+                <Modal.Header closeButton={true}>
+                    <Modal.Title id="contained-modal-title-vcenter">{this.getEditTitle(editLayout)}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={`p-4`}>
+                    {this.getEditLayout(editType, editLayout, user)}
+                </Modal.Body>
+            </Modal>
         </>;
     }
 }
@@ -334,7 +501,10 @@ function mapStateToProps(state) {
         verifyRequest: state.verifyRequest,
         importStates: state.importStates,
         importCountries: state.importCountries,
+        profileRateUpdate: state.profileRateUpdate,
         profileInfoUpdate: state.profileInfoUpdate,
+        profilePictureUpdate: state.profilePictureUpdate,
+        profileRemoveUpdate: state.profileRemoveUpdate,
     }
 }
 

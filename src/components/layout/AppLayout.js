@@ -5,12 +5,13 @@ import Message from "./Message";
 import {Col, Container, Row} from "react-bootstrap";
 import NavLayout from "./NavLayout";
 import MobileNavLayout from "./MobileNavLayout";
+import Footer from "../footer/Footer";
 
 class AppLayout extends Component {
 
     render() {
 
-        const { children, hasHeader = true, location} = this.props;
+        const { component, hasHeader = true, location} = this.props;
 
         const hideMenu = () => {
             document.getElementById("mobile-bottom-sheet-container").classList.remove("top");
@@ -21,17 +22,17 @@ class AppLayout extends Component {
             <div>
                 {hasHeader && <Header {...this.props}/>}
                 {location.header && <Message header={location.header}/>}
-                <Container className={`mt-5 pb-5 position-relative`}>
+                <Container className={`mt-5 pb-5 position-relative container-min-height`}>
                     <Row>
                         <Col md={3} className={`pc-side-nav`}>
                             <NavLayout {...this.props}/>
                         </Col>
                         <Col md={9} className={`pc-container`}>
-                            { children }
+                            {component}
                         </Col>
                     </Row>
-                    {/*<Footer/>*/}
                 </Container>
+                <Footer/>
                 <div className={`mobile-bottom-sheet-container`} id={`mobile-bottom-sheet-container`} onClick={hideMenu}/>
                 <div className="mobile-bottom-sheet" id={`mobile-bottom-sheet`}>
                     <div className={`sheet-line justify-content-center d-flex`}><div/></div>

@@ -36,7 +36,7 @@ import UserReviews from "./components/review/UserReviews";
 import SingleReview from "./components/review/SingleReview";
 import Profile from "./components/profile/Profile";
 
-function App() {
+function App(props) {
     return (
         <Router>
             <React.Suspense fallback={<></>}>
@@ -64,8 +64,8 @@ function App() {
                     <PrivateRoute exact layout={AppLayout} path="/user/review" component={ReviewUser}/>
                     <PrivateRoute exact layout={AppLayout} path="/user/reviews" component={UserReviews}/>
                     <PrivateRoute exact layout={AppLayout} path="/user/review/:id" component={SingleReview}/>
-                    <PrivateRoute exact layout={AppLayout} path="/user/profile/:id" component={Profile}/>
-                    <PrivateRoute exact layout={AppLayout} path="/user/profile" component={Profile}/>
+                    <PrivateRoute exact layout={AppLayout} path="/user/:id/profile" component={Profile}/>
+                    <PrivateRoute exact key={1} layout={AppLayout} path="/user/profile" component={Profile}/>
                     <PrivateRoute exact layout={AppLayout} path="/loans/mine" component={MyLoans}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/offer" component={OfferLoan}/>
                     <PrivateRoute exact layout={AppLayout} path="/loan/request" component={RequestLoan}/>

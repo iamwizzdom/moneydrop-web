@@ -1,5 +1,21 @@
 import {ProfileConst} from '../constants';
 
+const ProfileRateReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case ProfileConst.PROFILE_RATING_REQUEST:
+            return {...state, requesting: true, type: action.id};
+        case ProfileConst.PROFILE_RATING_SUCCESS:
+            return {...state, requesting: false, data: action.payload, type: action.id};
+        case ProfileConst.PROFILE_RATING_FAILURE:
+            return {...state, requesting: false, data: action.payload, type: action.id};
+
+        default:
+            return state;
+    }
+};
+
 const ProfileInfoUpdateReducer = (state = {requesting: false, data: {}}, action) => {
 
     switch (action.type) {
@@ -49,6 +65,7 @@ const ProfilePictureRemoveReducer = (state = {requesting: false, data: {}}, acti
 };
 
 export {
+    ProfileRateReducer,
     ProfileInfoUpdateReducer,
     ProfilePictureUpdateReducer,
     ProfilePictureRemoveReducer

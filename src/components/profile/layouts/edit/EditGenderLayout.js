@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import swal from "@sweetalert/with-react";
-import {Col, Row} from "react-bootstrap";
+import {Button, Col, Form, Row, Spinner} from "react-bootstrap";
 import {AppConst} from "../../../../constants";
 import male from "../../../../assets/images/male-icon.svg";
 import checkmark from "../../../../assets/images/checkmark.svg";
@@ -14,24 +13,25 @@ class EditGenderLayout extends Component {
 
     componentDidMount() {
         const {gender} = this.props;
-        this.setState({gender}, () => {
-            let tm = setTimeout(() => {
-                swal.setActionValue(JSON.stringify(this.state));
-                clearTimeout(tm);
-            }, 500);
-        });
+        this.setState({gender});
     }
 
     setGender = (gender) => {
-        this.setState({gender}, () => {
-            swal.setActionValue(JSON.stringify(this.state));
-        });
+        this.setState({gender});
+    }
+
+    submit = (e) => {
+        e.preventDefault();
+        const {submit, type} = this.props;
+        submit(this.state, type);
     }
 
     render() {
+
+        const {profileInfoUpdate} = this.props;
+
         return <>
-            <h5 className={`mt-2 mb-4 text-left`}>Update Gender</h5>
-            <Row className={`mt-5 mb-3`}>
+            <Row className={`mt-3 mb-3 text-center`}>
                 <Col>
                     <div className={`gender-check-box-container`} onClick={() => {this.setGender(AppConst.MALE)}}>
                         <img src={male} className={`img-fluid`} alt={`male`}/>
@@ -51,6 +51,10 @@ class EditGenderLayout extends Component {
                     </div>
                 </Col>
             </Row>
+            <Form.Text className={`text-danger text-center`}>{profileInfoUpdate.data?.errors?.gender}</Form.Text>
+            <Button variant="primary" type="submit" onClick={this.submit} className={`font-size-16 min-height-48 mt-4 text-capitalize`} block>
+                {profileInfoUpdate.requesting ? <Spinner animation="border" variant="light"/> : 'Submit'}
+            </Button>
         </>;
     }
 }

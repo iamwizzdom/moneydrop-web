@@ -1,6 +1,7 @@
 export const AppConst = {
     LIVE: false,
     APP_NAME: 'MoneyDrop',
+    APP_YEAR: (new Date()).getFullYear(),
     MALE: 1,
     FEMALE: 2,
     PAGINATION_PER_PAGE: 30,

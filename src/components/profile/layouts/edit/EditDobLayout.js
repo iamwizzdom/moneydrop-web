@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import swal from "@sweetalert/with-react";
-import {Button, Form} from "react-bootstrap";
+import {Button, Form, Spinner} from "react-bootstrap";
 import {getMonth, getYear} from "date-fns";
 import moment from "moment";
 import DatePicker from "react-datepicker";
@@ -10,27 +9,30 @@ class EditDobLayout extends Component {
 
     state = {
         date: '',
-        dob: ''
+        data: {
+            dob: ''
+        }
     }
 
     componentDidMount() {
         const {dob} = this.props;
-        this.setState({dob, date: moment(dob).toDate()}, () => {
-            let tm = setTimeout(() => {
-                swal.setActionValue(JSON.stringify({dob: this.state.dob}));
-                clearTimeout(tm);
-            }, 500);
-        });
+        this.setState({data: {dob}, date: moment(dob).toDate()});
     }
 
     onChange(date) {
         let dob = moment(date).format('YYYY-MM-DD');
-        this.setState({dob, date}, () => {
-            swal.setActionValue(JSON.stringify({dob: this.state.dob}));
-        });
+        this.setState({data: {dob}, date});
+    }
+
+    submit = (e) => {
+        e.preventDefault();
+        const {submit, type} = this.props;
+        submit(this.state.data, type);
     }
 
     render() {
+
+        const {profileInfoUpdate} = this.props;
 
         const years = range(1970, getYear(new Date()) + 1, 1);
         const months = [
@@ -49,8 +51,7 @@ class EditDobLayout extends Component {
         ];
 
         return <>
-            <h5 className={`mt-2 mb-4 text-left`}>Update Date of Birth</h5>
-            <Form className={`text-left`}>
+            <Form className={`text-left`} onSubmit={this.submit}>
                 <Form.Group controlId="dob">
                     <Form.Label>Date of Birth</Form.Label>
                     <DatePicker
@@ -107,10 +108,14 @@ class EditDobLayout extends Component {
                         autoComplete={`off`}
                         selected={this.state.date}
                         dateFormat="yyyy-MM-dd"
-                        className={`form-control`}
+                        className={`form-control ${!!profileInfoUpdate.data?.errors?.dob && 'is-invalid'}`}
                         onChange={this.onChange.bind(this)}
                     />
+                    <Form.Text className={`text-danger`}>{profileInfoUpdate.data?.errors?.dob}</Form.Text>
                 </Form.Group>
+                <Button variant="primary" type="submit" className={`font-size-16 min-height-48 mt-4 text-capitalize`} block>
+                    {profileInfoUpdate.requesting ? <Spinner animation="border" variant="light"/> : 'Submit'}
+                </Button>
             </Form>
         </>;
     }

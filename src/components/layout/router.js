@@ -1,23 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 
-const LayoutRoute = ({component: Component, layout: Layout, ...rest}) => {
+class LayoutRoute extends Component {
 
-    if (!Layout) {
+    forceUpdateHandler = () => {
+        this.forceUpdate();
+    };
 
-        return (
-            <Route {...rest} render={props => (
-                <Component {...props} />
-            )}/>);
+    setHeaderMessage = (message, status) => {
+        this.props.location.header = {message, status};
+        this.forceUpdate();
     }
 
-    return (
-        <Route {...rest} render={(props => {
+    render() {
 
-            return <Layout {...props} {...rest} >
-                <Component {...props} {...rest}/>
-            </Layout>
-        })}/>);
+        const {component: Component, layout: Layout, ...rest} = this.props;
+
+        if (!Layout) {
+
+            return (
+                <Route {...rest} render={props => (
+                    <Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />
+                )}/>);
+        }
+
+        return (
+            <Route {...rest} render={(props => {
+
+                return <Layout component={<Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />} {...props} />
+            })}/>);
+
+    }
 }
 
 export default LayoutRoute;
