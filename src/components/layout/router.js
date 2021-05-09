@@ -27,7 +27,7 @@ class LayoutRoute extends Component {
         return (
             <Route {...rest} render={(props => {
 
-                return <Layout component={<Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />} {...props} />
+                return <Layout component={<Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />} forceUpdateHandler={this.forceUpdateHandler} {...props} />
             })}/>);
 
     }

@@ -21,7 +21,7 @@ class AppLayout extends Component {
         return (
             <div>
                 {hasHeader && <Header {...this.props}/>}
-                {location.header && <Message header={location.header}/>}
+                {location.header && <Message header={location.header} {...this.props}/>}
                 <Container className={`mt-5 pb-5 position-relative container-min-height`}>
                     <Row>
                         <Col md={3} className={`pc-side-nav`}>

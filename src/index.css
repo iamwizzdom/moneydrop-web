@@ -115,6 +115,10 @@ a.color-accent-hover:hover, .color-accent-hover:hover {
     border-color: #f9beaa !important;
 }
 
+.border-radius-standard {
+    border-radius: .25rem !important;
+}
+
 .border-radius-10 {
     border-radius: 10px;
 }
@@ -222,6 +226,19 @@ a.color-accent-hover:hover, .color-accent-hover:hover {
 
 .w-30 {
     width: 28% !important;
+}
+
+.modal-content .react-transform-component {
+    width: 100% !important;
+}
+
+.modal-content .react-transform-element {
+    width: 100% !important;
+    position: relative;
+}
+
+.min-width-160 {
+    min-width: 160px !important;
 }
 
 .min-width-160 {

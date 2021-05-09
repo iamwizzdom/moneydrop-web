@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Col, Modal, Nav, Row, Spinner, Tab} from "react-bootstrap";
+import {Button, Card, Col, Modal, Nav, Row, Spinner, Tab} from "react-bootstrap";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
 import {Link, Redirect} from "react-router-dom";
 import arrow from "../../assets/images/arrow-accent.svg";
@@ -30,6 +30,11 @@ import capture from "../../assets/images/capture.svg";
 import gallery from "../../assets/images/gallery.svg";
 import deletePhoto from "../../assets/images/delete-photo.svg";
 import remove from "../../assets/images/remove.svg";
+import close from "../../assets/images/close.svg";
+import Webcam from "react-webcam";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import Message from "../layout/Message";
+import imageCompression from "browser-image-compression";
 
 class Profile extends Component {
 
@@ -39,11 +44,17 @@ class Profile extends Component {
         currentTab: 'user-info',
         editType: '',
         editLayout: '',
+        imageSrc: '',
+        showProfilePic: false,
         showEditModal: false,
         showRemovePicture: false,
+        pictureMessage: {message: '', status: ''}
     }
 
+    webcamRef;
+
     componentDidMount() {
+        this.webcamRef = React.createRef();
         const {dispatch, location} = this.props;
         const {state} = location;
         const mState = {
@@ -96,7 +107,7 @@ class Profile extends Component {
             }
         }
 
-        if (profileInfoUpdate.data.status) {
+        if (profileInfoUpdate.data.status || (profileInfoUpdate.data.status === false && Utility.isEmpty(profileInfoUpdate.data.errors))) {
 
             let status = profileInfoUpdate.data.status;
             profileInfoUpdate.data.status = null;
@@ -120,16 +131,17 @@ class Profile extends Component {
             });
         }
 
-        if (profileRemoveUpdate.data.status) {
+        if (profileRemoveUpdate.data.message) {
 
             let status = profileRemoveUpdate.data.status;
-            profileRemoveUpdate.data.status = null;
+            let message = profileRemoveUpdate.data.message;
+            profileRemoveUpdate.data.message = null;
 
             this.hideEditModal(() => {
 
                 swal({
                     title: profileRemoveUpdate.data.title,
-                    text: profileRemoveUpdate.data.message,
+                    text: message,
                     icon: (status ? `success` : `error`),
                     button: "Ok",
                 });
@@ -144,16 +156,21 @@ class Profile extends Component {
             });
         }
 
-        if (profilePictureUpdate.data.status) {
+        if (profilePictureUpdate.data.message) {
 
             let status = profilePictureUpdate.data.status;
-            profilePictureUpdate.data.status = null;
+            let message = profilePictureUpdate.data.message;
+            profilePictureUpdate.data.message = null;
+
+            if (profilePictureUpdate.data.hasOwnProperty("errors") && Object.keys(profilePictureUpdate.data.errors).length > 0) {
+                message = Utility.serializeObject(profilePictureUpdate.data.errors);
+            }
 
             this.hideEditModal(() => {
 
                 swal({
                     title: profilePictureUpdate.data.title,
-                    text: profilePictureUpdate.data.message,
+                    text: message,
                     icon: (status ? `success` : `error`),
                     button: "Ok",
                 });
@@ -168,7 +185,7 @@ class Profile extends Component {
             });
         }
 
-        if (verifyRequest.data.status) {
+        if (verifyRequest.data.status || (verifyRequest.data.status === false && Utility.isEmpty(verifyRequest.data.errors))) {
 
             let status = verifyRequest.data.status;
             verifyRequest.data.status = null;
@@ -187,7 +204,7 @@ class Profile extends Component {
             });
         }
 
-        if (verifyAuth.data.status) {
+        if (verifyAuth.data.status || (verifyAuth.data.status === false && Utility.isEmpty(verifyAuth.data.errors))) {
 
             let status = verifyAuth.data.status;
             verifyAuth.data.status = null;
@@ -231,6 +248,10 @@ class Profile extends Component {
         }
     }
 
+    setPictureMessage = (message, status) => {
+        this.setState({pictureMessage: {message, status}});
+    }
+
     onNavSelected = (key) => {
         this.setState({currentTab: key});
     };
@@ -268,6 +289,8 @@ class Profile extends Component {
                 return "Change Password";
             case 'otp':
                 return "Verification";
+            case 'web-cam':
+                return "Take Photo";
             default:
                 break;
         }
@@ -308,7 +331,7 @@ class Profile extends Component {
                                    oldData={type === 'email' ? user.getEmail() : user.getPhone()} submit={this.verify} resend={this.submit} type={type} />
             case 'picture':
                 return <Nav variant="pills" className="flex-column">
-                    <Nav.Item className={`my-nav-item pl-2 pb-3 m-0 underline cursor-pointer`}>
+                    <Nav.Item className={`my-nav-item pl-2 pb-3 m-0 underline cursor-pointer`} onClick={() => this.showEditModal('picture', 'web-cam')}>
                         <img src={capture} width={19} className={`mr-3`} style={{marginTop: '-5px'}} alt={`nav-icon`}/>
                         Take Photo
                     </Nav.Item>
@@ -321,6 +344,41 @@ class Profile extends Component {
                         Remove Photo
                     </Nav.Item>
                 </Nav>;
+            case 'web-cam':
+                const {width, height} = window.screen;
+                return <>
+                    <Message header={this.state.pictureMessage} onClose={() => {this.setState({pictureMessage: {}})}} {...this.props}/>
+                    {this.state.imageSrc ? <img className={`img-fluid w-100 h-100`} src={this.state.imageSrc} alt={`captured-pic`}/> : <Webcam
+                        audio={false}
+                        width={'100%'}
+                        height={'100%'}
+                        ref={this.webcamRef}
+                        screenshotFormat="image/jpeg"
+                        videoConstraints={{width, height, facingMode: "user"}}
+                    />}
+                    <div className={`text-right`}>
+                        {this.state.imageSrc ? <>
+                            <Button variant="outline-secondary" type="button" onClick={() => this.setState({imageSrc: ''})}
+                                    className={`font-size-16 min-height-48 mt-4 m-1`}>Retake</Button>
+                            <Button variant="primary" type="button" className={`font-size-16 min-width-160 min-height-48 mt-4 m-1 border-radius-standard`}
+                                    onClick={() => {
+                                        if (this.state.imageSrc) {
+                                            let image = this.state.imageSrc;
+                                            this.hideEditModal(() => {
+                                                this.uploadFile(image);
+                                            });
+                                        } else this.setPictureMessage('No image to upload.', 'error');
+                            }}>Upload</Button>
+                        </> : <>
+                            <Button variant="outline-secondary" type="button" className={`font-size-16 min-height-48 mt-4 m-1`} onClick={() => this.hideEditModal()} >Cancel</Button>
+                            <Button variant="primary" type="button" className={`font-size-16 min-height-48 mt-4 m-1 border-radius-standard`} onClick={() => {
+                                const imageSrc = this.webcamRef.current.getScreenshot();
+                                if (imageSrc) this.setState({imageSrc});
+                                else this.setPictureMessage('No image to capture yet.', 'info');
+                            }}>Capture photo</Button>
+                        </>}
+                    </div>
+                </>
             default:
                 break;
         }
@@ -332,7 +390,7 @@ class Profile extends Component {
     }
 
     hideEditModal = (callback) => {
-        this.setState({showEditModal: false}, callback || (() => {
+        this.setState({showEditModal: false, imageSrc: ''}, callback || (() => {
            if (!Utility.isEmpty(this.props.profileInfoUpdate.data?.errors)) this.props.profileInfoUpdate.data.errors = {};
            if (this.props.verifyAuth.data?.message) this.props.verifyAuth.data.message = null;
         }));
@@ -358,15 +416,23 @@ class Profile extends Component {
 
     uploadFile = (file) => {
         const {dispatch} = this.props;
-        this.toBase64(file, (base64) => {
+        const upload = (base64) => {
             dispatch(ProfileAction.updatePhoto(base64));
-        })
+        };
+        if (Utility.isString(file)) upload(file); else this.toBase64(file, upload);
     };
-
+s
     toBase64(file, callback){
-        let reader = new FileReader();
-        reader.onload = (e) => callback(btoa(e.target.result));
-        reader.readAsBinaryString(file);
+
+        imageCompression(file, {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+        }).then(file => {
+            let reader = new FileReader();
+            reader.onload = (e) => callback(btoa(e.target.result));
+            reader.readAsBinaryString(file);
+        });
     }
 
     render() {
@@ -402,11 +468,13 @@ class Profile extends Component {
                                         {(profilePictureUpdate.requesting || profileRemoveUpdate.requesting) && <Spinner animation="border" variant="warning" size={`sm`}
                                                   className={`position-absolute`}
                                                   style={{top: 'calc(50% - 5px)', left: 'calc(50% - 5px)'}}/>}
-                                        <img
+
+                                        <img onClick={() => this.setState({showProfilePic: true})}
                                             src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
                                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                                             style={{objectFit: 'cover'}} alt={`user`}
-                                            className={`w-100 h-100 rounded-circle border-accent background-accent-light p-2`}/>
+                                            className={`w-100 h-100 rounded-circle border-accent background-accent-light p-2 cursor-pointer`}/>
+
                                         {user.isMe() && <div className={`rounded-circle background-accent position-absolute cursor-pointer`}
                                               style={{width: 25, height: 25, top: 60, left: 70}}
                                         onClick={() => this.showEditModal('picture')}>
@@ -490,6 +558,22 @@ class Profile extends Component {
                 <Modal.Body className={`p-4`}>
                     {this.getEditLayout(editType, editLayout, user)}
                 </Modal.Body>
+            </Modal>
+            <Modal
+                show={this.state.showProfilePic}
+                onHide={() => this.setState({showProfilePic: false})}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <img src={close} alt={`close`} title={`close`} width={30} className={`position-absolute bg-white p-1 rounded-circle cursor-pointer`}
+                     onClick={() => this.setState({showProfilePic: false})} style={{top: 15, right: 15, zIndex: 100}}/>
+                <TransformWrapper>
+                    <TransformComponent>
+                        <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
+                            onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
+                            alt={`user`} className={`mx-auto`} style={{maxWidth: '100%'}}/>
+                    </TransformComponent>
+                </TransformWrapper>
             </Modal>
         </>;
     }
