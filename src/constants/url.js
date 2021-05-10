@@ -1,7 +1,7 @@
 class UrlBaseConst {
     static HTTP_SCHEME = "http://";
     static HTTPS_SCHEME = "https://";
-    static SCHEME = UrlBaseConst.HTTP_SCHEME;
+    static SCHEME = UrlBaseConst.HTTPS_SCHEME;
     static HOST_URL = "moneydrop.ng:8085/moneydrop/server";
     // static HOST_URL = "moneydrop.test";
     // static HOST_URL = "192.168.0.109:8000";
