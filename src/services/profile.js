@@ -1,19 +1,6 @@
 import {UrlConst} from "../constants";
 import Utility from "../helpers/Utility";
-
-function handleResponse(response) {
-    if (response.status === 419) {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert("Session expired");
-        window.location.assign('/login');
-        return;
-    }
-    if (!response.ok) {
-        return Promise.reject(response.json());
-    }
-    return response.json();
-}
+import ResponseHandler from "./ResponseHandler";
 
 const getToken = () => {
     return sessionStorage.getItem("token");
@@ -29,7 +16,7 @@ const rateUser = (rate, id) => {
         },
         body: JSON.stringify({id, rate})
     };
-    return fetch(UrlConst.PROFILE_RATE_REQUEST_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.PROFILE_RATE_REQUEST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const updateInfo = (data, type) => {
@@ -42,7 +29,7 @@ const updateInfo = (data, type) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.PROFILE_UPDATE_REQUEST_URL, type), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.PROFILE_UPDATE_REQUEST_URL, type), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const updatePhoto = (image) => {
@@ -55,7 +42,7 @@ const updatePhoto = (image) => {
         },
         body: image
     };
-    return fetch(Utility.sprintf(UrlConst.PROFILE_UPDATE_REQUEST_URL, 'picture'), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.PROFILE_UPDATE_REQUEST_URL, 'picture'), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const removePhoto = () => {
@@ -67,7 +54,7 @@ const removePhoto = () => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.PROFILE_UPDATE_REQUEST_URL, 'picture-remove'), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.PROFILE_UPDATE_REQUEST_URL, 'picture-remove'), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 export const ProfileService = {

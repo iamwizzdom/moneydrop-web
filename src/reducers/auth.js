@@ -91,8 +91,6 @@ const ResetPasswordReducer = (state = {requesting: false, data: {}}, action) => 
         case AuthConst.RESET_PASSWORD_FAILURE:
             return {...state, requesting: false, data: action.payload};
 
-        case AuthConst.LOGOUT:
-            return {};
         default:
             return state;
     }
@@ -114,4 +112,16 @@ const GenderAuthReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
-export {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer};
+const LogoutReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case AuthConst.LOGOUT:
+            return {};
+
+        default:
+            return state;
+    }
+};
+
+export {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer, LogoutReducer};

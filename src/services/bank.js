@@ -1,19 +1,6 @@
 import {UrlConst} from "../constants";
 import Utility from "../helpers/Utility";
-
-function handleResponse(response) {
-    if (response.status === 419) {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert("Session expired");
-        window.location.assign('/login');
-        return;
-    }
-    if (!response.ok) {
-        return Promise.reject(response.json());
-    }
-    return response.json();
-}
+import ResponseHandler from "./ResponseHandler";
 
 const getToken = () => {
     return sessionStorage.getItem("token");
@@ -28,7 +15,7 @@ const removeBank = (bankID) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.BANK_ACCOUNT_REMOVE_URL, bankID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.BANK_ACCOUNT_REMOVE_URL, bankID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const creditBank = (data, bankID) => {
@@ -41,7 +28,7 @@ const creditBank = (data, bankID) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.WALLET_CASH_OUT_URL, bankID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.WALLET_CASH_OUT_URL, bankID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const verifyBank = (data) => {
@@ -54,7 +41,7 @@ const verifyBank = (data) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(UrlConst.BANK_ACCOUNT_ADD_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.BANK_ACCOUNT_ADD_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const fetchBanks = () => {
@@ -66,7 +53,7 @@ const fetchBanks = () => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(UrlConst.BANK_ACCOUNT_RETRIEVE_ALL_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.BANK_ACCOUNT_RETRIEVE_ALL_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 export const BankService = {

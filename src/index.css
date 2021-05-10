@@ -417,7 +417,8 @@ input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not
     border-color: #e2e0df !important;
 }
 
-input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):disabled {
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):disabled,
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):read-only {
     background-color: #f1efee !important;
     cursor: not-allowed;
 }

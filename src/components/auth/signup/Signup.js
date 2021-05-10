@@ -111,7 +111,7 @@ class Signup extends Component {
 
         return (
             <>
-                <div className="mb-5 text-center">
+                <div className="mt-5 mb-5 text-center">
                     <img src={logo} alt="Logo" width={40} style={{marginTop: -10}}/>
                     <span className="color-accent font-size-25 m-1">oney<b>Drop</b></span>
                     <p className="font-size-22 mt-2 text-center">Create your MoneyDrop account.</p>
@@ -123,7 +123,7 @@ class Signup extends Component {
                             <Row>
                                 <Col md={6}>
                                     <Form.Group controlId="firstname">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>First name</Form.Label>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>First name</Form.Label>
                                         <Form.Control type="text" placeholder="First name" name="firstname"
                                                       onChange={this.onChange} isInvalid={!!error.firstname}/>
                                         <Form.Control.Feedback type="invalid">{error.firstname}</Form.Control.Feedback>
@@ -131,7 +131,7 @@ class Signup extends Component {
                                 </Col>
                                 <Col md={6}>
                                     <Form.Group controlId="lastname">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>Last name</Form.Label>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>Last name</Form.Label>
                                         <Form.Control type="text" placeholder="Last name" name="lastname"
                                                       onChange={this.onChange} isInvalid={!!error.lastname}/>
                                         <Form.Control.Feedback type="invalid">{error.lastname}</Form.Control.Feedback>
@@ -141,7 +141,7 @@ class Signup extends Component {
                             <Row>
                                 <Col md={6}>
                                     <Form.Group controlId="email">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>Email address</Form.Label>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>Email address</Form.Label>
                                         <Form.Control type="email" placeholder="Enter email" name="email"
                                                       value={mounted && email} onChange={this.onChange}
                                                       isInvalid={!!error.email} readOnly={true}/>
@@ -150,7 +150,7 @@ class Signup extends Component {
                                 </Col>
                                 <Col md={6}>
                                     <Form.Group controlId="phone">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>Phone number</Form.Label>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>Phone number</Form.Label>
                                         <PhoneInput
                                             country={'ng'}
                                             disableDropdown={!error.phone}
@@ -169,7 +169,7 @@ class Signup extends Component {
                             <Row>
                                 <Col>
                                     <Form.Group controlId="dob">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>Date of Birth</Form.Label>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>Date of Birth</Form.Label>
                                         <DatePicker
                                             renderCustomHeader={({
                                                                      date,
@@ -237,28 +237,26 @@ class Signup extends Component {
                             <Row>
                                 <Col md={6}>
                                     <Form.Group controlId="password">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Password" name="password"
-                                                      onChange={this.onChange} isInvalid={!!error.password}/>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>Password</Form.Label>
+                                        <Form.Control type="password" placeholder="Password" name="password" isInvalid={!!error.password}/>
                                         <Form.Control.Feedback type="invalid">{error.password}</Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col md={6}>
                                     <Form.Group controlId="confirm-password">
-                                        <Form.Label className={`text-dark font-size-16 text-uppercase`}>Confirm password</Form.Label>
-                                        <Form.Control type="password" placeholder="Confirm password" name="password_confirmation"
-                                                      onChange={this.onChange} isInvalid={!!error.password_confirmation}/>
+                                        <Form.Label className={`text-dark font-size-14 text-uppercase`}>Confirm password</Form.Label>
+                                        <Form.Control type="password" placeholder="Confirm password" name="password_confirmation" isInvalid={!!error.password_confirmation}/>
                                         <Form.Control.Feedback type="invalid">{error.password_confirmation}</Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                             </Row>
 
                             <div className="mt-4 text-center">
-                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-60 min-width-55-per text-capitalize`}>
+                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-55 min-width-55-per text-capitalize`}>
                                     {auth.requesting ? <Spinner animation="border" variant="light"/> : 'Sign up'}
                                 </Button>
                             </div>
-                            <p className="text-center mt-3">Already have an account? <Link to={'/login'} className={`color-accent font-weight-bold`}>Login</Link></p>
+                            <p className="text-center mt-3 mb-0">Already have an account? <Link to={'/login'} className={`color-accent font-weight-bold`}>Login</Link></p>
                         </Form>
                     </Card.Body>
                 </Card>

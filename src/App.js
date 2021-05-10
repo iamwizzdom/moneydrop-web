@@ -13,7 +13,6 @@ import VerifyData from "./components/auth/signup/verification/VerifyData";
 import VerifyPhone from "./components/auth/signup/verification/VerifyPhone";
 import Signup from "./components/auth/signup/Signup";
 import SignupSuccessful from "./components/auth/signup/SignupSuccessful";
-import NotFound from "./components/NotFound";
 import Dashboard from "./components/dashboard/Dashboard";
 import Loans from "./components/loans/Loans";
 import Wallet from "./components/wallet/Wallet";
@@ -31,15 +30,18 @@ import LoanRepaymentHistory from "./components/history/LoanRepaymentHistory";
 import TransactionReceipt from "./components/transaction/TransactionReceipt";
 import Notifications from "./components/notification/Notifications";
 import NotFoundLayout from "./components/layout/NotFoundLayout";
+import NotFound from "./components/NotFound";
 import ReviewUser from "./components/review/ReviewUser";
 import UserReviews from "./components/review/UserReviews";
 import SingleReview from "./components/review/SingleReview";
 import Profile from "./components/profile/Profile";
+import ForgotPassword from "./components/auth/forgot-password/ForgotPassword";
+import PasswordReset from "./components/auth/forgot-password/PasswordReset";
 
 function App(props) {
     return (
         <Router>
-            <React.Suspense fallback={<></>}>
+            <React.Suspense fallback={<>Hi</>}>
                 <Switch>
 
                     <PrivateLogin exact layout={AuthLayout} path="/signup/verification/email/verify" component={VerifyData}/>
@@ -49,6 +51,8 @@ function App(props) {
                     <PrivateLogin exact layout={AuthLayout} path="/signup/successful" component={SignupSuccessful} forceView={true}/>
                     <PrivateLogin exact layout={AuthLayout} path="/signup" component={Signup}/>
                     <PrivateLogin exact layout={AuthLayout} path="/login" component={Login}/>
+                    <PrivateLogin exact layout={AuthLayout} path="/forgot-password" component={ForgotPassword}/>
+                    <PrivateLogin exact layout={AuthLayout} path="/password-reset" component={PasswordReset}/>
 
                     <PrivateRoute exact layout={AppLayout} path="/bank-accounts" component={BankAccounts}/>
                     <PrivateRoute exact layout={AppLayout} path="/cards" component={Cards}/>

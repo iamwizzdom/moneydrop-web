@@ -31,7 +31,7 @@ class User {
     }
 
     getFirstname() {
-        return this.userObject.firstname;
+        return this.userObject.firstname || '';
     }
 
     setFirstname(firstname) {
@@ -39,7 +39,7 @@ class User {
     }
 
     getMiddlename() {
-        return this.userObject.middlename;
+        return this.userObject.middlename || '';
     }
 
     setMiddlename(middlename) {
@@ -47,7 +47,7 @@ class User {
     }
 
     getLastname() {
-        return this.userObject.lastname;
+        return this.userObject.lastname || '';
     }
 
     setLastname(lastname) {
@@ -179,11 +179,12 @@ class User {
     }
 
     isMe() {
-        const user = new User(localStorage.getItem("user"));
+        const user = new User();
         return this.getUuid() === user.getUuid();
     }
 
     setValues(user) {
+        user || (user = localStorage.getItem("user"));
         this.userObject = Utility.isString(user) ? JSON.parse(user) : (Utility.isObject(user) ? user : {});
     }
 

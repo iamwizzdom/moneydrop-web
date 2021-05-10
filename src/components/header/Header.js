@@ -8,12 +8,12 @@ import {AuthAction} from "../../actions";
 import userIcon from "../../assets/images/user.svg";
 import logouts from "../../assets/images/logouts.svg";
 import {LinkContainer} from "react-router-bootstrap";
+import {connect} from "react-redux";
 
 const HeaderLayout = (props) => {
 
-    const {dispatch} = props;
-
     const logout = () => {
+        const {dispatch} = props;
         dispatch(AuthAction.logout())
     };
 
@@ -26,7 +26,7 @@ const HeaderLayout = (props) => {
 
     return <>
         <Navbar bg="light" expand="lg" sticky={"top"}>
-            <Container className={`pt-1 pb-1`}>
+            <Container>
                 <Navbar.Brand href="/">
                     <img src={logo} style={{marginTop: '-5px'}} alt={`${AppConst.APP_NAME} logo`} width={40} height={40} />
                     <span className="color-accent font-size-22 m-1 pc-brand">oney<b>Drop</b></span>
@@ -75,4 +75,11 @@ const HeaderLayout = (props) => {
     </>;
 };
 
-export default HeaderLayout;
+
+function mapStateToProps(state) {
+    return {
+        logOut: state.logOut
+    }
+}
+
+export default connect(mapStateToProps)(HeaderLayout)

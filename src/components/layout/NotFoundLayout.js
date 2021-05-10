@@ -8,7 +8,7 @@ class NotFoundLayout extends Component {
         return <Container>
             <Row className="d-flex flex-column min-vh-100 justify-content-center align-items-center position-relative">
                 <Col lg={8}>
-                    { this.props.children }
+                    { this.props.component }
                 </Col>
             </Row>
         </Container>;

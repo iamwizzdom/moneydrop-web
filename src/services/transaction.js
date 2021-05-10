@@ -1,18 +1,5 @@
 import {AppConst, UrlConst} from "../constants";
-
-function handleResponse(response) {
-    if (response.status === 419) {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert("Session expired");
-        window.location.assign('/login');
-        return;
-    }
-    if (!response.ok) {
-        return Promise.reject(response.json());
-    }
-    return response.json();
-}
+import ResponseHandler from "./ResponseHandler";
 
 const getToken = () => {
     return sessionStorage.getItem("token");
@@ -28,7 +15,7 @@ const getTransactions = (link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || UrlConst.TRANSACTION_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.TRANSACTION_LIST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 export const TransactionService = {

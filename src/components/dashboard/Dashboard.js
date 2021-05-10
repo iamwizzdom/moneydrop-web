@@ -138,7 +138,7 @@ class Dashboard extends Component {
     render() {
 
         const {dashboard, chargeCard} = this.props;
-        const user = new User(localStorage.getItem("user"));
+        const user = new User();
 
         let {available_balance, loans, transactions} = {
             ...{

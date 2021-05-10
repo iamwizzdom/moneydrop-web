@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer} from './auth';
+import {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer, LogoutReducer} from './auth';
 import {DashboardReducer} from './dashboard';
 import {WalletReducer} from './wallet';
 import {TransactionReducer} from './transaction';
@@ -26,6 +26,7 @@ import {ImportCountriesReducer, ImportStatesReducer} from "./import";
 
 const rootReducer = combineReducers({
     loginAuth: LoginReducer,
+    logOut: LogoutReducer,
     verifyRequest: VerifyReducer,
     verifyAuth: VerifyAuthReducer,
     signup: SignupReducer,

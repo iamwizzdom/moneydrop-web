@@ -23,13 +23,27 @@ class VerifyPhone extends Component {
 
     componentDidMount() {
         const {errorMessage, state} = this.props.location;
-        if (this.props.auth?.data) this.props.auth.data = {};
+        if (this.props.verifyRequest?.data) this.props.verifyRequest.data = {};
         this.setState({
             ...this.state,
             errorMessage,
             ...state,
             mounted: true
         });
+    }
+
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        let {email, phone, mounted} = this.state;
+        let {verifyRequest} = this.props;
+
+        if ((mounted && email && phone) || (mounted && verifyRequest.data?.code === 409)) {
+            if ((mounted && verifyRequest.data?.code === 409) && !this.state.navigate) {
+                setTimeout(() => {
+                    this.setState({navigate: true});
+                }, 2000);
+            }
+        }
     }
 
     submit = (e) => {
@@ -55,41 +69,34 @@ class VerifyPhone extends Component {
 
     render() {
 
-        let {error, email, phone, mounted, errorMessage} = this.state;
-        let {auth} = this.props;
+        let {error, email, mounted, errorMessage} = this.state;
+        let {verifyRequest} = this.props;
 
         if (mounted && !email) {
             return <Redirect to={{ pathname: `/signup/verification/email`, errorMessage: 'You must first verify your email address'}} />;
         }
 
-        if (mounted && auth.data?.status === false && auth.data?.errors) {
-            error = {...error, ...auth.data?.errors};
-            auth.data.errors = null;
+        if (mounted && verifyRequest.data?.status === false && verifyRequest.data?.errors) {
+            error = {...error, ...verifyRequest.data?.errors};
+            verifyRequest.data.errors = null;
         }
 
         let message = null;
 
-        if ((mounted && auth.data?.message) || errorMessage) {
-            message = <Alert key={1} variant={auth.data?.status ? `success` : `danger`}>{auth.data.message || errorMessage}</Alert>;
-            auth.data.message = null;
+        if ((mounted && verifyRequest.data?.message) || errorMessage) {
+            message = <Alert key={1} variant={verifyRequest.data?.status ? `success` : `danger`}>{verifyRequest.data.message || errorMessage}</Alert>;
+            verifyRequest.data.message = null;
         }
 
-        if ((mounted && email && phone) || (mounted && auth.data?.code === 409)) {
-            if ((mounted && auth.data?.code === 409) && !this.state.navigate) {
-                setTimeout(() => {
-                    this.setState({navigate: true});
-                }, 3000);
-            }
-            if (this.state.navigate) return <Redirect to={{ pathname: '/signup', state: { phone: this.state.phone, email } }} />;
-        }
+        if (this.state.navigate) return <Redirect to={{ pathname: '/signup', state: { phone: this.state.phone, email } }} />;
 
-        if (mounted && auth.data?.status && auth.data?.code !== 409) {
-            return <Redirect to={{ pathname: '/signup/verification/phone/verify', state: { data: auth.data?.phone, email, type: 'phone' } }} />;
+        if (mounted && verifyRequest.data?.status && verifyRequest.data?.code !== 409) {
+            return <Redirect to={{ pathname: '/signup/verification/phone/verify', state: { data: verifyRequest.data?.phone, countDownTime: verifyRequest.data?.expire, email, type: 'phone' } }} />;
         }
 
         return (
             <>
-                <div className="mb-5 text-center">
+                <div className="mt-5 mb-5 text-center">
                     <img src={logo} alt="Logo" width={40} style={{marginTop: -10}}/>
                     <span className="color-accent font-size-25 m-1">oney<b>Drop</b></span>
                     <p className="font-size-22 mt-2 text-center">Enter you phone number, we will send you OTP to verify it.</p>
@@ -101,7 +108,7 @@ class VerifyPhone extends Component {
                             <Form.Group controlId="phone">
                                 <Form.Label className={`text-dark font-size-16 text-uppercase`}>Phone number</Form.Label>
                                 <PhoneInput
-                                    className={`form-control min-height-60`}
+                                    className={`form-control min-height-55`}
                                     name={`phone`}
                                     placeholder={`Enter phone`}
                                     country="NG"
@@ -113,10 +120,9 @@ class VerifyPhone extends Component {
                                 />
                                 <Form.Text className={`text-danger`}>{error.phone}</Form.Text>
                             </Form.Group>
-
                             <div className="mt-4">
-                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-60 w-100 text-uppercase`}>
-                                    {auth.requesting ? <Spinner animation="border" variant="light" /> : 'Send'}
+                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-55 w-100 text-uppercase`}>
+                                    {verifyRequest.requesting ? <Spinner animation="border" variant="light" /> : 'Send'}
                                 </Button>
                             </div>
                         </Form>
@@ -130,7 +136,7 @@ class VerifyPhone extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.verifyRequest
+        verifyRequest: state.verifyRequest
     }
 }
 

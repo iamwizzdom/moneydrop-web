@@ -19,13 +19,27 @@ class VerifyEmail extends Component {
 
     componentDidMount() {
         const {errorMessage, state} = this.props.location;
-        if (this.props.auth?.data) this.props.auth.data = {};
+        if (this.props.verifyRequest?.data) this.props.verifyRequest.data = {};
         this.setState({
             ...this.state,
             errorMessage,
             ...state,
             mounted: true
         });
+    }
+
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        let {email, mounted} = this.state;
+        let {verifyRequest} = this.props;
+
+        if ((mounted && email) || (mounted && verifyRequest.data?.code === 409)) {
+            if ((mounted && verifyRequest.data?.code === 409) && !this.state.navigate) {
+                setTimeout(() => {
+                    this.setState({navigate: true});
+                }, 2000);
+            }
+        }
     }
 
     submit = (e) => {
@@ -52,37 +66,30 @@ class VerifyEmail extends Component {
 
     render() {
 
-        let {error, email, mounted, errorMessage} = this.state;
-        let {auth} = this.props;
+        let {error, mounted, errorMessage} = this.state;
+        let {verifyRequest} = this.props;
 
-        if (mounted && auth.data?.status === false && auth.data?.errors) {
-            error = {...error, ...auth.data?.errors};
-            auth.data.errors = null;
+        if (mounted && verifyRequest.data?.status === false && verifyRequest.data?.errors) {
+            error = {...error, ...verifyRequest.data?.errors};
+            verifyRequest.data.errors = null;
         }
 
         let message = null;
 
-        if ((mounted && auth.data?.message) || errorMessage) {
-            message = <Alert key={1} variant={auth.data?.status ? `success` : `danger`}>{auth.data.message || errorMessage}</Alert>;
-            auth.data.message = null;
+        if ((mounted && verifyRequest.data?.message) || errorMessage) {
+            message = <Alert key={1} variant={verifyRequest.data?.status ? `success` : `danger`}>{verifyRequest.data.message || errorMessage}</Alert>;
+            verifyRequest.data.message = null;
         }
 
-        if ((mounted && email) || (mounted && auth.data?.code === 409)) {
-            if ((mounted && auth.data?.code === 409) && !this.state.navigate) {
-                setTimeout(() => {
-                    this.setState({navigate: true});
-                }, 3000);
-            }
-            if (this.state.navigate) return <Redirect to={{ pathname: '/signup/verification/phone', state: { email: this.state.email } }} />;
-        }
+        if (this.state.navigate) return <Redirect to={{ pathname: '/signup/verification/phone', state: { email: this.state.email } }} />;
 
-        if (mounted && auth.data?.status && auth.data?.code !== 409) {
-            return <Redirect to={{ pathname: '/signup/verification/email/verify', state: { data: auth.data?.email, type: 'email' } }} />;
+        if (mounted && verifyRequest.data?.status && verifyRequest.data?.code !== 409) {
+            return <Redirect to={{ pathname: '/signup/verification/email/verify', state: { data: verifyRequest.data?.email, countDownTime: verifyRequest.data?.expire, type: 'email' } }} />;
         }
 
         return (
             <>
-                <div className="mb-5 text-center">
+                <div className="mt-5 mb-5 text-center">
                     <img src={logo} alt="Logo" width={40} style={{marginTop: -10}}/>
                     <span className="color-accent font-size-25 m-1">oney<b>Drop</b></span>
                     <p className="font-size-22 mt-2 text-center">Enter you email address, we will send you OTP to verify it.</p>
@@ -98,17 +105,18 @@ class VerifyEmail extends Component {
                             </Form.Group>
 
                             <div className="mt-4">
-                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-60 w-100 text-uppercase`}>
-                                    {auth.requesting ? <Spinner animation="border" variant="light" /> : 'Start using'}
+                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-55 w-100 text-uppercase`}>
+                                    {verifyRequest.requesting ? <Spinner animation="border" variant="light" /> : 'Start using'}
                                 </Button>
                             </div>
-                            <div className={`w-100 text-center mt-5`}>
-                                <p className={`m-0`}>By clicking start you agree to our</p>
-                                <Link to={'/sign-up'} className={`color-accent`}>Privacy Policy and Terms</Link>
-                            </div>
+                            <p className="text-center mt-3 mb-0">Already have an account? <Link to={'/login'} className={`color-accent font-weight-bold`}>Login</Link></p>
                         </Form>
                     </Card.Body>
                 </Card>
+                <div className={`w-100 text-center mt-5`}>
+                    <p className={`m-0`}>By clicking start you agree to our</p>
+                    <Link to={'/sign-up'} className={`color-accent`}>Privacy Policy and Terms</Link>
+                </div>
             </>
         );
     }
@@ -117,7 +125,7 @@ class VerifyEmail extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.verifyRequest
+        verifyRequest: state.verifyRequest
     }
 }
 

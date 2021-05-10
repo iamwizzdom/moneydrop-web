@@ -145,15 +145,14 @@ function forgotPassword(email) {
             dispatch(success(res));
 
         } catch (err) {
-            const errorMsg = await err;
-            dispatch(failure(errorMsg.errors || errorMsg.msg));
+            const error = await err;
+            dispatch(failure(error));
         }
     }
 }
 
-function resetPassword(email, code, password) {
+function resetPassword(data) {
     // return the promise using fetch which adds to localstorage on resolve
-    const credentials = {email, code, password, password_confirmation: password};
 
     function request() {
         return {type: AuthConst.RESET_PASSWORD_REQUEST}
@@ -170,13 +169,13 @@ function resetPassword(email, code, password) {
     return async function dispatch(dispatch) {
         dispatch(request());
         try {
-            const res = await AuthService.resetPassword(credentials);
+            const res = await AuthService.resetPassword(data);
             // console.log(res)
             dispatch(success(res));
 
         } catch (err) {
-            const errorMsg = await err;
-            dispatch(failure(errorMsg.errors || errorMsg.msg));
+            const error = await err;
+            dispatch(failure(error));
         }
     }
 }
@@ -219,8 +218,8 @@ function signup(user) {
 
             dispatch(success(res));
         } catch (err) {
-            const errorMsg = await err;
-            dispatch(failure(errorMsg));
+            const error = await err;
+            dispatch(failure(error));
         }
     }
 }

@@ -17,7 +17,6 @@ class LayoutRoute extends Component {
         const {component: Component, layout: Layout, ...rest} = this.props;
 
         if (!Layout) {
-
             return (
                 <Route {...rest} render={props => (
                     <Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />

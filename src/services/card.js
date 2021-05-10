@@ -1,19 +1,6 @@
 import {UrlConst} from "../constants";
 import Utility from "../helpers/Utility";
-
-function handleResponse(response) {
-    if (response.status === 419) {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert("Session expired");
-        window.location.assign('/login');
-        return;
-    }
-    if (!response.ok) {
-        return Promise.reject(response.json());
-    }
-    return response.json();
-}
+import ResponseHandler from "./ResponseHandler";
 
 const getToken = () => {
     return sessionStorage.getItem("token");
@@ -28,7 +15,7 @@ const removeCard = (cardID) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.CARD_REMOVE_URL, cardID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.CARD_REMOVE_URL, cardID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const chargeCard = (data, cardID) => {
@@ -41,7 +28,7 @@ const chargeCard = (data, cardID) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.WALLET_TOP_UP_URL, cardID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.WALLET_TOP_UP_URL, cardID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const verifyCard = (data) => {
@@ -56,7 +43,7 @@ const verifyCard = (data) => {
     };
     return fetch(UrlConst.CARD_VERIFICATION_URL, requestOptions).then((res) => {
         if (res.status === 419) logTransRef(data);
-        return handleResponse(res);
+        return ResponseHandler.handleResponse(res);
     });
 };
 
@@ -70,7 +57,7 @@ const logTransRef = (data) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(UrlConst.CARD_TRANS_LOG_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.CARD_TRANS_LOG_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const fetchCards = () => {
@@ -82,7 +69,7 @@ const fetchCards = () => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(UrlConst.CARD_RETRIEVE_ALL_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.CARD_RETRIEVE_ALL_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 export const CardService = {

@@ -68,7 +68,7 @@ class Profile extends Component {
         }
 
         if (!(mState?.user instanceof User)) {
-            mState.user = new User(localStorage.getItem('user'));
+            mState.user = new User();
         }
 
         this.setState({...mState}, () => {
@@ -319,9 +319,9 @@ class Profile extends Component {
             case 'dob':
                 return <EditDobLayout dob={user.getDob()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
             case 'country':
-                return <EditCountryLayout country={user.getCountry().getId()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+                return <EditCountryLayout country={user.getCountry()?.getId()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
             case 'state':
-                return <EditStateLayout country={user.getCountry().getId()} state={user.getState().getId()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
+                return <EditStateLayout country={user.getCountry()?.getId()} state={user.getState()?.getId()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
             case 'address':
                 return <EditAddressLayout address={user.getAddress()} profileInfoUpdate={profileInfoUpdate} submit={this.submit} type={type}/>
             case 'password':

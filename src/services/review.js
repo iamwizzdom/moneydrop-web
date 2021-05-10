@@ -1,19 +1,6 @@
 import {AppConst, UrlConst} from "../constants";
 import Utility from "../helpers/Utility";
-
-function handleResponse(response) {
-    if (response.status === 419) {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert("Session expired");
-        window.location.assign('/login');
-        return;
-    }
-    if (!response.ok) {
-        return Promise.reject(response.json());
-    }
-    return response.json();
-}
+import ResponseHandler from "./ResponseHandler";
 
 const getToken = () => {
     return sessionStorage.getItem("token");
@@ -29,7 +16,7 @@ const reviewUser = (data, applicationID) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICANT_REVIEW_URL, applicationID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICANT_REVIEW_URL, applicationID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const editReview = (data, reviewID) => {
@@ -42,7 +29,7 @@ const editReview = (data, reviewID) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.EDIT_REVIEW_URL, reviewID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.EDIT_REVIEW_URL, reviewID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const deleteReview = (reviewID) => {
@@ -54,7 +41,7 @@ const deleteReview = (reviewID) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.DELETE_REVIEW_URL, reviewID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.DELETE_REVIEW_URL, reviewID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const fetchReviews = (userID, url) => {
@@ -67,7 +54,7 @@ const fetchReviews = (userID, url) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(url || Utility.sprintf(UrlConst.USER_REVIEWS_URL, userID), requestOptions).then(handleResponse);
+    return fetch(url || Utility.sprintf(UrlConst.USER_REVIEWS_URL, userID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 export const ReviewService = {

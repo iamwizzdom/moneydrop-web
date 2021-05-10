@@ -58,7 +58,7 @@ class Login extends Component {
 
         return (
             <>
-                <div className="mb-5 text-center">
+                <div className="mt-5 mb-5 text-center">
                     <img src={logo} alt="Logo" width={40} style={{marginTop: -10}}/>
                     <span className="color-accent font-size-25 m-1">oney<b>Drop</b></span>
                     <p className="font-size-22 mt-2">Login to your account.</p>
@@ -86,11 +86,11 @@ class Login extends Component {
                             </Form.Group>
 
                             <div className="mt-4">
-                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-60 w-100 text-uppercase`}>
+                                <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-55 w-100 text-uppercase`}>
                                     {auth.requesting ? <Spinner animation="border" variant="light" /> : 'Login'}
                                 </Button>
                             </div>
-                            <p className="text-center mt-3">Don't have an account? <Link to={'/signup/verification/email'} className={`color-accent font-weight-bold`}>Signup</Link></p>
+                            <p className="text-center mt-3 mb-0">Don't have an account? <Link to={'/signup/verification/email'} className={`color-accent font-weight-bold`}>Signup</Link></p>
                         </Form>
                     </Card.Body>
                 </Card>

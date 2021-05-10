@@ -1,19 +1,6 @@
 import {AppConst, UrlConst} from "../constants";
 import Utility from "../helpers/Utility";
-
-function handleResponse(response) {
-    if (response.status === 419) {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert("Session expired");
-        window.location.assign('/login');
-        return;
-    }
-    if (!response.ok) {
-        return Promise.reject(response.json());
-    }
-    return response.json();
-}
+import ResponseHandler from "./ResponseHandler";
 
 const getToken = () => {
     return sessionStorage.getItem("token");
@@ -29,7 +16,7 @@ const getLoanRequests = (link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || UrlConst.LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.LOAN_REQUEST_LIST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const getLoanOffers = (link) => {
@@ -42,7 +29,7 @@ const getLoanOffers = (link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || UrlConst.LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.LOAN_OFFER_LIST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const getMyLoanRequests = (link) => {
@@ -55,7 +42,7 @@ const getMyLoanRequests = (link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || UrlConst.USER_LOAN_REQUEST_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.USER_LOAN_REQUEST_LIST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const getMyLoanOffers = (link) => {
@@ -68,7 +55,7 @@ const getMyLoanOffers = (link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || UrlConst.USER_LOAN_OFFER_LIST_URL, requestOptions).then(handleResponse);
+    return fetch(link || UrlConst.USER_LOAN_OFFER_LIST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const getLoanConst = () => {
@@ -80,7 +67,7 @@ const getLoanConst = () => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(UrlConst.LOAN_CONSTANTS_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.LOAN_CONSTANTS_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const offerLoan = (data) => {
@@ -93,7 +80,7 @@ const offerLoan = (data) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(UrlConst.LOAN_OFFER_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.LOAN_OFFER_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const requestLoan = (data) => {
@@ -106,7 +93,7 @@ const requestLoan = (data) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(UrlConst.LOAN_REQUEST_URL, requestOptions).then(handleResponse);
+    return fetch(UrlConst.LOAN_REQUEST_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const loanApply = (data, loanID) => {
@@ -119,7 +106,7 @@ const loanApply = (data, loanID) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.LOAN_APPLY_URL, loanID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLY_URL, loanID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const getLoanApplications = (loanID, link) => {
@@ -132,7 +119,7 @@ const getLoanApplications = (loanID, link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || Utility.sprintf(UrlConst.LOAN_APPLICANTS_URL, loanID), requestOptions).then(handleResponse);
+    return fetch(link || Utility.sprintf(UrlConst.LOAN_APPLICANTS_URL, loanID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const grantLoanApplication = (loanID, applicationID) => {
@@ -144,7 +131,7 @@ const grantLoanApplication = (loanID, applicationID) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_GRANT_URL, loanID, applicationID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_GRANT_URL, loanID, applicationID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const cancelLoanApplication = (loanID, applicationID) => {
@@ -156,7 +143,7 @@ const cancelLoanApplication = (loanID, applicationID) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_CANCEL_URL, loanID, applicationID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.LOAN_APPLICATION_CANCEL_URL, loanID, applicationID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const repayLoan = (data, applicationID) => {
@@ -169,7 +156,7 @@ const repayLoan = (data, applicationID) => {
         },
         body: JSON.stringify(data)
     };
-    return fetch(Utility.sprintf(UrlConst.LOAN_REPAYMENT_URL, applicationID), requestOptions).then(handleResponse);
+    return fetch(Utility.sprintf(UrlConst.LOAN_REPAYMENT_URL, applicationID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 const getLoanRepaymentHistory = (applicationID, link) => {
@@ -182,7 +169,7 @@ const getLoanRepaymentHistory = (applicationID, link) => {
             'Auth-Token': getToken()
         }
     };
-    return fetch(link || Utility.sprintf(UrlConst.LOAN_REPAYMENT_HISTORY_URL, applicationID), requestOptions).then(handleResponse);
+    return fetch(link || Utility.sprintf(UrlConst.LOAN_REPAYMENT_HISTORY_URL, applicationID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
 export const LoanService = {

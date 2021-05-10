@@ -92,7 +92,7 @@ class LoanDetails extends Component {
     render() {
 
         let {mounted, loan, from} = this.state;
-        const {loanApply} = this.props;
+        const {loanApply, location} = this.props;
 
         if (!mounted) return null;
 
@@ -116,6 +116,12 @@ class LoanDetails extends Component {
                 btnProps.onClick = () => this.setState({showLoanApplyModal: true});
             }
         }
+
+        const userImg = <img
+            src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
+            onError={(e) => {e.target.onerror = null; e.target.src = loanUser.getDefaultPicture()}}
+            style={{width: 40, height: 40, objectFit: 'cover'}} alt={`loan-user`}
+            className={`rounded-circle border-accent background-accent-light my-p-0-9 mb-3`}/>;
 
         return <>
             <Row>
@@ -146,11 +152,12 @@ class LoanDetails extends Component {
                                 <Col lg={6} md={6} sm={6} xl={6} xs={6}>
                                     <Row className={`text-right`}>
                                         <Col lg={12} md={12} sm={12} xl={12} xs={12}>
-                                            <img
-                                                src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
-                                                onError={(e) => {e.target.onerror = null; e.target.src = loanUser.getDefaultPicture()}}
-                                                style={{width: 40, height: 40, objectFit: 'cover'}} alt={`loan-user`}
-                                                className={`rounded-circle border-accent background-accent-light my-p-0-9 mb-3`}/>
+                                            {!loanUser.isMe() ? <Link to={{
+                                                pathname: `/user/${loanUser.getUuid()}/profile`,
+                                                state: {user: loanUser, from: location}
+                                            }} className={`text-decoration-none`}>
+                                                {userImg}
+                                            </Link> : userImg}
                                         </Col>
                                         <Col lg={12} md={12} sm={12} xl={12} xs={12}>
                                             <small className={`p text-muted`}>Amount</small>

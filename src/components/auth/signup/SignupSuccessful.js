@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Button, Card, Col, Modal, Row, Spinner} from "react-bootstrap";
 import logo from '../../../assets/images/logo.svg';
-import success from '../../../assets/images/success.svg';
 import male from '../../../assets/images/male-icon.svg';
 import female from '../../../assets/images/female-icon.svg';
 import checkmark from '../../../assets/images/checkmark.svg';
@@ -9,6 +8,11 @@ import {AuthAction} from "../../../actions";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {AppConst} from "../../../constants";
+import successful from "../../../assets/raw/successful.json";
+import {Player} from "@lottiefiles/react-lottie-player";
+import Utility from "../../../helpers/Utility";
+import swal from "@sweetalert/with-react";
+import User from "../../../models/User";
 
 class SignupSuccessful extends Component {
 
@@ -29,6 +33,31 @@ class SignupSuccessful extends Component {
             ...state,
             mounted: true
         });
+    }
+
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+
+        const {genderAuth} = this.props;
+
+        if (genderAuth.data.status && genderAuth.data.response?.user) {
+            let user = genderAuth.data.response?.user;
+            genderAuth.data.response.user = null;
+            user = new User(user);
+            user.update();
+        }
+
+        if (genderAuth.data?.status) {
+            if (!this.state.navigate) {
+                setTimeout(() => {
+                    this.setState({navigate: true});
+                }, 2000);
+            }
+        }
+
+        if (genderAuth.data?.status === false && !Utility.isEmpty(genderAuth.data.errors)) {
+            this.setState({...this.state, ...{error: genderAuth.data?.errors}});
+            genderAuth.data.errors = {};
+        }
     }
 
     setModalShow = (status) => {
@@ -54,41 +83,34 @@ class SignupSuccessful extends Component {
     render() {
 
         const {error, signup, signupMessage, mounted} = this.state;
-        const {auth} = this.props;
+        const {genderAuth} = this.props;
 
         if (mounted && !signup) return <Redirect to={{ pathname: `/signup`, errorMessage: 'Sign up first.'}} />;
 
-        if (mounted && auth.data?.status) {
-            if (!this.state.navigate) {
-                setTimeout(() => {
-                    this.setState({navigate: true});
-                }, 2000);
-            }
-            if (this.state.navigate) return <Redirect to={{pathname: `/`, header: {status: 'success', message: `Welcome to ${AppConst.APP_NAME}`}}}/>;
-        }
+        if (this.state.navigate) return <Redirect to={{pathname: `/`, header: {status: 'success', message: `Welcome to ${AppConst.APP_NAME}`}}}/>;
 
-        if (mounted && auth.data?.status === false && Object.keys(auth.data.errors).length > 0) {
-            this.setState({...this.state, ...{error: auth.data?.errors}});
-            auth.data.errors = {};
-        }
-
-        let message = auth.data?.message;
-        if (message) auth.data.message = null;
+        let message = genderAuth.data?.message;
+        if (message) genderAuth.data.message = null;
 
         return (
             <>
-                <div className="mb-5 text-center">
+                <div className="mt-5 mb-5 text-center">
                     <img src={logo} alt="Logo" width={40} style={{marginTop: -10}}/>
                     <span className="color-accent font-size-25 m-1">oney<b>Drop</b></span>
                 </div>
                 <Card border="light" className={`border-radius-10`}>
                     <Card.Body className={`p-5 text-center`}>
-                        <img src={success} className={`img-fluid`} alt={`success`}/>
-                        <h3 className={`color-accent mt-2`}>Success!</h3>
+                        <Player
+                            autoplay={true}
+                            loop={true}
+                            src={successful}
+                            style={{ height: '150px', width: '150px' }}
+                        />
+                        <h3 className={`color-accent mt-5`}>Success!</h3>
                         <p className={`font-size-15 mt-3 pr-md-5 pl-md-5`}>{signupMessage || 'You have successfully been registered on our app and can now start using it'}</p>
                         <div className="col mt-5">
                             <Button variant="primary" type="button" size="lg" onClick={() => this.setModalShow(true)}
-                                    className={`font-size-16 min-width-80-per min-height-60 text-uppercase`}>
+                                    className={`font-size-16 min-width-80-per min-height-55 text-uppercase`}>
                                 Continue to Dashboard
                             </Button>
                         </div>
@@ -107,7 +129,7 @@ class SignupSuccessful extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={`text-center`}>
-                        <Row className={`mb-3 mt-3`}>
+                        <Row className={`mt-3`}>
                             <Col>
                                 <div className={`gender-check-box-container`} onClick={() => {this.setGender(AppConst.MALE)}}>
                                     <img src={male} className={`img-fluid`} alt={`male`}/>
@@ -127,11 +149,11 @@ class SignupSuccessful extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <small className={`text-${auth.data?.status ? 'success' : 'danger'}`}>{mounted && (error.gender || message)}</small>
+                        <small className={`text-${genderAuth.data?.status ? 'success' : 'danger'}`}>{mounted && (error.gender || message)}</small>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" className={`text-center`} onClick={() => this.submit()}>
-                            {auth.requesting ? <Spinner animation="border" variant="light" /> : 'Done'}
+                            {genderAuth.requesting ? <Spinner animation="border" variant="light" /> : 'Done'}
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -143,7 +165,7 @@ class SignupSuccessful extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.genderAuth
+        genderAuth: state.genderAuth
     }
 }
 

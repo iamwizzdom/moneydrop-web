@@ -117,7 +117,7 @@ class Cards extends Component {
             cards = [1, 2, 3, 4, 5];
         }
 
-        const user = new User(localStorage.getItem("user"));
+        const user = new User();
         const reference = v4();
         const config = {
             txref: reference,

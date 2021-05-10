@@ -14,9 +14,9 @@ class EditCountryLayout extends Component {
     }
 
     componentDidMount() {
-        const {state} = this.props;
+        const {state, country} = this.props;
         let states = localStorage.getItem('states');
-        this.setState({mounted: true, data: {state}, states: !Utility.isEmpty(states) ? JSON.parse(states) : []});
+        this.setState({mounted: true, data: {state}, states: (!Utility.isEmpty(states) ? JSON.parse(states) : []).filter(state => state.country_id === country)});
     }
 
     onChange(e) {
@@ -42,7 +42,7 @@ class EditCountryLayout extends Component {
                     <Form.Label>State</Form.Label>
                     <select className={`form-control custom-select ${!!profileInfoUpdate.data?.errors?.state && 'is-invalid'}`}
                             name={`state`} onChange={this.onChange.bind(this)} defaultValue={this.state.data.state}>
-                        <option value="" disabled>Select Country</option>
+                        <option value="" disabled>Select State</option>
                         {this.state.states.map((item, key) => {
                             let state = new State(item);
                             return <option key={key} value={state.getId()}>{state.getName()}</option>;
