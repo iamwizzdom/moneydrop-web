@@ -10,15 +10,15 @@ import logouts from "../../assets/images/logouts.svg";
 import {LinkContainer} from "react-router-bootstrap";
 import {connect} from "react-redux";
 import swal from "@sweetalert/with-react";
-import logMeOut from "../../assets/images/log-me-out.svg";
+import logoutIcon from "../../assets/images/log-me-out.svg";
 
 const HeaderLayout = (props) => {
 
     const logout = () => {
         swal(<span className={`color-accent`}>Are you sure you want to logout?</span>, {
-            icon: logMeOut,
+            icon: logoutIcon,
             buttons: {
-                cancel: "No, I'm not ready",
+                cancel: "No, Cancel",
                 confirm: "Yes, Log me out"
             }
         }).then(status => {
