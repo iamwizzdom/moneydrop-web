@@ -9,12 +9,24 @@ import userIcon from "../../assets/images/user.svg";
 import logouts from "../../assets/images/logouts.svg";
 import {LinkContainer} from "react-router-bootstrap";
 import {connect} from "react-redux";
+import swal from "@sweetalert/with-react";
+import logMeOut from "../../assets/images/log-me-out.svg";
 
 const HeaderLayout = (props) => {
 
     const logout = () => {
-        const {dispatch} = props;
-        dispatch(AuthAction.logout())
+        swal(<span className={`color-accent`}>Are you sure you want to logout?</span>, {
+            icon: logMeOut,
+            buttons: {
+                cancel: "No, I'm not ready",
+                confirm: "Yes, Log me out"
+            }
+        }).then(status => {
+            if (status) {
+                const {dispatch} = props;
+                dispatch(AuthAction.logout());
+            }
+        });
     };
 
     const user = new User(localStorage.getItem("user"));

@@ -10,13 +10,28 @@ import logouts from '../../assets/images/logouts.svg';
 import {AuthAction} from "../../actions";
 import history from "../../assets/images/history.svg";
 import {LinkContainer} from "react-router-bootstrap";
+import swal from "@sweetalert/with-react";
+import logMeOut from "../../assets/images/log-me-out.svg";
+import React from "react";
 
 const MobileNavLayout = (props) => {
 
-    const {dispatch, hideMenu} = props;
+    const {hideMenu} = props;
 
     const logout = () => {
-        dispatch(AuthAction.logout())
+        hideMenu();
+        swal(<span className={`color-accent`}>Are you sure you want to logout?</span>, {
+            icon: logMeOut,
+            buttons: {
+                cancel: "No, I'm not ready",
+                confirm: "Yes, Log me out"
+            }
+        }).then(status => {
+            if (status) {
+                const {dispatch} = props;
+                dispatch(AuthAction.logout());
+            }
+        });
     };
 
     return <>
