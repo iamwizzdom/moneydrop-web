@@ -96,17 +96,25 @@ class Dashboard extends Component {
             wrapper.classList.add("row");
             ReactDOM.render(<CardList />, wrapper);
 
+            let cards = localStorage.getItem("cards");
+            if (!Utility.isEmpty(cards)) cards = JSON.parse(cards);
+
             swal({
                 title: "Select Card",
                 content: wrapper,
                 buttons: {
                     cancel: "Cancel",
-                    confirm: "Proceed"
+                    confirm: Utility.isEmpty(cards) ? "Add Card" : "Proceed"
                 }
             }).then((cardID) => {
 
                 if (!cardID) {
                     this.setState({showAmountModal: false, showSelectCardModal: false});
+                    return;
+                }
+
+                if (Utility.isEmpty(cards)) {
+                    window.location.assign('/cards');
                     return;
                 }
 
