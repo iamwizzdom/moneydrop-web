@@ -345,7 +345,6 @@ class Profile extends Component {
                     </Nav.Item>
                 </Nav>;
             case 'web-cam':
-                const {width, height} = window.screen;
                 return <>
                     <Message header={this.state.pictureMessage} onClose={() => {this.setState({pictureMessage: {}})}} {...this.props}/>
                     {this.state.imageSrc ? <img className={`img-fluid w-100 h-100`} src={this.state.imageSrc} alt={`captured-pic`}/> : <Webcam
@@ -354,7 +353,7 @@ class Profile extends Component {
                         height={350}
                         ref={this.webcamRef}
                         screenshotFormat="image/jpeg"
-                        videoConstraints={{width, height, facingMode: "user"}}
+                        videoConstraints={{width: window.screen.width, height: 350, facingMode: "user"}}
                     />}
                     <div className={`text-right`}>
                         {this.state.imageSrc ? <>
