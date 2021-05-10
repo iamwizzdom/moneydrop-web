@@ -351,7 +351,7 @@ class Profile extends Component {
                     {this.state.imageSrc ? <img className={`img-fluid w-100 h-100`} src={this.state.imageSrc} alt={`captured-pic`}/> : <Webcam
                         audio={false}
                         width={'100%'}
-                        height={'100%'}
+                        height={350}
                         ref={this.webcamRef}
                         screenshotFormat="image/jpeg"
                         videoConstraints={{width, height, facingMode: "user"}}
@@ -360,7 +360,7 @@ class Profile extends Component {
                         {this.state.imageSrc ? <>
                             <Button variant="outline-secondary" type="button" onClick={() => this.setState({imageSrc: ''})}
                                     className={`font-size-16 min-height-48 mt-4 m-1`}>Retake</Button>
-                            <Button variant="primary" type="button" className={`font-size-16 min-width-160 min-height-48 mt-4 m-1 border-radius-standard`}
+                            <Button variant="primary" type="button" className={`font-size-16 min-height-48 mt-4 m-1 border-radius-standard`}
                                     onClick={() => {
                                         if (this.state.imageSrc) {
                                             let image = this.state.imageSrc;
@@ -375,7 +375,7 @@ class Profile extends Component {
                                 const imageSrc = this.webcamRef.current.getScreenshot();
                                 if (imageSrc) this.setState({imageSrc});
                                 else this.setPictureMessage('No image to capture yet.', 'info');
-                            }}>Capture photo</Button>
+                            }}>Capture</Button>
                         </>}
                     </div>
                 </>
