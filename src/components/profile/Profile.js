@@ -353,7 +353,11 @@ class Profile extends Component {
                         height={'auto'}
                         ref={this.webcamRef}
                         screenshotFormat="image/jpeg"
-                        videoConstraints={{width: window.screen.width, height: 350, facingMode: "user"}}
+                        videoConstraints={{
+                            width: { min: 640, ideal: 1920, max: window.screen.width },
+                            height: { min: 400, ideal: 1080 },
+                            aspectRatio: 1.777777778, facingMode: "user"
+                        }}
                     />}
                     <div className={`text-right`}>
                         {this.state.imageSrc ? <>
