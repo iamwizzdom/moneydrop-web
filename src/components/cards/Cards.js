@@ -121,6 +121,8 @@ class Cards extends Component {
         const reference = v4();
         const config = {
             txref: reference,
+            customer_firstname: user.getFirstname(),
+            customer_lastname: user.getLastname(),
             customer_email: user.getEmail(),
             customer_phone: user.getPhone(),
             amount: 50,
@@ -152,6 +154,7 @@ class Cards extends Component {
                     <RaveProvider
                         custom_logo={`${UrlConst.BASE_URL}/storage/system/logo.png`}
                         payment_options={`card`}
+                        custom_title={`MoneyDrop card test charge`}
                         custom_description={`MoneyDrop card test charge`}
                         {...config}>
                         <RavePaymentButton className={`btn btn-primary pl-4 pr-4 m-1 my-rounded`}>

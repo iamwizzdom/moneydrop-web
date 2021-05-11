@@ -6,6 +6,6 @@ export const AppConst = {
     FEMALE: 2,
     PAGINATION_PER_PAGE: 30,
     MONO_KEY: 'test_pk_QkHIcvviN20Tbyap1wnF',
-    FLUTTERWAVE_PUBKEY: 'FLWPUBK_TEST-52ece87389c981bffbff5283aa35f00f-X',
+    FLUTTERWAVE_PUBKEY: 'FLWPUBK-a46dd307fadd0d345c9ebba50b56c724-X',
     MIN_TOP_UP_AMOUNT: 1000,
 };
