@@ -129,9 +129,7 @@ class Cards extends Component {
             PBFPubKey: AppConst.FLUTTERWAVE_PUBKEY,
             production: AppConst.LIVE,
             onSuccess: () => {
-                this.setState({onSuccess: true}, () => {
-                    document.getElementById('web-close-btn').click();
-                });
+                this.setState({onSuccess: true});
             },
             onClose: () => {
                 if (this.state.onSuccess) {
