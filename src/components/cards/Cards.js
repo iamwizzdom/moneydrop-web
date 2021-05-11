@@ -152,7 +152,7 @@ class Cards extends Component {
                     <RaveProvider
                         custom_logo={`${UrlConst.BASE_URL}/storage/system/logo.png`}
                         payment_options={`card`}
-                        custom_title={`MoneyDrop Card Test Transaction`}
+                        custom_description={`MoneyDrop card test charge`}
                         {...config}>
                         <RavePaymentButton className={`btn btn-primary pl-4 pr-4 m-1 my-rounded`}>
                             {verifyCard.requesting ? <Spinner animation="border" variant="light"/> : 'Add new'}
