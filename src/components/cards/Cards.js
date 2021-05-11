@@ -129,16 +129,14 @@ class Cards extends Component {
             PBFPubKey: AppConst.FLUTTERWAVE_PUBKEY,
             production: AppConst.LIVE,
             onSuccess: () => {
-                this.setState({onSuccess: true, reference}, () => {
-                    dispatch(CardAction.logTransRef({reference: this.state.reference}));
+                this.setState({onSuccess: true}, () => {
+                    dispatch(CardAction.logTransRef({reference}));
                 });
             },
             onClose: () => {
                 if (this.state.onSuccess) {
-                    let reference = this.state.reference;
-                    this.setState({onSuccess: false, reference: ''}, () => {
-                        dispatch(CardAction.verifyCard({reference}));
-                    });
+                    this.setState({onSuccess: false});
+                    dispatch(CardAction.verifyCard({reference}));
                 }
             }
         };
