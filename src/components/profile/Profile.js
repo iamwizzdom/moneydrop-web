@@ -350,7 +350,7 @@ class Profile extends Component {
                     {this.state.imageSrc ? <img className={`img-fluid w-100 h-100`} src={this.state.imageSrc} alt={`captured-pic`}/> : <Webcam
                         audio={false}
                         width={'100%'}
-                        height={350}
+                        height={'auto'}
                         ref={this.webcamRef}
                         screenshotFormat="image/jpeg"
                         videoConstraints={{width: window.screen.width, height: 350, facingMode: "user"}}

@@ -51,6 +51,10 @@ code {
     monospace;
 }
 
+video {
+    min-height: 350px !important;
+}
+
 .container-min-height {
     min-height: calc(100vh - 180px);
 }

@@ -1,5 +1,5 @@
 export const AppConst = {
-    LIVE: false,
+    LIVE: true,
     APP_NAME: 'MoneyDrop',
     APP_YEAR: (new Date()).getFullYear(),
     MALE: 1,
