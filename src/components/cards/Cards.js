@@ -149,7 +149,11 @@ class Cards extends Component {
                     <p>Your reusable cards on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
-                    <RaveProvider custom_logo={`${UrlConst.BASE_URL}/storage/system/logo.png`} custom_title={`MoneyDrop Card Test Transaction`} {...config}>
+                    <RaveProvider
+                        custom_logo={`${UrlConst.BASE_URL}/storage/system/logo.png`}
+                        payment_options={`card`}
+                        custom_title={`MoneyDrop Card Test Transaction`}
+                        {...config}>
                         <RavePaymentButton className={`btn btn-primary pl-4 pr-4 m-1 my-rounded`}>
                             {verifyCard.requesting ? <Spinner animation="border" variant="light"/> : 'Add new'}
                         </RavePaymentButton>

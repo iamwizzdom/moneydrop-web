@@ -520,12 +520,12 @@ s
                                     <Nav className={`justify-content-end`} variant="pills">
                                         <div className={`d-flex my-rounded`} style={{backgroundColor: '#f5f5f5'}}>
                                             <Nav.Item className={`my-tab-nav-item m-2`}>
-                                                <Nav.Link className={`my-rounded`} eventKey="user-info">
+                                                <Nav.Link className={`my-rounded`} eventKey="user-info" title={`User Info`}>
                                                     <img src={userIcon} width={20} alt={`nav-icon`}/>
                                                 </Nav.Link>
                                             </Nav.Item>
                                             {isMe && <Nav.Item className={`my-tab-nav-item m-2`}>
-                                                <Nav.Link className={`my-rounded`} eventKey="settings">
+                                                <Nav.Link className={`my-rounded`} eventKey="settings" title={`Settings`}>
                                                     <img src={settings} width={20} alt={`nav-icon`}/>
                                                 </Nav.Link>
                                             </Nav.Item>}
