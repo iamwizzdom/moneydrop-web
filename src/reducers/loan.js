@@ -96,6 +96,22 @@ const LoanApplyReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
+const LoanRevokeReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case LoanConst.LOAN_REVOKE_REQUEST:
+            return {...state, requesting: true};
+        case LoanConst.LOAN_REVOKE_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case LoanConst.LOAN_REVOKE_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
 const LoanApplicationsReducer = (state = {requesting: false, data: {}}, action) => {
 
     switch (action.type) {
@@ -183,6 +199,7 @@ export {
     LoanOfferReducer,
     LoanRequestReducer,
     LoanApplyReducer,
+    LoanRevokeReducer,
     LoanApplicationsReducer,
     LoanApplicationGrantReducer,
     LoanApplicationCancelReducer,

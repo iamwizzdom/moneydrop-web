@@ -1,9 +1,10 @@
 import React, {Component} from "react";
-import {Badge, Button, Card, Col, Row} from "react-bootstrap";
+import {Badge, Button, Card, Col, Row, Spinner} from "react-bootstrap";
 import Loan from "../../models/Loan";
 import {Link, Redirect} from "react-router-dom";
 import Utility from "../../helpers/Utility";
 import backArrow from '../../assets/images/dark-back-arrow.svg';
+import remove from '../../assets/images/remove.svg';
 import ReactDOM from "react-dom";
 import swal from "@sweetalert/with-react";
 import LoanApplyLayout from "../layout/LoanApplyLayout";
@@ -16,6 +17,7 @@ class LoanDetails extends Component {
         loan: null,
         mounted: false,
         showLoanApplyModal: false,
+        showLoanRevokeModal: false,
     }
 
     loanApplyRef = null;
@@ -35,7 +37,7 @@ class LoanDetails extends Component {
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
-        const {dispatch, loanApply} = this.props;
+        const {dispatch, loanApply, loanRevoke} = this.props;
 
         if (loanApply.data.message) {
             if (loanApply.data.hasOwnProperty("errors") && Object.keys(loanApply.data.errors).length > 0) {
@@ -50,6 +52,19 @@ class LoanDetails extends Component {
             loanApply.data.message = null;
         }
 
+        if (loanRevoke.data.message) {
+            if (loanRevoke.data.hasOwnProperty("errors") && Object.keys(loanRevoke.data.errors).length > 0) {
+                loanRevoke.data.message = Utility.serializeObject(loanRevoke.data.errors);
+            }
+            swal({
+                title: loanRevoke.data.title,
+                text: loanRevoke.data.message,
+                icon: (loanRevoke.data.status ? `success` : `error`),
+                button: "Ok",
+            });
+            loanRevoke.data.message = null;
+        }
+
         if (this.state.showLoanApplyModal) {
 
             const {loanApplyRef} = this;
@@ -60,10 +75,7 @@ class LoanDetails extends Component {
                 content: wrapper,
                 buttons: {
                     cancel: "No, cancel",
-                    confirm: {
-                        text: "Yes, apply",
-                        closeModal: false
-                    }
+                    confirm: "Yes, apply"
                 }
             }).then((data) => {
 
@@ -87,12 +99,34 @@ class LoanDetails extends Component {
 
             });
         }
+
+        if (this.state.showLoanRevokeModal) {
+
+            swal(<span className={`color-accent`}>Are you sure you want to revoke this loan?</span>, {
+                icon: remove,
+                buttons: {
+                    cancel: "No, cancel",
+                    confirm: "Yes, revoke"
+                }
+            }).then((data) => {
+
+                if (!data) {
+                    this.setState({showLoanRevokeModal: false});
+                    return;
+                }
+
+                this.setState({showLoanRevokeModal: false}, () => {
+                    dispatch(LoanAction.revokeLoan(this.state.loan.getUuid()));
+                });
+
+            });
+        }
     }
 
     render() {
 
         let {mounted, loan, from} = this.state;
-        const {loanApply, location} = this.props;
+        const {loanApply, loanRevoke, location} = this.props;
 
         if (!mounted) return null;
 
@@ -129,6 +163,9 @@ class LoanDetails extends Component {
                     <h4 className={`font-weight-bold text-muted`}>
                         <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
                         Loan Details
+                        <Button variant={`light`} className={`float-right color-accent`} onClick={() => this.setState({showLoanRevokeModal: true})}>
+                            {loanRevoke.requesting ? <Spinner animation="border" variant="warning"/> : 'Revoke'}
+                        </Button>
                     </h4>
                 </Col>
             </Row>
@@ -217,7 +254,8 @@ class LoanDetails extends Component {
                 </Col>
             </Row>
             {showBtn && ((btnProps.href && <Link to={btnProps.href} className={`btn btn-primary btn-block btn-lg font-size-16 mt-4`} style={{padding: '.7rem 1rem'}}>{btnTitle}</Link>) ||
-               (<Button variant={`primary`} className={`mt-4 font-size-16`} disabled={(!loan.isMine() && (loan.isHasApplied() || loanApply.data?.status))} size={`lg`} style={{padding: '.7rem 1rem'}} block onClick={btnProps.onClick}>{btnTitle}</Button>)
+               (<Button variant={`primary`} className={`mt-4 font-size-16`} disabled={(!loan.isMine() && (loan.isHasApplied() || loanApply.data?.status))}
+                        size={`lg`} style={{padding: '.7rem 1rem'}} block onClick={btnProps.onClick}>{loanApply.requesting ? <Spinner animation="border" variant="light"/> : btnTitle}</Button>)
             )}
         </>;
     }
@@ -225,7 +263,8 @@ class LoanDetails extends Component {
 
 function mapStateToProps(state) {
     return {
-        loanApply: state.loanApply
+        loanApply: state.loanApply,
+        loanRevoke: state.loanRevoke,
     }
 }
 

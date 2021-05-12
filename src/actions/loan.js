@@ -257,6 +257,38 @@ function loanApply(data, loanID) {
     }
 }
 
+function revokeLoan(loanID) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: LoanConst.LOAN_REVOKE_REQUEST}
+    }
+
+    function success(payload) {
+        return {type: LoanConst.LOAN_REVOKE_SUCCESS, payload}
+    }
+
+    function failure(payload) {
+        return {type: LoanConst.LOAN_REVOKE_FAILURE, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await LoanService.revokeLoan(loanID);
+
+            if (res.status) dispatch(success(res));
+            else dispatch(failure(res));
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
 function getLoanApplications(loanID, link) {
     // return the promise using fetch which adds to localstorage on resolve
 
@@ -426,6 +458,7 @@ export const LoanAction = {
     offerLoan,
     requestLoan,
     loanApply,
+    revokeLoan,
     getLoanApplications,
     grantLoanApplication,
     cancelLoanApplication,

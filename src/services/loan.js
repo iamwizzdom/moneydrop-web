@@ -109,6 +109,18 @@ const loanApply = (data, loanID) => {
     return fetch(Utility.sprintf(UrlConst.LOAN_APPLY_URL, loanID), requestOptions).then(ResponseHandler.handleResponse);
 };
 
+const revokeLoan = (loanID) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Auth-Token': getToken()
+        }
+    };
+    return fetch(Utility.sprintf(UrlConst.LOAN_REVOKE_URL, loanID), requestOptions).then(ResponseHandler.handleResponse);
+};
+
 const getLoanApplications = (loanID, link) => {
     const requestOptions = {
         method: 'GET',
@@ -181,6 +193,7 @@ export const LoanService = {
     offerLoan,
     requestLoan,
     loanApply,
+    revokeLoan,
     getLoanApplications,
     grantLoanApplication,
     cancelLoanApplication,
