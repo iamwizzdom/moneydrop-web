@@ -163,9 +163,10 @@ class LoanDetails extends Component {
                     <h4 className={`font-weight-bold text-muted`}>
                         <img src={backArrow} onClick={() => this.props.history.goBack()} alt={`back`} className={`mr-3 cursor-pointer`} title={`Go Back`}/>
                         Loan Details
-                        <Button variant={`light`} className={`float-right color-accent`} onClick={() => this.setState({showLoanRevokeModal: true})}>
+                        {((loan.isPending() || loan.isAwaiting()) && loan.isMine()) && <Button variant={`light`} className={`float-right color-accent`}
+                                 onClick={() => this.setState({showLoanRevokeModal: true})}>
                             {loanRevoke.requesting ? <Spinner animation="border" variant="warning"/> : 'Revoke'}
-                        </Button>
+                        </Button>}
                     </h4>
                 </Col>
             </Row>
