@@ -122,11 +122,11 @@ class Loan {
     }
 
     isPending() {
-        return this.getStatus().toLowerCase().equals("pending");
+        return this.getStatus().toLowerCase() === "pending";
     }
 
     isAwaiting() {
-        return this.getStatus().toLowerCase().equals("awaiting");
+        return this.getStatus().toLowerCase() === "awaiting";
     }
 
     isMine() {
