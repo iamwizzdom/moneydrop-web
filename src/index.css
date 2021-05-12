@@ -401,7 +401,7 @@ textarea {
     box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
 }
 
-input[inputmode] {
+input[data-id] {
     width: calc((100% - 40px) / 5) !important;
     max-width: 55px;
     height: 55px !important;
@@ -410,14 +410,14 @@ input[inputmode] {
     padding: 0 !important;
 }
 
-input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not(input[inputmode]) {
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not(input[data-id]) {
     width: 100% !important;
     height: 55px !important;
     background-color: #ffffff !important;
     box-shadow: 0 1px 3px 3px rgba(226, 224, 223, 0.2) !important;
 }
 
-input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not(input[inputmode]):focus {
+input:not(input[type='range']):not(.input-transparent):not(.PhoneInputInput):not(input[data-id]):focus {
     border-color: #e2e0df !important;
 }
 
