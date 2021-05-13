@@ -63,6 +63,17 @@ class LoanDetails extends Component {
                 button: "Ok",
             });
             loanRevoke.data.message = null;
+            if (loanRevoke.data.status && loanRevoke.data.response?.loan) {
+                this.setState({loan: new Loan(loanRevoke.data.response.loan)}, () => {
+                    this.props.history.replace({
+                        ...this.props.location,
+                        state: {
+                            ...this.props.location.state,
+                            loan: this.state.loan
+                        }
+                    });
+                });
+            }
         }
 
         if (this.state.showLoanApplyModal) {
