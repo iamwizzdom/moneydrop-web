@@ -161,7 +161,7 @@ class SingleReview extends Component {
                             <Row>
                                 <Col xl={2} lg={2} md={2} sm={2} xs={2}>
                                     <img
-                                        src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
+                                        src={user.getPicture() || user.getDefaultPicture()}
                                         onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                                         style={{width: 45, height: 45, objectFit: 'cover'}} alt={`review-user`}
                                         className={`rounded-circle border-accent background-accent-light my-p-0-9 m-auto d-block`}/>
@@ -192,7 +192,7 @@ class SingleReview extends Component {
                             <Row className={`pt-3 pb-3`}>
                                 <Col xl={2} lg={2} md={3} sm={3} xs={4}>
                                     <img
-                                        src={(reviewer.getPicture() ? reviewer.getPictureUrl() : null) || reviewer.getDefaultPicture()}
+                                        src={reviewer.getPicture() || reviewer.getDefaultPicture()}
                                         onError={(e) => {e.target.onerror = null; e.target.src = reviewer.getDefaultPicture()}}
                                         style={{width: 45, height: 45, objectFit: 'cover'}} alt={`review-reviewer`}
                                         className={`rounded-circle border-accent background-accent-light my-p-0-9 m-auto d-block`}/>

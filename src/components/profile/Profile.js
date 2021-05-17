@@ -473,7 +473,7 @@ s
                                                   style={{top: 'calc(50% - 5px)', left: 'calc(50% - 5px)'}}/>}
 
                                         <img onClick={() => this.setState({showProfilePic: true})}
-                                            src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
+                                            src={user.getPicture() || user.getDefaultPicture()}
                                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                                             style={{objectFit: 'cover'}} alt={`user`}
                                             className={`w-100 h-100 rounded-circle border-accent background-accent-light p-2 cursor-pointer`}/>
@@ -572,7 +572,7 @@ s
                      onClick={() => this.setState({showProfilePic: false})} style={{top: 15, right: 15, zIndex: 100}}/>
                 <TransformWrapper>
                     <TransformComponent>
-                        <img src={(user.getPicture() ? user.getPictureUrl() : null) || user.getDefaultPicture()}
+                        <img src={user.getPicture() || user.getDefaultPicture()}
                             onError={(e) => {e.target.onerror = null; e.target.src = user.getDefaultPicture()}}
                             alt={`user`} className={`mx-auto`} style={{maxWidth: '100%'}}/>
                     </TransformComponent>

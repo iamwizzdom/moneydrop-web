@@ -163,7 +163,7 @@ class LoanDetails extends Component {
         }
 
         const userImg = <img
-            src={(loanUser.getPicture() ? loanUser.getPictureUrl() : null) || loanUser.getDefaultPicture()}
+            src={loanUser.getPicture() || loanUser.getDefaultPicture()}
             onError={(e) => {e.target.onerror = null; e.target.src = loanUser.getDefaultPicture()}}
             style={{width: 40, height: 40, objectFit: 'cover'}} alt={`loan-user`}
             className={`rounded-circle border-accent background-accent-light my-p-0-9 mb-3`}/>;

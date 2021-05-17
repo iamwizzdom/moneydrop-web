@@ -1,4 +1,4 @@
-import {AppConst, UrlConst} from "../constants";
+import {AppConst} from "../constants";
 import male from '../assets/images/male-user.svg';
 import female from '../assets/images/female-user.svg';
 import unisex from '../assets/images/unisex.svg';
@@ -136,10 +136,6 @@ class User {
 
     getPicture() {
         return this.userObject.picture;
-    }
-
-    getPictureUrl() {
-        return (UrlConst.BASE_URL + "/" + this.getPicture());
     }
 
     getDefaultPicture() {

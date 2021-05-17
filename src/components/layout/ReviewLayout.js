@@ -18,7 +18,7 @@ class ReviewLayout extends Component {
                 <Row>
                     <Col lg={2} md={2} sm={2} xl={2} xs={2}>
                         <img
-                            src={(reviewer.getPicture() ? reviewer.getPictureUrl() : null) || reviewer.getDefaultPicture()}
+                            src={reviewer.getPicture() || reviewer.getDefaultPicture()}
                             onError={(e) => {e.target.onerror = null; e.target.src = reviewer.getDefaultPicture()}}
                             style={{width: 40, height: 40, objectFit: 'cover'}} alt={`review-user`}
                             className={`rounded-circle border-accent background-accent-light my-p-0-9`}/>

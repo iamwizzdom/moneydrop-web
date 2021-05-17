@@ -92,7 +92,7 @@ class ReviewUser extends Component {
                             <Row>
                                 <Col xl={2} lg={2} md={3} sm={3} xs={4} className={`p-0`}>
                                     <img
-                                        src={(loanRecipient.getPicture() ? loanRecipient.getPictureUrl() : null) || loanRecipient.getDefaultPicture()}
+                                        src={loanRecipient.getPicture() || loanRecipient.getDefaultPicture()}
                                         onError={(e) => {e.target.onerror = null; e.target.src = loanRecipient.getDefaultPicture()}}
                                         style={{width: 95, height: 95, objectFit: 'cover'}} alt={`user`}
                                         className={`rounded-circle border-accent background-accent-light p-2 m-auto d-block`}/>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import notFound from "../assets/raw/lottie-lonely-404.json";
-import logo from "../assets/images/logo-dark.svg";
+import logo from "../assets/images/logo-white.svg";
 import {Player} from "@lottiefiles/react-lottie-player";
 
 class NotFound extends Component {
