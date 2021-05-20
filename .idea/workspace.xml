@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="75828032-3f15-47a8-89b4-752e2bf8d7c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.0af49c5a.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.0af49c5a.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.de9f8e6f.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.de9f8e6f.chunk.js.map" beforeDir="false" />
-    </list>
+    <list default="true" id="75828032-3f15-47a8-89b4-752e2bf8d7c0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +87,7 @@
       <option name="presentableId" value="Default" />
       <updated>1621500333852</updated>
       <workItem from="1621500335681" duration="6447000" />
-      <workItem from="1621526362796" duration="2752000" />
+      <workItem from="1621526362796" duration="3054000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented sign in with google">
       <created>1621505520971</created>
@@ -139,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621529608564</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Built project">
+      <created>1621529859812</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1621529859812</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,8 +158,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented sign in with google" />
-    <MESSAGE value="Built project" />
     <MESSAGE value="Refactored profile page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored profile page" />
+    <MESSAGE value="Built project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Built project" />
   </component>
 </project>
