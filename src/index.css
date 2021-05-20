@@ -307,6 +307,19 @@ a.color-accent-hover:hover, .color-accent-hover:hover {
     color: #ffffff !important
 }
 
+.btn-outline-primary {
+    border-color: #e04805 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #e04805 !important;
+    color: #ffffff !important;
+}
+
+.google-sign-in-btn:hover img {
+    content: url("./assets/images/google-glass-logo-white.svg");
+}
+
 .btn-primary.sm {
     height: 30px !important;
 }

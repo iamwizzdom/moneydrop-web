@@ -16,6 +16,22 @@ const LoginReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
+const LoginWithGoogleReducer = (state = {requesting: false, data: {}}, action) => {
+
+    switch (action.type) {
+
+        case AuthConst.LOGIN_WITH_GOOGLE_REQUEST:
+            return {...state, requesting: true};
+        case AuthConst.LOGIN_WITH_GOOGLE_SUCCESS:
+            return {...state, requesting: false, data: action.payload};
+        case AuthConst.LOGIN_WITH_GOOGLE_FAILURE:
+            return {...state, requesting: false, data: action.payload};
+
+        default:
+            return state;
+    }
+};
+
 const VerifyReducer = (state = {requesting: false, data: {}}, action) => {
 
     switch (action.type) {
@@ -124,4 +140,4 @@ const LogoutReducer = (state = {requesting: false, data: {}}, action) => {
     }
 };
 
-export {LoginReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer, LogoutReducer};
+export {LoginReducer, LoginWithGoogleReducer, VerifyReducer, VerifyAuthReducer, SignupReducer, ForgotPasswordReducer, ResetPasswordReducer, GenderAuthReducer, LogoutReducer};

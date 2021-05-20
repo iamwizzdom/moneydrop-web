@@ -18,6 +18,18 @@ const login = (credentials) => {
     return fetch(UrlConst.LOGIN_URL, requestOptions).then(ResponseHandler.handleResponse);
 };
 
+const loginWithGoogle = (credentials) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(credentials)
+    };
+    return fetch(UrlConst.LOGIN_WITH_GOOGLE_URL, requestOptions).then(ResponseHandler.handleResponse);
+};
+
 const verifyRequest = (data, type) => {
     const requestOptions = {
         method: 'POST',
@@ -100,6 +112,7 @@ export const AuthService = {
     setGender,
     signup,
     login,
+    loginWithGoogle,
     verifyRequest,
     verify,
     logout,

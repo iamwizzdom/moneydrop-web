@@ -3,6 +3,7 @@ import {AuthService} from '../services';
 
 export const AuthAction = {
     login,
+    loginWithGoogle,
     logout,
     verifyRequest,
     verify,
@@ -34,6 +35,45 @@ function login(email, password) {
 
         try {
             const res = await AuthService.login(user);
+
+            if (res.status && res.response.user) {
+                sessionStorage.setItem('token', res.response.user.token);
+                localStorage.setItem('user', JSON.stringify(res.response.user));
+                localStorage.setItem('cards', JSON.stringify(res.response.cards));
+                localStorage.setItem('bank-accounts', JSON.stringify(res.response['bank-accounts']));
+                dispatch(success(res));
+            } else {
+                dispatch(failure(res));
+            }
+
+        } catch (err) {
+            const error = await err;
+            dispatch(failure(error));
+        }
+    }
+}
+
+function loginWithGoogle(credentials) {
+    // return the promise using fetch which adds to localstorage on resolve
+
+    function request() {
+        return {type: AuthConst.LOGIN_WITH_GOOGLE_REQUEST}
+    }
+
+    function success(payload) {
+        return {type: AuthConst.LOGIN_WITH_GOOGLE_SUCCESS, payload}
+    }
+
+    function failure(payload) {
+        return {type: AuthConst.LOGIN_WITH_GOOGLE_FAILURE, payload}
+    }
+
+    return async function dispatch(dispatch) {
+
+        dispatch(request());
+
+        try {
+            const res = await AuthService.loginWithGoogle(credentials);
 
             if (res.status && res.response.user) {
                 sessionStorage.setItem('token', res.response.user.token);

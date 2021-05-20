@@ -18,6 +18,7 @@ export const UrlConst = {
     IMPORT_COUNTRIES_URL: UrlBaseConst.API_URL + "/import/countries",
     IMPORT_STATES_URL: UrlBaseConst.API_URL + "/import/states",
     LOGIN_URL: UrlBaseConst.API_URL + "/auth/login",
+    LOGIN_WITH_GOOGLE_URL: UrlBaseConst.API_URL + "/auth/login-with-google",
     REGISTRATION_URL: UrlBaseConst.API_URL + "/auth/register",
     FORGOT_PASSWORD_URL: UrlBaseConst.API_URL + "/auth/password/forgot",
     RESET_PASSWORD_URL: UrlBaseConst.API_URL + "/auth/password/reset",

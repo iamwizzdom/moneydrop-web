@@ -1,10 +1,14 @@
 import React, {Component} from "react";
 import {Alert, Button, Card, Form, Spinner} from "react-bootstrap";
 import logo from '../../../assets/images/logo.svg';
+import googleLogo from '../../../assets/images/google-glass-logo.svg';
 import {Link, Redirect} from "react-router-dom";
 import Validator from "../../../helpers/validator";
 import {AuthAction} from "../../../actions";
 import {connect} from "react-redux";
+import GoogleLogin, {useGoogleLogout} from "react-google-login";
+import {AppConst} from "../../../constants";
+import * as ReactDOM from "react-dom";
 
 class Login extends Component {
 
@@ -35,25 +39,44 @@ class Login extends Component {
 
     };
 
+    responseGoogle = (response) => {
+        if (response && response.error) return;
+        const {dispatch} = this.props;
+        const {email, googleId} = response.profileObj;
+        dispatch(AuthAction.loginWithGoogle({email, google_id: googleId, token_id: response.tokenId}));
+    }
+
     render() {
 
         let {error} = this.state;
-        const {auth, location} = this.props;
+        const {loginAuth, loginWithGoogleAuth, location} = this.props;
         let errorMessage = location?.errorMessage;
         if (errorMessage) location.errorMessage = null;
 
-        if (auth.data?.status) return <Redirect to={{pathname: `/`, header: {status: 'success', message: auth.data.message}}}/>;
+        if (loginAuth.data?.status) return <Redirect to={{pathname: `/`, header: {status: 'success', message: loginAuth.data.message}}}/>;
 
-        if (auth.data?.status === false && auth.data?.errors) {
-            error = {...error, ...auth.data?.errors};
-            auth.data.errors = null;
+        if (loginWithGoogleAuth.data?.status) {
+            return <Redirect to={{pathname: `/`, header: {status: 'success', message: loginAuth.data.message}}}/>;
+        }
+
+        if (loginAuth.data?.status === false && loginAuth.data?.errors) {
+            error = {...error, ...loginAuth.data?.errors};
+            loginAuth.data.errors = null;
+        }
+
+        if (loginWithGoogleAuth.data?.status === false && loginWithGoogleAuth.data?.errors) {
+            error = {...error, ...loginWithGoogleAuth.data?.errors};
+            loginWithGoogleAuth.data.errors = null;
         }
 
         let message = null;
 
-        if (errorMessage || auth.data?.message) {
-            message = <Alert key={1} variant={auth.data?.status ? `success` : `danger`}>{errorMessage || auth.data.message}</Alert>;
-            auth.data.message = null;
+        if (errorMessage || loginAuth.data?.message) {
+            message = <Alert key={1} variant={loginAuth.data?.status ? `success` : `danger`}>{errorMessage || loginAuth.data.message}</Alert>;
+            loginAuth.data.message = null;
+        } else if (loginWithGoogleAuth.data?.message) {
+            message = <Alert key={1} variant={loginWithGoogleAuth.data?.status ? `success` : `danger`}>{loginWithGoogleAuth.data.message}</Alert>;
+            loginWithGoogleAuth.data.message = null;
         }
 
         return (
@@ -87,8 +110,23 @@ class Login extends Component {
 
                             <div className="mt-4">
                                 <Button variant="primary" type="submit" size="lg" className={`font-size-16 min-height-55 w-100 text-uppercase`}>
-                                    {auth.requesting ? <Spinner animation="border" variant="light" /> : 'Login'}
+                                    {loginAuth.requesting ? <Spinner animation="border" variant="light" /> : 'Login'}
                                 </Button>
+                            </div>
+
+                            <div className="mt-4">
+                                <GoogleLogin
+                                    clientId={AppConst.GOOGLE_CLIENT_ID}
+                                    render={renderProps => (
+                                        <Button onClick={renderProps.onClick} disabled={renderProps.disabled} variant="outline-primary"
+                                                type="submit" size="lg" className={`font-size-16 color-accent min-height-55 w-100 text-uppercase google-sign-in-btn`}>
+                                            {loginWithGoogleAuth.requesting ? <Spinner animation="border" variant="warning" /> : <><img src={googleLogo} style={{marginTop: "-5px"}} className={`img-fluid mr-2`} alt={`google-logo`}/>Sign in with Google</>}
+                                        </Button>
+                                    )}
+                                    onSuccess={this.responseGoogle}
+                                    onFailure={this.responseGoogle}
+                                    redirectUri={`/login`}
+                                />
                             </div>
                             <p className="text-center mt-3 mb-0">Don't have an account? <Link to={'/signup/verification/email'} className={`color-accent font-weight-bold`}>Signup</Link></p>
                         </Form>
@@ -102,7 +140,8 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.loginAuth
+        loginAuth: state.loginAuth,
+        loginWithGoogleAuth: state.loginWithGoogleAuth,
     }
 }
 
