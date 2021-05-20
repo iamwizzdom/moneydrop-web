@@ -40,7 +40,10 @@ class Login extends Component {
     };
 
     responseGoogle = (response) => {
-        if (response && response.error) return;
+        if (response && response.error) {
+            console.log(response);
+            return;
+        }
         const {dispatch} = this.props;
         const {email, googleId} = response.profileObj;
         dispatch(AuthAction.loginWithGoogle({email, google_id: googleId, token_id: response.tokenId}));
