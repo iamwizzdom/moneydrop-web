@@ -17,7 +17,7 @@ class Settings extends Component {
     render() {
         const {isMe, showEditModal} = this.props;
 
-        return <Row>
+        return <Row className={`pl-2`}>
             <SettingLayout title={`Change Password`} showEditModal={showEditModal} isMe={isMe} type={`password`} underline/>
             <SettingLayout title={`Privacy Policy`} underline/>
             <SettingLayout title={`Terms and Conditions`} underline/>

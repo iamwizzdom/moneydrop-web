@@ -510,41 +510,24 @@ s
             <Row className={`mt-3`}>
                 <Col md={12}>
                     <Card border={`light`} className={`border-radius-10`}>
-                        <Tab.Container id="left-tabs-example" defaultActiveKey="user-info" onSelect={this.onNavSelected}>
                         <Card.Header className={`bg-white border-0`}>
-                            <Row>
-                                <Col xl={8} lg={8} md={8} sm={8} xs={8}>
-                                    <h5 className={`mt-3`}>{this.state.currentTab === 'user-info' ? `User Information` : `Settings`}</h5>
-                                </Col>
-                                <Col xl={4} lg={4} md={4} sm={4} xs={4}>
-                                    <Nav className={`justify-content-end`} variant="pills">
-                                        <div className={`d-flex my-rounded`} style={{backgroundColor: '#f5f5f5'}}>
-                                            <Nav.Item className={`my-tab-nav-item m-2`}>
-                                                <Nav.Link className={`my-rounded`} eventKey="user-info" title={`User Info`}>
-                                                    <img src={userIcon} width={20} alt={`nav-icon`}/>
-                                                </Nav.Link>
-                                            </Nav.Item>
-                                            {isMe && <Nav.Item className={`my-tab-nav-item m-2`}>
-                                                <Nav.Link className={`my-rounded`} eventKey="settings" title={`Settings`}>
-                                                    <img src={settings} width={20} alt={`nav-icon`}/>
-                                                </Nav.Link>
-                                            </Nav.Item>}
-                                        </div>
-                                    </Nav>
-                                </Col>
-                            </Row>
+                            <h5 className={`mt-3`}>User Information</h5>
                         </Card.Header>
-                        <Card.Body>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="user-info" className={`pl-3`}>
-                                    <UserInfo user={user} isMe={isMe} showEditModal={this.showEditModal}/>
-                                </Tab.Pane>
-                                {isMe && <Tab.Pane eventKey="settings" className={`pl-3`}>
-                                    <Settings isMe={isMe} showEditModal={this.showEditModal}/>
-                                </Tab.Pane>}
-                            </Tab.Content>
+                        <Card.Body className={`pl-4 pt-0`}>
+                            <UserInfo user={user} isMe={isMe} showEditModal={this.showEditModal}/>
                         </Card.Body>
-                        </Tab.Container>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className={`mt-3`}>
+                <Col md={12}>
+                    <Card border={`light`} className={`border-radius-10`}>
+                        <Card.Header className={`bg-white border-0`}>
+                            <h5 className={`mt-3`}>Settings</h5>
+                        </Card.Header>
+                        <Card.Body className={`pl-4 pt-0`}>
+                            <Settings isMe={isMe} showEditModal={this.showEditModal}/>
+                        </Card.Body>
                     </Card>
                 </Col>
             </Row>

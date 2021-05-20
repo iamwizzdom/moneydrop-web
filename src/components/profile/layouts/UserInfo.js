@@ -23,7 +23,7 @@ class UserInfo extends Component {
         if (!(user instanceof User)) return null;
 
         return <>
-            <Row>
+            <Row className={`pl-2`}>
                 <InfoLayout title={`Name`} info={`${user.getFirstname()} ${user.getLastname()}`} showEditModal={showEditModal} isMe={isMe} type={`name`} underline/>
                 {isMe && <InfoLayout title={`Phone`} info={user.getPhone()} showEditModal={showEditModal} isMe={isMe} type={`phone`} underline/>}
                 {isMe && <InfoLayout title={`Email`} info={user.getEmail()} showEditModal={showEditModal} isMe={isMe} type={`email`} underline/>}

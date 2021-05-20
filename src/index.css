@@ -157,6 +157,7 @@ a.color-accent-hover:hover, .color-accent-hover:hover {
 .my-tab-nav-item a.active {
     color: #e04805 !important;
     background-color: #ffffff !important;
+    box-shadow: 0 1px 2px 0 rgba(191, 65, 3, 0.75) !important;
 }
 
 .my-pt-1 {

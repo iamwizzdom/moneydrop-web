@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="75828032-3f15-47a8-89b4-752e2bf8d7c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profile/layouts/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile/layouts/Settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profile/layouts/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile/layouts/UserInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +30,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -56,6 +62,7 @@
         <script value="dev" />
       </scripts>
       <node-interpreter value="project" />
+      <package-manager value="npm" />
       <envs />
       <method v="2" />
     </configuration>
@@ -71,9 +78,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -86,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1621500333852</updated>
       <workItem from="1621500335681" duration="6447000" />
-      <workItem from="1621526362796" duration="637000" />
+      <workItem from="1621526362796" duration="2396000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented sign in with google">
       <created>1621505520971</created>
@@ -116,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621506602614</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Built project">
+      <created>1621527366423</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621527366423</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
