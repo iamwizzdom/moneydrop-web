@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75828032-3f15-47a8-89b4-752e2bf8d7c0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/signup/SignupSuccessful.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/signup/SignupSuccessful.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/LoanApplicantLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/LoanApplicantLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/LoanApplyLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/LoanApplyLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/loans/LoanApplicants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loans/LoanApplicants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/url.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/url.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.3151536d.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.3151536d.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/media/settings.d93f98da.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/media/user-icon.10a93f10.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,8 +82,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -104,7 +101,7 @@
       <workItem from="1621547073641" duration="591000" />
       <workItem from="1621591974444" duration="37000" />
       <workItem from="1621872478996" duration="10973000" />
-      <workItem from="1621935089708" duration="5060000" />
+      <workItem from="1621935089708" duration="5919000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented sign in with google">
       <created>1621505520971</created>
@@ -162,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621530438147</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Stage 25">
+      <created>1621954337698</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1621954337698</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,6 +188,7 @@
     <MESSAGE value="Implemented sign in with google" />
     <MESSAGE value="Refactored profile page" />
     <MESSAGE value="Built project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Built project" />
+    <MESSAGE value="Stage 25" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stage 25" />
   </component>
 </project>

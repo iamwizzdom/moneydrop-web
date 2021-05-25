@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.806ac26c.chunk.css",
-    "main.js": "/static/js/main.3151536d.chunk.js",
-    "main.js.map": "/static/js/main.3151536d.chunk.js.map",
+    "main.js": "/static/js/main.5d49b16d.chunk.js",
+    "main.js.map": "/static/js/main.5d49b16d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.556967fc.js",
     "runtime-main.js.map": "/static/js/runtime-main.556967fc.js.map",
     "static/css/2.a0f9ddfc.chunk.css": "/static/css/2.a0f9ddfc.chunk.css",
@@ -65,11 +65,9 @@
     "static/media/remove.1033c20b.svg": "/static/media/remove.1033c20b.svg",
     "static/media/request-loan.a7e456b7.svg": "/static/media/request-loan.a7e456b7.svg",
     "static/media/select-checkmark.e93f0f58.svg": "/static/media/select-checkmark.e93f0f58.svg",
-    "static/media/settings.d93f98da.svg": "/static/media/settings.d93f98da.svg",
     "static/media/three-small-dots.e007d536.svg": "/static/media/three-small-dots.e007d536.svg",
     "static/media/transactions.521fbad8.svg": "/static/media/transactions.521fbad8.svg",
     "static/media/unisex.78f248bf.svg": "/static/media/unisex.78f248bf.svg",
-    "static/media/user-icon.10a93f10.svg": "/static/media/user-icon.10a93f10.svg",
     "static/media/user.7c2cb7fb.svg": "/static/media/user.7c2cb7fb.svg",
     "static/media/verve.263688f1.svg": "/static/media/verve.263688f1.svg",
     "static/media/visa.06dafb46.svg": "/static/media/visa.06dafb46.svg",
@@ -80,6 +78,6 @@
     "static/css/2.a0f9ddfc.chunk.css",
     "static/js/2.0f1dfdb9.chunk.js",
     "static/css/main.806ac26c.chunk.css",
-    "static/js/main.3151536d.chunk.js"
+    "static/js/main.5d49b16d.chunk.js"
   ]
 }
