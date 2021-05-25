@@ -6,9 +6,8 @@ import {Link, Redirect} from "react-router-dom";
 import Validator from "../../../helpers/validator";
 import {AuthAction} from "../../../actions";
 import {connect} from "react-redux";
-import GoogleLogin, {useGoogleLogout} from "react-google-login";
+import GoogleLogin from "react-google-login";
 import {AppConst} from "../../../constants";
-import * as ReactDOM from "react-dom";
 
 class Login extends Component {
 

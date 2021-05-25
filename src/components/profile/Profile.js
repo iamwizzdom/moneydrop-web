@@ -1,10 +1,8 @@
 import React, {Component} from "react";
-import {Button, Card, Col, Modal, Nav, Row, Spinner, Tab} from "react-bootstrap";
+import {Button, Card, Col, Modal, Nav, Row, Spinner} from "react-bootstrap";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
 import {Link, Redirect} from "react-router-dom";
 import arrow from "../../assets/images/arrow-accent.svg";
-import userIcon from "../../assets/images/user-icon.svg";
-import settings from "../../assets/images/settings.svg";
 import camera from "../../assets/images/camera.svg";
 import ReactStars from "react-rating-stars-component";
 import Utility from "../../helpers/Utility";

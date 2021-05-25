@@ -11,7 +11,6 @@ import {AppConst} from "../../../constants";
 import successful from "../../../assets/raw/successful.json";
 import {Player} from "@lottiefiles/react-lottie-player";
 import Utility from "../../../helpers/Utility";
-import swal from "@sweetalert/with-react";
 import User from "../../../models/User";
 
 class SignupSuccessful extends Component {

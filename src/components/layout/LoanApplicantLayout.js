@@ -50,7 +50,7 @@ class LoanApplicantLayout extends Component {
 
             swal(<div><Player
                 lottieRef={instance => {
-                    this.setState({ lottie: instance });
+                    if (!this.state.lottie) this.setState({ lottie: instance });
                 }}
                 ref={this.player} // set the ref to your class instance
                 autoplay={true}
@@ -68,14 +68,12 @@ class LoanApplicantLayout extends Component {
 
                 if (!data) {
                     this.setState({showGrantModal: false}, () => {
-                        this.player.current.stop();
                         this.state.lottie.destroy();
                     });
                     return;
                 }
 
                 this.setState({showGrantModal: false}, () => {
-                    this.player.current.stop();
                     this.state.lottie.destroy();
                     dispatch(LoanAction.grantLoanApplication(loan.getUuid(), application.getReference()));
                 });

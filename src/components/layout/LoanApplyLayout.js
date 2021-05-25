@@ -17,7 +17,7 @@ class LoanApplyLayout extends Component {
         this.player = React.createRef();
         this.setState({amount: this.props.amount}, () => {
             let tm = setTimeout(() => {
-                swal.setActionValue(JSON.stringify(this.state));
+                swal.setActionValue(JSON.stringify({amount: this.state.amount}));
                 clearTimeout(tm);
             }, 500);
         });
@@ -26,7 +26,7 @@ class LoanApplyLayout extends Component {
     onChange(e) {
         let {name, value} = e.target;
         this.setState({[name]: value}, () => {
-            swal.setActionValue(JSON.stringify(this.state));
+            swal.setActionValue(JSON.stringify({amount: this.state.amount}));
         });
     }
 

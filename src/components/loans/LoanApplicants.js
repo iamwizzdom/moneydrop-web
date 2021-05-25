@@ -47,7 +47,7 @@ class LoanApplicants extends Component {
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
-        const {applicants} = this.props;
+        const {applicants, applicantGrant} = this.props;
         const {requesting} = applicants;
 
         const {applications, pagination} = {...{applications: [], pagination: {nextPage: null}}, ...applicants.data};
@@ -65,6 +65,18 @@ class LoanApplicants extends Component {
 
         if (hasMoreData && (pagination.nextPage !== this.state.nextPage)) {
             this.setNextPage(pagination.nextPage);
+        }
+
+        if (applicantGrant.data.response?.application) {
+            const {application} = applicantGrant.data.response;
+            applicantGrant.data.response.application = null;
+            applications.map(app => {
+                if (app.uuid === application.uuid) {
+                    this.setState({loan: new Loan(application.loan)});
+                    return application;
+                }
+                return app;
+            });
         }
     }
 
@@ -151,6 +163,7 @@ class LoanApplicants extends Component {
 
 function mapStateToProps(state) {
     return {
+        applicantGrant: state.loanApplicationGrant,
         applicants: state.loanApplications
     }
 }
