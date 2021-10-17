@@ -1,126 +1,0 @@
-
->javascript:S1441"Strings must use singlequote.(»Á‚ıÿÿÿÿ
->javascript:S1441"Strings must use singlequote.(¾ÄŸ»ùÿÿÿÿ
-xjavascript:S100	"XRename this 'Validator' function to match the regular expression '^[_a-z][a-zA-Z0-9]*$'.(É× ÿÿÿÿÿ
-Vjavascript:S3353	"5'Validator' is never reassigned. Use 'const' instead.(É× ÿÿÿÿÿ
-Qjavascript:S3353"6'formObject' is never reassigned. Use 'const' instead.(³¤Ô^
-Qjavascript:S3353"5'condition' is never reassigned. Use 'const' instead.(ÁìÛë
-`javascript:S3524""?Remove parentheses around the parameter of this arrow function.(ïĞ±ÿÿÿÿÿ
->javascript:S1441""Strings must use singlequote.(ïĞ±ÿÿÿÿÿ
-[javascript:S3524)"?Remove parentheses around the parameter of this arrow function.(–—ñê
-[javascript:S35240"?Remove parentheses around the parameter of this arrow function.(î›èÑ
-[javascript:S35247"?Remove parentheses around the parameter of this arrow function.(ˆ¨å¬
-9javascript:S14417"Strings must use singlequote.(ˆ¨å¬
-[javascript:S3524>"?Remove parentheses around the parameter of this arrow function.(ÿş„£
-;javascript:S121?" Expected { after 'if' condition.(½Ç¿æ
-{javascript:S1067A"ZReduce the number of conditional operators (4) used in the expression (maximum allowed 3).(§¢ğœûÿÿÿÿ
-8javascript:S1441C"Strings must use singlequote.(¿¢Ÿ
-9javascript:S1441D"Strings must use singlequote.(äïş£
-9javascript:S1441E"Strings must use singlequote.(äïş£
-Zjavascript:S3524M"?Remove parentheses around the parameter of this arrow function.(ŒØø3
-Kjavascript:S1117M"0'object' is already declared in the upper scope.(ŒØø3
-ojavascript:S3776M"TRefactor this function to reduce its Cognitive Complexity from 47 to the 15 allowed.(ŒØø3
-_javascript:S1541M"DFunction has a complexity of 15 which is greater than 10 authorized.(ŒØø3
-Njavascript:S3353N"-'x' is never reassigned. Use 'const' instead.(óÎå²ıÿÿÿÿ
-9javascript:S1441Q"Strings must use singlequote.(™Ÿ°¸
-Pjavascript:S1821R"4Refactor the code to eliminate this nested "switch".(‚ì˜Í
-ijavascript:S134R"NRefactor this code to not nest more than 3 if/for/while/switch/try statements.(‚ì˜Í
-9javascript:S1441S"Strings must use singlequote.(ŠÛµå
-7javascript:S1774T"Ternary operator used.(›³šÛúÿÿÿÿ
-2javascript:S1774U"Ternary operator used.(ñù¾•
-`javascript:S3358U"DExtract this nested ternary operation into an independent statement.(ñù¾•
-8javascript:S1441V"Strings must use singlequote.(èÆì8
-ijavascript:S1871X"HThis case's code block is the same as the block for the case on line 83.(Óğ—Âùÿÿÿÿ
->javascript:S1441X"Strings must use singlequote.(Óğ—Âùÿÿÿÿ
-7javascript:S1774Y"Ternary operator used.(›³šÛúÿÿÿÿ
-2javascript:S1774Z"Ternary operator used.(ñù¾•
-`javascript:S3358Z"DExtract this nested ternary operation into an independent statement.(ñù¾•
-8javascript:S1441["Strings must use singlequote.(èÆì8
-9javascript:S1441b"Strings must use singlequote.(«´ìé
->javascript:S1441e"Strings must use singlequote.(Ûæâ®ùÿÿÿÿ
-Ojavascript:S3353f"3'options' is never reassigned. Use 'const' instead.(„Í¢ÿ
-5javascript:S121g"Expected { after 'for-in'.(êÄ©
-ijavascript:S134g"NRefactor this code to not nest more than 3 if/for/while/switch/try statements.(êÄ©
-Ijavascript:S3353g"-'z' is never reassigned. Use 'const' instead.(êÄ©
-@javascript:S121h" Expected { after 'if' condition.(ÔßÇ«ÿÿÿÿÿ
-Mjavascript:S1066h",Merge this if statement with the nested one.(ÔßÇ«ÿÿÿÿÿ
-;javascript:S121i" Expected { after 'if' condition.(ÎÊÒë
-[javascript:S3524}"?Remove parentheses around the parameter of this arrow function.(€¢µ¤
-ajavascript:S3524Œ"?Remove parentheses around the parameter of this arrow function.(°±Ğ“ùÿÿÿÿ
-;javascript:S121"Expected { after 'for-in'.(ôøÃÕúÿÿÿÿ
-Ojavascript:S3353"-'x' is never reassigned. Use 'const' instead.(ôøÃÕúÿÿÿÿ
-<javascript:S121" Expected { after 'if' condition.(¡ø Ñ
-Ijavascript:S1066",Merge this if statement with the nested one.(¡ø Ñ
-<javascript:S121" Expected { after 'if' condition.(ôËıè
-ajavascript:S3524˜"?Remove parentheses around the parameter of this arrow function.(Ìÿ—÷øÿÿÿÿ
-Ajavascript:S121™" Expected { after 'if' condition.(ŒŠÁìüÿÿÿÿ
-<javascript:S121š" Expected { after 'if' condition.(æß·
-:javascript:S1441š"Strings must use singlequote.(æß·
-[javascript:S1192š">Define a constant instead of duplicating this literal 3 times.(æß·
-ajavascript:S3524£"?Remove parentheses around the parameter of this arrow function.(ìÔÎñùÿÿÿÿ
-;javascript:S121¥" Expected { after 'if' condition.(Àõ
-<javascript:S121¦" Expected { after 'if' condition.(æß·
-:javascript:S1441¦"Strings must use singlequote.(æß·
-Ajavascript:S121¨" Expected { after 'if' condition.(í•†ùÿÿÿÿ
-\javascript:S3524³"?Remove parentheses around the parameter of this arrow function.(©İ½¤
-;javascript:S121µ" Expected { after 'if' condition.(Àõ
-<javascript:S121¶" Expected { after 'if' condition.(æß·
-:javascript:S1441¶"Strings must use singlequote.(æß·
-Ajavascript:S121¸" Expected { after 'if' condition.(í•†ùÿÿÿÿ
-<javascript:S121Ç" Expected { after 'if' condition.(Ïòæ€
-Ajavascript:S121È" Expected { after 'if' condition.(‡¸ÿÿÿÿÿÿ
-<javascript:S121É" Expected { after 'if' condition.(ù¥÷Õ
-:javascript:S1441É"Strings must use singlequote.(ù¥÷Õ
-Ajavascript:S121Ê" Expected { after 'if' condition.(ÊŒõşÿÿÿÿ
-Ljavascript:S3353Ì"0'node' is never reassigned. Use 'const' instead.(ƒï¥V
-Ijavascript:S1066Ï",Merge this if statement with the nested one.(¼ÆÉ
-Ajavascript:S121Ñ" Expected { after 'if' condition.(è©˜èøÿÿÿÿ
-ojavascript:S134Ñ"NRefactor this code to not nest more than 3 if/for/while/switch/try statements.(è©˜èøÿÿÿÿ
-Bjavascript:S3512Ñ" Unexpected string concatenation.(è©˜èøÿÿÿÿ
-?javascript:S1441Ñ"Strings must use singlequote.(è©˜èøÿÿÿÿ
-Ajavascript:S121Ü" Expected { after 'if' condition.(™—ßÆüÿÿÿÿ
-ajavascript:S3524æ"?Remove parentheses around the parameter of this arrow function.(ÌÎÆ…øÿÿÿÿ
-;javascript:S121í"Expected { after 'for-in'.(ˆå»£ıÿÿÿÿ
-Ojavascript:S3353í"-'x' is never reassigned. Use 'const' instead.(ˆå»£ıÿÿÿÿ
-<javascript:S121î" Expected { after 'if' condition.(½Ìá
-Ijavascript:S1066î",Merge this if statement with the nested one.(½Ìá
-<javascript:S121ï" Expected { after 'if' condition.(¾ÅŸ¬
-;javascript:S121ù"Expected { after 'for-in'.(ˆå»£ıÿÿÿÿ
-Ojavascript:S3353ù"-'x' is never reassigned. Use 'const' instead.(ˆå»£ıÿÿÿÿ
-<javascript:S121ú" Expected { after 'if' condition.(½Ìá
-Ijavascript:S1066ú",Merge this if statement with the nested one.(½Ìá
-Ajavascript:S121û" Expected { after 'if' condition.(„¢™åüÿÿÿÿ
-\javascript:S3524„"?Remove parentheses around the parameter of this arrow function.(¬ì×
-<javascript:S121†" Expected { after 'if' condition.(Ğå‹
-\javascript:S3524‘"?Remove parentheses around the parameter of this arrow function.(•­åÿ
-<javascript:S121“" Expected { after 'if' condition.(Ğå‹
-Tjavascript:S3353š"2'errors' is never reassigned. Use 'const' instead.(Í×ùãúÿÿÿÿ
-6javascript:S121›"Expected { after 'for-in'.(úÿêÙ
-<javascript:S121œ" Expected { after 'if' condition.(½Ìá
-Ijavascript:S1066œ",Merge this if statement with the nested one.(½Ìá
-Ajavascript:S121" Expected { after 'if' condition.(áóëÙúÿÿÿÿ
-qjavascript:S3776¦"TRefactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.(Ã¿óæ
-Mjavascript:S3353§"0'list' is never reassigned. Use 'const' instead.(ü¬Ô‰
-Ijavascript:S1066©",Merge this if statement with the nested one.(¼üÓå
-Sjavascript:S3353«"1'error' is never reassigned. Use 'const' instead.(ô´Úşÿÿÿÿ
-ojavascript:S134¬"NRefactor this code to not nest more than 3 if/for/while/switch/try statements.(áêÔœùÿÿÿÿ
-Ojavascript:S3353¬"-'z' is never reassigned. Use 'const' instead.(áêÔœùÿÿÿÿ
-<javascript:S121®" Expected { after 'if' condition.(»ìş¨
-Ajavascript:S909®"%Unexpected use of continue statement.(»ìş¨
-Ajavascript:S121À" Expected { after 'if' condition.(í•†ùÿÿÿÿ
-Ajavascript:S121Ï" Expected { after 'if' condition.(¸©×éÿÿÿÿÿ
-6javascript:S121Ğ"Expected { after 'for-in'.(÷¾•¢
-Jjavascript:S3353Ğ"-'x' is never reassigned. Use 'const' instead.(÷¾•¢
-<javascript:S121Ñ" Expected { after 'if' condition.(”Ôê
-Ujavascript:S1117Û"3'condition' is already declared in the upper scope.(¥˜ãÿÿÿÿÿ
-<javascript:S121Ü" Expected { after 'if' condition.(›š…’
-[javascript:S3812Ü">Unexpected negating the left operand of 'instanceof' operator.(›š…’
-:javascript:S1441İ"Strings must use singlequote.(ê„¼Ø
-[javascript:S3524ç"?Remove parentheses around the parameter of this arrow function.(èøÕn
-Ajavascript:S121è" Expected { after 'if' condition.(í•†ùÿÿÿÿ
-[javascript:S3524ø"?Remove parentheses around the parameter of this arrow function.(•ÓG
-Ljavascript:S1117ø"0'object' is already declared in the upper scope.(•ÓG
-;javascript:S121ù" Expected { after 'if' condition.(ÆÆ
-9javascript:S1441ù"Strings must use singlequote.(ÆÆ
-?javascript:S1441ú"Strings must use singlequote.(š¦ÙÒúÿÿÿÿ
-Ojavascript:S113".Newline required at end of file but not found.(“§á½øÿÿÿÿ
