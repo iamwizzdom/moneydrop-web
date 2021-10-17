@@ -1,100 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="75828032-3f15-47a8-89b4-752e2bf8d7c0" name="Default Changelist" comment="Stage 25">
+    <list default="true" id="75828032-3f15-47a8-89b4-752e2bf8d7c0" name="Default Changelist" comment="Switched to production url">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/2.a0f9ddfc.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/2.a0f9ddfc.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.806ac26c.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.806ac26c.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.0f1dfdb9.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.0f1dfdb9.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.0f1dfdb9.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/3.08f6f9eb.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/3.08f6f9eb.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.5d49b16d.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.5d49b16d.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.556967fc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.556967fc.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/american-express.f094ecf9.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/arrow-accent.b404342b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/arrow.8ea87358.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/arrows.0ca93040.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/bank.1bb32c67.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/camera.63e22f52.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/campton_bold.5b69b512.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/campton_light.65fe788a.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/campton_medium.1e87a6be.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/capture.02158bd6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/card.b118b074.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/checkmark.dbbfd1c2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/close.48f87c3c.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/dark-back-arrow.5de35b9d.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/delete-photo.7895159c.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/diners-club.84ffe7b9.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/discover.6600272b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/female-icon.98b40355.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/female-user.addb41f1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/gallery.85c30334.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/google-glass-logo-white.df618e7e.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/google-glass-logo.27721304.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/history.bac1cb6f.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/home-nav.90d74b43.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/incoming-danger.856b01af.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/incoming-info.4ae8c312.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/incoming-pending.daa34a30.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/incoming-success.8eb520ac.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/incoming-warning.04df5ccd.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/jcb.785f8a11.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/light-bulb.71c767b9.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/loan-nav.41f8f7f6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/log-me-out.22ac464b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/logo-white.80796776.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/logo.89e334ad.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/logouts.7aebda67.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/maestro.37c560cc.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/male-icon.c1e40eb3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/male-user.881b563b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/mastercard.7e382641.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/minus.f3653b55.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/naira-sign-dark.4f6388ef.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/no-content.3ebc6211.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/notification-white.ef329e8d.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/notification.bfeaa764.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/offer-loan.4154ab52.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/outgoing-danger.d7cb871b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/outgoing-info.b120e7b8.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/outgoing-pending.6478415f.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/outgoing-success.74487ffd.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/outgoing-warning.b2176313.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/plus.4f330538.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/remove.1033c20b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/request-loan.a7e456b7.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/select-checkmark.e93f0f58.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/three-small-dots.e007d536.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/transactions.521fbad8.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/unisex.78f248bf.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/user.7c2cb7fb.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/verve.263688f1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/visa.06dafb46.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/wallet-nav.915a6c51.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/LoanLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/LoanLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/transaction/Transactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/transaction/Transactions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/url.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/url.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/Utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Utility.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +31,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../moneydrop_admin" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -224,7 +133,7 @@
       <workItem from="1634113387554" duration="6000" />
       <workItem from="1634113998219" duration="19000" />
       <workItem from="1634156129610" duration="5662000" />
-      <workItem from="1634479486537" duration="872000" />
+      <workItem from="1634479486537" duration="1584000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented sign in with google">
       <created>1621505520971</created>
@@ -289,7 +198,28 @@
       <option name="project" value="LOCAL" />
       <updated>1621954337698</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Production build">
+      <created>1634480607949</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1634480607949</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Switched to production url">
+      <created>1634481058450</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1634481058450</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Switched to production url">
+      <created>1634481865816</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1634481865816</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +242,9 @@
     <MESSAGE value="Refactored profile page" />
     <MESSAGE value="Built project" />
     <MESSAGE value="Stage 25" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stage 25" />
+    <MESSAGE value="Production build" />
+    <MESSAGE value="Switched to production url" />
+    <option name="LAST_COMMIT_MESSAGE" value="Switched to production url" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

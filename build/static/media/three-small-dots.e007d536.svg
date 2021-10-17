@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2px" height="8px" viewBox="0 0 2 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>three-small-dots</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="landing-page" transform="translate(-334.000000, -213.000000)" fill="#7B7A7A" fill-rule="nonzero">
+            <g id="three-small-dots" transform="translate(335.000000, 217.000000) rotate(90.000000) translate(-335.000000, -217.000000) translate(331.000000, 216.000000)">
+                <path d="M1,2 C0.448681019,2 0,1.55141462 0,0.999863541 C0,0.448539891 0.448681019,0 1,0 C1.55131898,0 2,0.448539891 2,0.999863541 C1.99990904,1.55141462 1.55131898,2 1,2 Z" id="Path"></path>
+                <path d="M3.99992419,2 C3.44853833,2 3,1.55141462 3,0.999863541 C3,0.448539891 3.44855349,0 3.99992419,0 C4.55131004,0 5,0.448539891 5,0.999863541 C5,1.55141462 4.55132521,2 3.99992419,2 Z" id="Path"></path>
+                <path d="M7.00009856,2 C6.44870016,2 6,1.55141462 6,0.999863541 C6,0.448539891 6.44870016,0 7.00009856,0 C7.55149696,0 8,0.448539891 8,0.999863541 C8,1.55141462 7.55149696,2 7.00009856,2 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>
