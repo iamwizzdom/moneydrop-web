@@ -44,10 +44,10 @@ function App(props) {
             <React.Suspense fallback={<>Hi</>}>
                 <Switch>
 
-                    <PrivateLogin exact layout={AuthLayout} path="/signup/verification/email/verify" component={VerifyData}/>
                     <PrivateLogin exact layout={AuthLayout} path="/signup/verification/email" component={VerifyEmail}/>
-                    <PrivateLogin exact layout={AuthLayout} path="/signup/verification/phone/verify" component={VerifyData}/>
+                    <PrivateLogin exact layout={AuthLayout} path="/signup/verification/email/verify" component={VerifyData}/>
                     <PrivateLogin exact layout={AuthLayout} path="/signup/verification/phone" component={VerifyPhone}/>
+                    <PrivateLogin exact layout={AuthLayout} path="/signup/verification/phone/verify" component={VerifyData}/>
                     <PrivateLogin exact layout={AuthLayout} path="/signup/successful" component={SignupSuccessful} forceView={true}/>
                     <PrivateLogin exact layout={AuthLayout} path="/signup" component={Signup}/>
                     <PrivateLogin exact layout={AuthLayout} path="/login" component={Login}/>

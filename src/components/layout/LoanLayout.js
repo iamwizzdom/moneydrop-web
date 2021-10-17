@@ -31,7 +31,7 @@ class LoanLayout extends Component {
             </Col>
             <Col lg={4} md={4} sm={4} xl={4} xs={4} className={`text-right`}>
                 <Row>
-                    <Col lg={12} md={12} sm={12} xl={12} xs={12}><small style={{color: theme.color}}>{Utility.format(parseFloat(loan.getAmount()), 0)}</small></Col>
+                    <Col lg={12} md={12} sm={12} xl={12} xs={12}><small style={{color: theme.color}}>{Utility.format(parseFloat(loan.getAmount()), 2)}</small></Col>
                     <Col lg={12} md={12} sm={12} xl={12} xs={12}><Badge variant={theme.badge}>{loan.getStatus() || "Unknown"}</Badge></Col>
                 </Row>
             </Col>

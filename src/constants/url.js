@@ -2,11 +2,9 @@ class UrlBaseConst {
     static HTTP_SCHEME = "http://";
     static HTTPS_SCHEME = "https://";
     static SCHEME = UrlBaseConst.HTTPS_SCHEME;
-    static HOST_URL = "moneydrop.ng:8085/server";
-    // static HOST_URL = "moneydrop.test";
-    // static HOST_URL = "192.168.0.109:8000";
-// static HOST_URL = "10.101.187.107:8000";
-// static HOST_URL = "54.93.104.127/moneydrop/server";
+    // static HOST_URL = "moneydrop.ng:8085/server";
+    static HOST_URL = "moneydrop.test";
+    // static HOST_URL = "192.168.0.186:8000";
     static BASE_URL = UrlBaseConst.SCHEME + UrlBaseConst.HOST_URL;
     static API_URL = UrlBaseConst.BASE_URL + "/api/v1/w-app";
 }

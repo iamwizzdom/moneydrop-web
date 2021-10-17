@@ -706,3 +706,24 @@ a.navbar-brand {
     background-repeat: no-repeat;
     background-position: right 6px;
 }
+
+.pass-wrapper {
+    position: relative;
+}
+
+.pass-wrapper input {
+    padding-right: 50px;
+}
+
+.pass-wrapper i {
+    position: absolute;
+    width: 50px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px;
+    text-align: center;
+    color: #bbbec9;
+    font-size: 20px;
+    cursor: pointer;
+}

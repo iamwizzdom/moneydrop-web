@@ -15,7 +15,7 @@ class Utility {
 
     static isEmpty(data) {
         return ((typeof data === 'undefined') || (data === null) ||
-            ((typeof data === "string") && (data.trim() === "" || data.trim() === " ")) ||
+            ((typeof data === 'string') && (data.trim() === '' || data.trim() === ' ')) ||
             (Array.isArray(data) && data.length <= 0) ||
             (typeof data === 'object' && Object.keys(data).length <= 0));
     }
@@ -30,17 +30,25 @@ class Utility {
             variable.substring(1, variable.length));
     }
 
-    static sprintf() {
-        let args_array = arguments, format = args_array[0];
-        if (format.search("%s") < 0) throw new Error("sprintf expects %s as its format argument");
-        let i = 0, size = (args_array.length - 1);
-        if (size >= 100) throw new Error("sprintf arguments can't be greater than 100");
-        for (; i < size; i++) format = format.replace("%s", args_array[(i + 1)]);
+    static sprintf(...args) {
+        const argsArray = args;
+        let format = argsArray[0];
+        if (format.search('%s') < 0) {
+            throw new Error('sprintf expects %s as its format argument');
+        }
+        let i = 0;
+        const size = (argsArray.length - 1), maxSize = 100;
+        if (size >= maxSize) {
+            throw new Error("sprintf arguments can't be greater than 100");
+        }
+        for (; i < size; i++) {
+            format = format.replace('%s', argsArray[(i + 1)]);
+        }
         return format;
-    };
+    }
 
     static isString(variable) {
-        return typeof variable === "string";
+        return typeof variable === 'string';
     }
 
     static isArray(variable) {
@@ -48,7 +56,7 @@ class Utility {
     }
 
     static isObject(variable) {
-        return variable !== null && typeof variable === "object";
+        return variable !== null && typeof variable === 'object';
     }
 
     static isNumeric(variable) {
@@ -97,11 +105,11 @@ class Utility {
         return theme;
     }
 
-    static format(amount, decimals = 2, style = 'currency', currency = 'NGN') {
+    static format(amount, decimals, style = 'currency', currency = 'NGN') {
         return !isNaN(amount) && amount.toLocaleString(`en-${currency.substr(0, 2)}`, {
-            style: style,
+            style,
             currency,
-            maximumFractionDigits: decimals
+            maximumFractionDigits: decimals || 2
         });
     }
 

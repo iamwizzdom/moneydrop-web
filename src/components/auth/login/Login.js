@@ -1,13 +1,14 @@
-import React, {Component} from "react";
-import {Alert, Button, Card, Form, Spinner} from "react-bootstrap";
+import React, {Component} from 'react';
+import {Alert, Button, Card, Form, Spinner} from 'react-bootstrap';
 import logo from '../../../assets/images/logo.svg';
 import googleLogo from '../../../assets/images/google-glass-logo.svg';
-import {Link, Redirect} from "react-router-dom";
-import Validator from "../../../helpers/validator";
-import {AuthAction} from "../../../actions";
-import {connect} from "react-redux";
-import GoogleLogin from "react-google-login";
-import {AppConst} from "../../../constants";
+import {Link, Redirect} from 'react-router-dom';
+import Validator from '../../../helpers/validator';
+import {AuthAction} from '../../../actions';
+import {connect} from 'react-redux';
+import GoogleLogin from 'react-google-login';
+import {AppConst} from '../../../constants';
+import {FaEye, FaEyeSlash} from 'react-icons/all';
 
 class Login extends Component {
 
@@ -15,13 +16,14 @@ class Login extends Component {
         error: {
             email: '',
             password: ''
-        }
+        },
+        passwordShown: false
     };
 
     submit = (e) => {
         e.preventDefault();
 
-        let validator = new Validator(e);
+        const validator = new Validator(e);
         validator.validate('email').isEmail("Please enter a valid email address");
         validator.validate('password').isBlank("Please enter your password")
             .hasMinLength(8, "Your password must be at least 8 characters.");
@@ -31,16 +33,17 @@ class Login extends Component {
         } else {
             this.setState({error: {email: '', password: ''}});
             const {dispatch} = this.props;
-            let email = validator.getValue('email');
-            let password = validator.getValue('password');
+            const email = validator.getValue('email');
+            const password = validator.getValue('password');
             dispatch(AuthAction.login(email, password));
         }
 
     };
 
+    togglePasswordVisibility = () => this.setState({ passwordShown: !this.state.passwordShown });
+
     responseGoogle = (response) => {
         if (response && response.error) {
-            console.log(response);
             return;
         }
         const {dispatch} = this.props;
@@ -50,12 +53,16 @@ class Login extends Component {
 
     render() {
 
-        let {error} = this.state;
+        let {error, passwordShown} = this.state;
         const {loginAuth, loginWithGoogleAuth, location} = this.props;
-        let errorMessage = location?.errorMessage;
-        if (errorMessage) location.errorMessage = null;
+        const errorMessage = location?.errorMessage;
+        if (errorMessage) {
+            location.errorMessage = null;
+        }
 
-        if (loginAuth.data?.status) return <Redirect to={{pathname: `/`, header: {status: 'success', message: loginAuth.data.message}}}/>;
+        if (loginAuth.data?.status) {
+            return <Redirect to={{pathname: `/`, header: {status: 'success', message: loginAuth.data.message}}}/>;
+        }
 
         if (loginWithGoogleAuth.data?.status) {
             return <Redirect to={{pathname: `/`, header: {status: 'success', message: loginAuth.data.message}}}/>;
@@ -76,9 +83,11 @@ class Login extends Component {
         if (errorMessage || loginAuth.data?.message) {
             message = <Alert key={1} variant={loginAuth.data?.status ? `success` : `danger`}>{errorMessage || loginAuth.data.message}</Alert>;
             loginAuth.data.message = null;
-        } else if (loginWithGoogleAuth.data?.message) {
-            message = <Alert key={1} variant={loginWithGoogleAuth.data?.status ? `success` : `danger`}>{loginWithGoogleAuth.data.message}</Alert>;
-            loginWithGoogleAuth.data.message = null;
+        } else {
+            if (loginWithGoogleAuth.data?.message) {
+                message = <Alert key={1} variant={loginWithGoogleAuth.data?.status ? `success` : `danger`}>{loginWithGoogleAuth.data.message}</Alert>;
+                loginWithGoogleAuth.data.message = null;
+            }
         }
 
         return (
@@ -97,11 +106,13 @@ class Login extends Component {
                                 <Form.Control type="email" placeholder="Enter email" name="email" isInvalid={!!error.email}/>
                                 <Form.Control.Feedback type="invalid">{error.email}</Form.Control.Feedback>
                             </Form.Group>
-
                             <Form.Group controlId="formBasicPassword" className="mt-4">
                                 <Form.Label className={`text-dark font-size-16 text-uppercase`}>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" name="password" isInvalid={!!error.password}/>
-                                <Form.Control.Feedback type="invalid">{error.password}</Form.Control.Feedback>
+                                <div className="pass-wrapper">
+                                    <Form.Control type={passwordShown ? 'text' : 'password'} placeholder="Password" name="password" isInvalid={!!error.password}/>
+                                    <Form.Control.Feedback type="invalid">{error.password}</Form.Control.Feedback>
+                                    <i onClick={this.togglePasswordVisibility}>{passwordShown ? <FaEye/> : <FaEyeSlash />}</i>
+                                </div>
                             </Form.Group>
 
                             <Form.Group controlId="forgot-password" className="mt-3">
@@ -139,12 +150,9 @@ class Login extends Component {
     }
 }
 
-
-function mapStateToProps(state) {
+export default connect(function (state) {
     return {
         loginAuth: state.loginAuth,
-        loginWithGoogleAuth: state.loginWithGoogleAuth,
+        loginWithGoogleAuth: state.loginWithGoogleAuth
     }
-}
-
-export default connect(mapStateToProps)(Login)
+})(Login);
