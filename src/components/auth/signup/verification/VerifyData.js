@@ -95,7 +95,7 @@ class VerifyEmail extends Component {
         e.preventDefault();
         const {data, type} = this.state;
         const {dispatch} = this.props;
-        dispatch(AuthAction.verifyRequest({[type]: data}, "email"));
+        dispatch(AuthAction.verifyRequest({[type]: data}, type));
     }
 
     startCountDown() {
