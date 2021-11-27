@@ -116,28 +116,31 @@ class Utility {
     static getSearchParameters(url) {
         let start = url.indexOf('?'), params = (start > -1 ? url.substr((start + 1)) : '');
         return params != null && params !== "" ? Utility.transformToAssocArray(params) : {};
-    };
+    }
 
     static transformToAssocArray(paramStr) {
         let params = {};
         let paramsArr = paramStr.split("&");
-        for (let i = 0; i < paramsArr.length; i++) {
-            let tmpArr = paramsArr[i].split("=");
+        for (const item of paramsArr) {
+            let tmpArr = item.split("=");
             params[decodeURIComponent(tmpArr[0])] = decodeURIComponent(tmpArr[1]);
         }
         return params;
-    };
+    }
 
     static serialize(object) {
         let list = [], x;
         for (x in object) {
-            if (object.hasOwnProperty(x)) {
+            if (Utility.isObject(object[x]) || Utility.isArray(object[x])) {
                 list[list.length] = `${encodeURIComponent(x)}=${encodeURIComponent(!Utility.isEmpty(object[x]) ?
-                    ((Utility.isObject(object[x]) || Utility.isArray(object[x])) ? JSON.stringify(object[x]) : object[x]) : "")}`;
+                    JSON.stringify(object[x]) : "")}`;
+            } else {
+                list[list.length] = `${encodeURIComponent(x)}=${encodeURIComponent(!Utility.isEmpty(object[x]) ?
+                    object[x] : "")}`;
             }
         }
         return list.join('&');
-    };
+    }
 
     static serializeObject(object) {
         let message = "", count = 0;
@@ -154,10 +157,12 @@ class Utility {
         let query = Utility.getSearchParameters(url), start = url.indexOf('?');
         query.perPage = AppConst.PAGINATION_PER_PAGE;
         return `${start > -1 ? url.substr(0, start) : url}?${Utility.serialize(query)}`;
-    };
+    }
 
     static convertGender(gender, defaultValue) {
-        return (gender === AppConst.MALE ? "Male" : (gender === AppConst.FEMALE ? "Female" : defaultValue));
+        if (gender === AppConst.FEMALE) return "Female";
+        if (gender === AppConst.MALE) return "Male";
+        return defaultValue;
     }
 }
 
