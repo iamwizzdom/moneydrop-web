@@ -164,7 +164,7 @@ class OfferLoan extends Component {
                                 </Row>
                                 <Row className={`mt-4`}>
                                     <div className={`w-100 scroll-horizontal scrollbar-invisible`}>
-                                        <div className={`h-100`} style={{width: (120 * amountList.length)}}>
+                                        <div className={`h-100 w-auto d-inline-flex`}>
                                             {amountList.map((v, k) => {
                                                 return <div key={k} onClick={() => this.setAmount(v)}
                                                             className={`badge loan-amounts color-accent cursor-pointer my-rounded font-size-16 p-3 m-1`}>
