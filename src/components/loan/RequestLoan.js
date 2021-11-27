@@ -154,13 +154,13 @@ class OfferLoan extends Component {
                             </div>
                             <div className={`pl-4 pr-4`}>
 
-                                <Row className={`mt-5`}>
+                                <Row className={`mt-5 justify-content-center`}>
                                     <Col lg={3} md={3} sm={3} xl={3} xs={3}>
                                         <img src={minus} width={50} alt={`minus`}
                                              className={`img-fluid float-right cursor-pointer`}
                                              onClick={() => this.decreaseAmount()}/>
                                     </Col>
-                                    <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-center`}>
+                                    <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-center p-0`}>
                                         <CurrencyInput
                                             intlConfig={{locale: 'en-NG', currency: 'NGN'}}
                                             style={{marginTop: '-5px'}}
@@ -169,13 +169,15 @@ class OfferLoan extends Component {
                                             decimalsLimit={2}
                                             onValueChange={(value, name) => this.setAmount(value)}
                                         />
-                                        <small className={`text-danger`}>{this.state.submitted && (errors.amount || (this.state.amount <= 0 && "Please enter a valid amount"))}</small>
                                     </Col>
                                     <Col lg={3} md={3} sm={3} xl={3} xs={3}>
                                         <img src={plus} width={50} alt={`minus`}
                                              className={`img-fluid float-left cursor-pointer`}
                                              onClick={() => this.increaseAmount()}/>
                                     </Col>
+                                    <small className={`text-danger text-center mt-md-0 mt-3 font-size-13`}>
+                                        {this.state.submitted && (errors.amount || (this.state.amount <= 0 && "Please enter a valid amount"))}
+                                    </small>
                                 </Row>
                                 <Row className={`mt-4`}>
                                     <div className={`w-100 scroll-horizontal scrollbar-invisible`}>
