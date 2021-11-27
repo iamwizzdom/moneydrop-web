@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
-import LayoutRoute from "./components/layout/router";
+import LayoutResolver from "./components/layout/LayoutResolver";
 import AuthLayout from "./components/layout/AuthLayout";
 import {PrivateLogin, PrivateRoute} from "./PrivateRoute";
 import AppLayout from "./components/layout/AppLayout";
@@ -76,7 +76,7 @@ function App(props) {
                     <PrivateRoute exact layout={AppLayout} path="/notifications" component={Notifications}/>
                     <PrivateRoute exact layout={AppLayout} path="/" component={Dashboard}/>
 
-                    <LayoutRoute layout={NotFoundLayout} component={NotFound}/>
+                    <LayoutResolver layout={NotFoundLayout} component={NotFound}/>
                 </Switch>
             </React.Suspense>
         </Router>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 
-class LayoutRoute extends Component {
+class LayoutResolver extends Component {
 
     forceUpdateHandler = () => {
         this.forceUpdate();
@@ -14,22 +14,22 @@ class LayoutRoute extends Component {
 
     render() {
 
-        const {component: Component, layout: Layout, ...rest} = this.props;
+        const {component: Comp, layout: Layout, ...rest} = this.props;
 
         if (!Layout) {
             return (
                 <Route {...rest} render={props => (
-                    <Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />
+                    <Comp forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />
                 )}/>);
         }
 
         return (
             <Route {...rest} render={(props => {
 
-                return <Layout component={<Component forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />} forceUpdateHandler={this.forceUpdateHandler} {...props} />
+                return <Layout component={<Comp forceUpdateHandler={this.forceUpdateHandler} setHeaderMessage={this.setHeaderMessage} {...props} />} forceUpdateHandler={this.forceUpdateHandler} {...props} />
             })}/>);
 
     }
 }
 
-export default LayoutRoute;
+export default LayoutResolver;

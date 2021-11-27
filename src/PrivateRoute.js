@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import LayoutRoute from "./components/layout/router";
+import LayoutResolver from "./components/layout/LayoutResolver";
 
 export const PrivateRoute = ({ ...rest }) => {
-    if (sessionStorage.getItem('token')) return <LayoutRoute {...rest} />;
+    if (sessionStorage.getItem('token')) return <LayoutResolver {...rest} />;
 
     let path = { pathname: '/login', state: { from: rest.location }};
 
@@ -15,5 +15,5 @@ export const PrivateRoute = ({ ...rest }) => {
 export const PrivateLogin = ({ forceView, ...rest }) => (
     !forceView && sessionStorage.getItem('token')
         ? <Redirect to={{pathname: '/', state: {from: rest.location}}}/>
-        : <LayoutRoute {...rest} />
+        : <LayoutResolver {...rest} />
 )

@@ -122,11 +122,11 @@ class SingleReview extends Component {
                 },
                 dangerMode: true,
             }).then((willDelete) => {
-                if (willDelete) {
-                    this.setState({showDeleteReviewModal: false}, () => {
+                this.setState({showDeleteReviewModal: false}, () => {
+                    if (willDelete) {
                         dispatch(ReviewAction.deleteReview(this.state.review.getUuid()));
-                    });
-                }
+                    }
+                });
             });
         }
     }
@@ -156,7 +156,8 @@ class SingleReview extends Component {
             </Row>
             <Row>
                 <Col md={6} className={`mt-3`}>
-                    <Row className={`m-1 mt-36`}>
+                    <Row className={`m-1`}>
+                        <h5 className={`color-accent font-weight-bold`}>Recipient</h5>
                         <Col md={12} className={`pt-4 pb-4 bg-white my-rounded`}>
                             <Row>
                                 <Col xl={2} lg={2} md={2} sm={2} xs={2}>

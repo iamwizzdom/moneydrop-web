@@ -14,7 +14,7 @@ class LoanRecipientLayout extends Component {
         let loan = application.getLoan(), user = loan.isLoanOffer() ? application.getApplicant() : loan.getUser();
 
         return <Col md={size || 6} className={`pt-4 pb-4 bg-white my-rounded`}>
-            <Link className={`text-decoration-none text-dark`} to={{pathname: (application.isReviewed() ? `/user/${user.getUuid()}/profile` : '/user/review'), state: {[application.isReviewed() ? 'user' : 'application']: application.isReviewed() ? user : application, from: location}}}>
+            <Link className={`text-decoration-none text-dark`} to={{pathname: (application.isReviewed() || user.isMe() ? `/user/${user.getUuid()}/profile` : '/user/review'), state: {[application.isReviewed() ? 'user' : 'application']: application.isReviewed() ? user : application, from: location}}}>
                 <Row style={{padding: 3}}>
                     <Col lg={2} md={2} sm={2} xl={2} xs={2}>
                         <img

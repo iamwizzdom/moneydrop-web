@@ -5,7 +5,7 @@ import Utility from "../../../helpers/Utility";
 
 const InfoLayout = (props) => {
     const {title, info, type, isMe, showEditModal, underline} = props;
-    return <Col xl={12} lg={12} md={12} sm={12} xs={12} title={`Click to update`} className={`p-3 ${underline && 'underline'} ${isMe && 'cursor-pointer'}`} onClick={() => {if (isMe) showEditModal(type)}}>
+    return <Col xl={12} lg={12} md={12} sm={12} xs={12} title={isMe && `Click to update`} className={`p-3 ${underline && 'underline'} ${isMe && 'cursor-pointer'}`} onClick={() => {if (isMe) showEditModal(type)}}>
         <Row style={{paddingRight: 13}}>
             <Col xl={4} lg={4} md={4} sm={4} xs={4} className={`p-0 pl-1`}><small className={`font-size-14 font-weight-bold`}>{title}</small></Col>
             <Col xl={8} lg={8} md={8} sm={8} xs={8} className={`text-right single-line-text text-arrow`} style={{paddingRight: 23, color: '#777777'}}>

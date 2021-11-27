@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Card, Col, Row, Spinner} from "react-bootstrap";
-import {AppConst, UrlConst} from "../../constants";
+import {AppConst} from "../../constants";
 import {CardAction} from "../../actions";
 import {connect} from "react-redux";
 import Utility from "../../helpers/Utility";
@@ -8,12 +8,12 @@ import NoContent from "../layout/NoContent";
 import CardModel from "../../models/Card";
 import CardShimmer from "../layout/CardShimmer";
 import CardLayout from "../layout/CardLayout";
-import {RavePaymentButton, RaveProvider} from "react-ravepayment";
 import User from "../../models/User";
 import {v4} from "uuid";
 import swal from "@sweetalert/with-react";
 import backArrow from "../../assets/images/dark-back-arrow.svg";
 import remove from "../../assets/images/remove.svg";
+import { PaystackButton } from 'react-paystack';
 
 class Cards extends Component {
 
@@ -25,7 +25,7 @@ class Cards extends Component {
     };
 
     componentDidMount() {
-        let cards = localStorage.getItem('cards');
+        const cards = localStorage.getItem('cards');
         if (Utility.isEmpty(cards) || Utility.isEmpty(JSON.parse(cards))) {
             const {dispatch} = this.props;
             dispatch(CardAction.fetchCards());
@@ -50,10 +50,10 @@ class Cards extends Component {
         }
 
         if (response.card) {
-            let cards = [response.card, ...this.state.cards];
-            this.setState({cards});
+            const cardList = [response.card, ...this.state.cards];
+            this.setState({cards: cardList});
             verifyCard.data.response = {};
-            localStorage.setItem('cards', JSON.stringify(cards));
+            localStorage.setItem('cards', JSON.stringify(cardList));
         }
 
         if (verifyCard.data.message) {
@@ -105,7 +105,7 @@ class Cards extends Component {
     }
 
     setCardToRemove = (card) => {
-        this.setState({card, showRemoveCard: true});
+        this.setState({ card, showRemoveCard: true });
     }
 
     render() {
@@ -118,26 +118,39 @@ class Cards extends Component {
         }
 
         const user = new User();
-        const reference = v4();
-        const config = {
-            txref: reference,
-            customer_firstname: user.getFirstname(),
-            customer_lastname: user.getLastname(),
-            customer_email: user.getEmail(),
-            customer_phone: user.getPhone(),
-            amount: 50,
-            PBFPubKey: AppConst.FLUTTERWAVE_PUBKEY,
-            production: AppConst.LIVE,
-            onSuccess: () => {
-                this.setState({onSuccess: true}, () => {
+        // const config = {
+        //     txref: reference,
+        //     customer_firstname: user.getFirstname(),
+        //     customer_lastname: user.getLastname(),
+        //     customer_email: user.getEmail(),
+        //     customer_phone: user.getPhone(),
+        //     amount: 50,
+        //     PBFPubKey: AppConst.FLUTTERWAVE_PUBKEY,
+        //     production: AppConst.LIVE,
+        //     onSuccess: () => {
+        //         this.setState({onSuccess: true}, () => {
+        //             dispatch(CardAction.logTransRef({reference}));
+        //         });
+        //     },
+        //     onClose: () => {
+        //         if (this.state.onSuccess) {
+        //             this.setState({onSuccess: false});
+        //             dispatch(CardAction.verifyCard({reference}));
+        //         }
+        //     }
+        // };
+
+        const componentProps = {
+            reference: v4(),
+            email: user.getEmail(),
+            phone: user.getPhone(),
+            amount: 5000,
+            publicKey: AppConst.PAYSTACK_KEY,
+            onSuccess: ({reference}) => {
+                this.setState({onSuccess: true, reference}, () => {
                     dispatch(CardAction.logTransRef({reference}));
-                });
-            },
-            onClose: () => {
-                if (this.state.onSuccess) {
-                    this.setState({onSuccess: false});
                     dispatch(CardAction.verifyCard({reference}));
-                }
+                });
             }
         };
 
@@ -151,16 +164,19 @@ class Cards extends Component {
                     <p>Your reusable cards on {AppConst.APP_NAME}</p>
                 </Col>
                 <Col md={6} className={`mt-3 mb-3 loan-type-btn-aligner`}>
-                    <RaveProvider
-                        custom_logo={`${UrlConst.BASE_URL}/storage/system/logo.png`}
-                        payment_options={`card`}
-                        custom_title={`MoneyDrop card test charge`}
-                        custom_description={`MoneyDrop card test charge`}
-                        {...config}>
-                        <RavePaymentButton className={`btn btn-primary pl-4 pr-4 m-1 my-rounded`}>
-                            {verifyCard.requesting ? <Spinner animation="border" variant="light"/> : 'Add new'}
-                        </RavePaymentButton>
-                    </RaveProvider>
+                    {/*<RaveProvider*/}
+                    {/*    custom_logo={`${UrlConst.BASE_URL}/storage/system/logo.png`}*/}
+                    {/*    payment_options={`card`}*/}
+                    {/*    custom_title={`MoneyDrop card test charge`}*/}
+                    {/*    custom_description={`MoneyDrop card test charge`}*/}
+                    {/*    {...config}>*/}
+                    {/*    <RavePaymentButton className={`btn btn-primary pl-4 pr-4 m-1 my-rounded`}>*/}
+                    {/*        {verifyCard.requesting ? <Spinner animation="border" variant="light"/> : 'Add new'}*/}
+                    {/*    </RavePaymentButton>*/}
+                    {/*</RaveProvider>*/}
+                    <PaystackButton className={`btn btn-primary pl-4 pr-4 m-1 my-rounded`} {...componentProps}>
+                        {verifyCard.requesting ? <Spinner animation="border" variant="light"/> : 'Add new'}
+                    </PaystackButton>
                 </Col>
             </Row>
             <Row className={`mt-3`}>

@@ -517,7 +517,7 @@ s
                     </Card>
                 </Col>
             </Row>
-            <Row className={`mt-3`}>
+            {isMe && <Row className={`mt-3`}>
                 <Col md={12}>
                     <Card border={`light`} className={`border-radius-10`}>
                         <Card.Header className={`bg-white border-0`}>
@@ -528,7 +528,7 @@ s
                         </Card.Body>
                     </Card>
                 </Col>
-            </Row>
+            </Row>}
             <Modal
                 show={this.state.showEditModal}
                 onHide={() => this.hideEditModal()}

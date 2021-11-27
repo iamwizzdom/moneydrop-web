@@ -7,6 +7,7 @@ export const AppConst = {
     PAGINATION_PER_PAGE: 30,
     MONO_KEY: 'test_pk_QkHIcvviN20Tbyap1wnF',
     FLUTTERWAVE_PUBKEY: 'FLWPUBK_TEST-52ece87389c981bffbff5283aa35f00f-X',
+    PAYSTACK_KEY: 'pk_test_2e24e05994f91052031815f4f3e31edbcaedf4ce',
     MIN_TOP_UP_AMOUNT: 1000,
     GOOGLE_CLIENT_ID: "629705934099-185d1ijs1uum9qra9k7klsvglfjsv2sg.apps.googleusercontent.com",
 };
