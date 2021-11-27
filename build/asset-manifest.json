@@ -1,22 +1,23 @@
 {
   "files": {
     "main.css": "/static/css/main.311898b4.chunk.css",
-    "main.js": "/static/js/main.bf7e602a.chunk.js",
-    "main.js.map": "/static/js/main.bf7e602a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.51e176de.js",
-    "runtime-main.js.map": "/static/js/runtime-main.51e176de.js.map",
-    "static/css/2.d31f3a5b.chunk.css": "/static/css/2.d31f3a5b.chunk.css",
-    "static/js/2.5f1f7f1b.chunk.js": "/static/js/2.5f1f7f1b.chunk.js",
-    "static/js/2.5f1f7f1b.chunk.js.map": "/static/js/2.5f1f7f1b.chunk.js.map",
-    "static/js/3.7e1accf0.chunk.js": "/static/js/3.7e1accf0.chunk.js",
-    "static/js/3.7e1accf0.chunk.js.map": "/static/js/3.7e1accf0.chunk.js.map",
+    "main.js": "/static/js/main.64049ce8.chunk.js",
+    "main.js.map": "/static/js/main.64049ce8.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.74096c0e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.74096c0e.js.map",
+    "static/css/2.92d31d15.chunk.css": "/static/css/2.92d31d15.chunk.css",
+    "static/js/2.8bdfa313.chunk.js": "/static/js/2.8bdfa313.chunk.js",
+    "static/js/2.8bdfa313.chunk.js.map": "/static/js/2.8bdfa313.chunk.js.map",
+    "static/js/3.5a35c200.chunk.js": "/static/js/3.5a35c200.chunk.js",
+    "static/js/3.5a35c200.chunk.js.map": "/static/js/3.5a35c200.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.d31f3a5b.chunk.css.map": "/static/css/2.d31f3a5b.chunk.css.map",
+    "static/css/2.92d31d15.chunk.css.map": "/static/css/2.92d31d15.chunk.css.map",
     "static/css/main.311898b4.chunk.css.map": "/static/css/main.311898b4.chunk.css.map",
-    "static/js/2.5f1f7f1b.chunk.js.LICENSE.txt": "/static/js/2.5f1f7f1b.chunk.js.LICENSE.txt",
+    "static/js/2.8bdfa313.chunk.js.LICENSE.txt": "/static/js/2.8bdfa313.chunk.js.LICENSE.txt",
     "static/media/american-express.16487ed4.svg": "/static/media/american-express.16487ed4.svg",
     "static/media/arrow-accent.b404342b.svg": "/static/media/arrow-accent.b404342b.svg",
     "static/media/index.css": "/static/media/notification-white.ef329e8d.svg",
+    "static/media/auth-bg.a7339f0b.svg": "/static/media/auth-bg.a7339f0b.svg",
     "static/media/bank.57d09d10.svg": "/static/media/bank.57d09d10.svg",
     "static/media/camera.63e22f52.svg": "/static/media/camera.63e22f52.svg",
     "static/media/campton_bold.5b69b512.ttf": "/static/media/campton_bold.5b69b512.ttf",
@@ -74,10 +75,10 @@
     "static/media/wallet-nav.915a6c51.svg": "/static/media/wallet-nav.915a6c51.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.51e176de.js",
-    "static/css/2.d31f3a5b.chunk.css",
-    "static/js/2.5f1f7f1b.chunk.js",
+    "static/js/runtime-main.74096c0e.js",
+    "static/css/2.92d31d15.chunk.css",
+    "static/js/2.8bdfa313.chunk.js",
     "static/css/main.311898b4.chunk.css",
-    "static/js/main.bf7e602a.chunk.js"
+    "static/js/main.64049ce8.chunk.js"
   ]
 }
