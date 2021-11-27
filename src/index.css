@@ -548,8 +548,9 @@ a.navbar-brand {
     border-bottom: 1px solid #e9e8e8;
 }
 
-.loam-amount-font-size {
+.loam-amount {
     font-size: 35px;
+    margin-top: -5px !important;
 }
 
 .item-center {
@@ -563,7 +564,8 @@ a.navbar-brand {
 
 @media only screen and (max-width: 991px) {
 
-    .loam-amount-font-size {
+    .loam-amount {
+        margin-top: 0 !important;
         font-size: 20px;
         padding-top: 20px;
     }

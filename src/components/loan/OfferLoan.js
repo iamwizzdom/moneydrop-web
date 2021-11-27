@@ -148,8 +148,7 @@ class OfferLoan extends Component {
                                     <Col lg={6} md={6} sm={6} xl={6} xs={6} className={`text-center p-0`}>
                                         <CurrencyInput
                                             intlConfig={{locale: 'en-NG', currency: 'NGN'}}
-                                            style={{marginTop: '-5px'}}
-                                            className={`input-transparent form-control text-center loam-amount-font-size color-accent`}
+                                            className={`input-transparent form-control text-center loam-amount color-accent`}
                                             value={this.state.amount}
                                             decimalsLimit={2}
                                             onValueChange={(value, name) => this.setAmount(value)}
